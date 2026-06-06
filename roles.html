@@ -4,340 +4,518 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Les 30 Rôles — T & F Mariage</title>
+<!-- Prevent flash-of-content during page transition -->
+<script>if(sessionStorage.getItem('cgm_t'))document.documentElement.setAttribute('data-trans-in','');</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
 <style>
-@font-face{font-family:'Parfumerie Script';src:local('Parfumerie Script'),local('Parfumerie Script Pro'),local('ParfumerieScript');}
-@font-face{font-family:'TAN Angleton';src:local('TAN Angleton'),local('TAN - Angleton'),local('TANAngleton');}
-@font-face{font-family:'Versailles';src:local('Versailles'),local('ITC Versailles'),local('Versailles LT Std'),local('Versailles 55');}
-
-:root{
-  --cream:#FAF5EF;--cream2:#F2EAE0;
-  --navy:#1F2F44;--ocean:#4F6D8A;--sky:#BFD4E6;--sand:#D8CFC4;
-  --brown:#7A5040;--bord:#6B2035;--gold:#C9A86C;--gold2:#B8913A;
-  --text:#1F2F44;--text-mid:#4F6D8A;--text-light:#8A9EB8;
-  --border:rgba(31,47,68,.1);--border2:rgba(31,47,68,.22);
-  --gold-border:rgba(201,168,108,.22);
-  --green:#3B7A62;--green-bg:rgba(59,122,98,.07);--green-border:rgba(59,122,98,.22);
-  --red-bg:rgba(107,32,53,.06);--red-border:rgba(107,32,53,.2);
-
-  --ph1:var(--gold);    --ph1-bg:rgba(201,168,108,.07);
-  --ph2:var(--ocean);   --ph2-bg:rgba(79,109,138,.06);
-  --ph3:var(--bord);    --ph3-bg:rgba(107,32,53,.06);
-  --ph4:var(--navy);    --ph4-bg:rgba(31,47,68,.05);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth}
-body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer;background:none;border:none}
-:focus-visible{outline:2px solid var(--ocean);outline-offset:3px}
-
-/* ── NAV ── */
-.nav{
-  position:sticky;top:0;z-index:200;
-  background:rgba(250,245,239,.97);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--gold-border);
-  padding:0 4rem;height:72px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.nav-logo{display:flex;align-items:center;height:54px}
-.nav-logo img{height:54px;width:auto;transition:opacity .25s}
-.nav-logo:hover img{opacity:.6}
-.nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.7rem;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);
-  position:relative;padding-bottom:2px;transition:color .25s;
-}
-.nav-links a::after{content:'';position:absolute;bottom:0;left:0;height:1px;width:0;background:var(--gold);transition:width .32s cubic-bezier(.4,0,.2,1)}
-.nav-links a:hover{color:var(--navy)}
-.nav-links a:hover::after{width:100%}
-.nav-cta{
-  font-family:'DM Sans',sans-serif;font-weight:400;font-size:.7rem;
-  letter-spacing:.1em;text-transform:uppercase;
-  color:var(--cream);background:var(--navy);padding:.6rem 1.5rem;
-  position:relative;overflow:hidden;transition:background .25s;
-}
-.nav-cta::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--gold);transition:width .32s cubic-bezier(.4,0,.2,1)}
-.nav-cta:hover{background:var(--ocean)}
-.nav-cta:hover::after{width:100%}
-
-/* ── PAGE HEADER ── */
-.page-head{
-  background:var(--navy);padding:4.5rem 4rem 3.5rem;
-  position:relative;overflow:hidden;
-}
-.page-head::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 80% at 80% 50%,rgba(79,109,138,.35) 0%,transparent 65%);
-  pointer-events:none;
-}
-.ph-ghost{
-  position:absolute;right:3rem;bottom:-1.5rem;
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:13rem;color:rgba(255,255,255,.025);
-  line-height:1;pointer-events:none;
-}
-.ph-inner{max-width:680px;position:relative;z-index:1}
-.ph-script{
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:1.65rem;color:rgba(201,168,108,.55);margin-bottom:.15rem;
-}
-.ph-title{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;
-  font-size:clamp(2rem,4.5vw,3.8rem);
-  color:#fff;line-height:1;margin-bottom:.9rem;
-}
-.ph-desc{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.85rem;
-  line-height:1.75;color:rgba(250,245,239,.4);max-width:460px;
+/* ═══════════════════════════════════════════════
+   Phase color accents
+   ═══════════════════════════════════════════════ */
+:root {
+  --ph1: var(--gold);    --ph1-bg: rgba(201,168,108,.07);
+  --ph2: var(--ocean);   --ph2-bg: rgba(79,109,138,.06);
+  --ph3: var(--bord);    --ph3-bg: rgba(107,32,53,.06);
+  --ph4: var(--navy);    --ph4-bg: rgba(31,47,68,.05);
+  --red-bg: rgba(107,32,53,.06); --red-border: rgba(107,32,53,.2);
 }
 
-/* ── FILTER BAR ── */
-.filter-bar{
-  position:sticky;top:72px;z-index:100;
-  background:var(--cream);border-bottom:1px solid var(--gold-border);
-  padding:.8rem 4rem;
-  display:flex;align-items:center;gap:0;flex-wrap:nowrap;
-  overflow-x:auto;scrollbar-width:none;
+/* ═══════════════════════════════════════════════
+   PAGE HEADER — navy strip
+   ═══════════════════════════════════════════════ */
+.page-head {
+  background: var(--navy);
+  padding: 4.5rem var(--page-pad) 3.5rem;
+  position: relative;
+  overflow: hidden;
 }
-.filter-bar::-webkit-scrollbar{display:none}
-.filter-section{display:flex;gap:.3rem;padding-right:1.2rem;margin-right:1.2rem;border-right:1px solid var(--gold-border);flex-shrink:0}
-.filter-section:last-child{border-right:none;padding-right:0;margin-right:0}
-.fb{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.68rem;
-  letter-spacing:.07em;text-transform:uppercase;
-  color:var(--text-light);padding:.42rem .88rem;
-  border:1px solid transparent;white-space:nowrap;transition:all .2s;
+.page-head::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(79,109,138,.35) 0%, transparent 65%);
+  pointer-events: none;
 }
-.fb:hover{color:var(--navy);border-color:var(--border)}
-.fb.active{color:var(--cream);background:var(--navy);border-color:var(--navy)}
-.fb[data-phase="1"].active{background:var(--gold2);border-color:var(--gold2)}
-.fb[data-phase="2"].active{background:var(--ocean);border-color:var(--ocean)}
-.fb[data-phase="3"].active{background:var(--bord);border-color:var(--bord)}
-.fb[data-phase="4"].active{background:#3A4D60;border-color:#3A4D60}
-.search-input{
-  font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:300;
-  color:var(--text);background:transparent;border:none;
-  border-bottom:1px solid var(--gold-border);padding:.36rem .15rem;
-  width:185px;outline:none;transition:border-color .2s;flex-shrink:0;
-}
-.search-input::placeholder{color:var(--text-light)}
-.search-input:focus{border-color:var(--ocean)}
-
-/* ── CONTENT ── */
-.content{padding:3rem 4rem 5rem;max-width:1400px;margin:0 auto}
-
-.phase-group{margin-bottom:4.5rem}
-.phase-header{
-  display:flex;align-items:center;gap:1.4rem;
-  padding-bottom:.85rem;margin-bottom:1.8rem;
-  border-bottom:1px solid var(--gold-border);
-}
-.phase-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.ph1 .phase-dot{background:var(--gold)}
-.ph2 .phase-dot{background:var(--ocean)}
-.ph3 .phase-dot{background:var(--bord)}
-.ph4 .phase-dot{background:#3A4D60}
-.phase-num{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;font-size:2rem;line-height:1;
-}
-.ph1 .phase-num{color:rgba(201,168,108,.28)}
-.ph2 .phase-num{color:rgba(79,109,138,.22)}
-.ph3 .phase-num{color:rgba(107,32,53,.2)}
-.ph4 .phase-num{color:rgba(31,47,68,.18)}
-.phase-name{
-  font-family:'Versailles','Cormorant Garamond','EB Garamond',serif;
-  font-weight:400;font-size:1.05rem;color:var(--navy);letter-spacing:.02em;
-}
-.phase-info{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.65rem;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--text-light);margin-left:auto;
+/* Ghost logo sur fond navy — inversé pour apparaître blanc */
+.ph-ghost-logo {
+  position: absolute;
+  right: 3rem;
+  bottom: -1rem;
+  width: clamp(120px, 15vw, 200px);
+  height: auto;
+  filter: invert(1);
+  opacity: .07;
+  pointer-events: none;
+  user-select: none;
 }
 
-/* ── ROLE GRID ── */
-.role-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(255px,1fr));
-  gap:1rem;
-}
-.role-card{
-  background:#fff;padding:1.7rem 1.5rem 1.5rem;
-  position:relative;cursor:pointer;
-  border:1px solid var(--border);
-  display:flex;flex-direction:column;min-height:205px;
-  opacity:0;transform:translateY(18px);
-  transition:opacity .48s ease,transform .48s ease,box-shadow .22s ease,border-color .22s;
-}
-.role-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  transition:opacity .22s;
-}
-.ph1 .role-card::before{background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:.45}
-.ph2 .role-card::before{background:linear-gradient(to right,transparent,var(--ocean),transparent);opacity:.45}
-.ph3 .role-card::before{background:linear-gradient(to right,transparent,var(--bord),transparent);opacity:.45}
-.ph4 .role-card::before{background:linear-gradient(to right,transparent,#3A4D60,transparent);opacity:.45}
-.role-card.anim-in{opacity:1;transform:translateY(0)}
-.role-card:hover{box-shadow:0 10px 36px rgba(31,47,68,.1);border-color:var(--border2);transform:translateY(-3px)!important}
-.role-card:hover::before{opacity:1}
-.role-card.full{background:var(--cream2)}
+.ph-inner { max-width: 680px; position: relative; z-index: 1; }
 
-.role-badge{display:inline-flex;align-items:center;gap:.4rem;margin-bottom:.8rem}
-.badge-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.badge-dot.open{background:var(--green)}
-.badge-dot.partial{background:var(--ocean)}
-.badge-dot.full{background:var(--bord)}
-.badge-text{font-family:'DM Sans',sans-serif;font-weight:300;font-size:.63rem;letter-spacing:.05em;text-transform:uppercase;color:var(--text-light)}
+.ph-script {
+  font-family: var(--font-script);
+  font-size: 1.65rem;
+  color: rgba(201,168,108,.55);
+  margin-bottom: .15rem;
+  display: block;
+}
+.ph-title {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  color: #fff;
+  line-height: 1;
+  margin-bottom: .9rem;
+}
+.ph-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .85rem;
+  line-height: 1.75;
+  color: rgba(250,245,239,.4);
+  max-width: 460px;
+}
 
-.role-num{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;font-size:2.2rem;line-height:1;margin-bottom:.55rem;
+/* ═══════════════════════════════════════════════
+   FILTER BAR
+   ═══════════════════════════════════════════════ */
+.filter-bar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 100;
+  background: var(--cream);
+  border-bottom: 1px solid var(--gold-border);
+  padding: .8rem var(--page-pad);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
-.ph1 .role-num{color:rgba(201,168,108,.18)}
-.ph2 .role-num{color:rgba(79,109,138,.15)}
-.ph3 .role-num{color:rgba(107,32,53,.15)}
-.ph4 .role-num{color:rgba(31,47,68,.12)}
+.filter-bar::-webkit-scrollbar { display: none; }
 
-.role-phase{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.6rem;
-  letter-spacing:.09em;text-transform:uppercase;margin-bottom:.25rem;
+.filter-section {
+  display: flex;
+  gap: .3rem;
+  padding-right: 1.2rem;
+  margin-right: 1.2rem;
+  border-right: 1px solid var(--gold-border);
+  flex-shrink: 0;
 }
-.ph1 .role-phase{color:var(--gold)}
-.ph2 .role-phase{color:var(--ocean)}
-.ph3 .role-phase{color:var(--bord)}
-.ph4 .role-phase{color:#3A4D60}
+.filter-section:last-child { border-right: none; padding-right: 0; margin-right: 0; }
 
-.role-name{
-  font-family:'Versailles','Cormorant Garamond','EB Garamond',serif;
-  font-weight:400;font-size:.98rem;color:var(--navy);line-height:1.25;margin-bottom:.18rem;
+.fb {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .68rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  padding: .42rem .88rem;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  transition: all var(--dur-mid) ease;
 }
-.role-en{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;
-  font-size:.73rem;color:var(--text-light);margin-bottom:.8rem;
-}
-.role-spots{margin-top:auto}
-.spot-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.25rem}
-.spot-circle{width:15px;height:15px;border-radius:50%;border:1px solid var(--border2);flex-shrink:0}
-.spot-circle.taken{background:var(--ocean);border-color:var(--ocean)}
-.spot-circle-name{font-family:'DM Sans',sans-serif;font-weight:300;font-size:.78rem;color:var(--navy);font-style:italic}
-.spot-circle-empty{font-family:'DM Sans',sans-serif;font-weight:300;font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text-light)}
-.role-cta-hint{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.64rem;
-  letter-spacing:.06em;text-transform:uppercase;
-  margin-top:.6rem;opacity:0;transition:opacity .2s;
-}
-.ph1 .role-cta-hint{color:var(--gold)}
-.ph2 .role-cta-hint{color:var(--ocean)}
-.ph3 .role-cta-hint{color:var(--bord)}
-.ph4 .role-cta-hint{color:#3A4D60}
-.role-card:hover .role-cta-hint{opacity:1}
+.fb:hover { color: var(--navy); border-color: var(--border); }
+.fb.active { color: var(--cream); background: var(--navy); border-color: var(--navy); }
+.fb[data-phase="1"].active { background: var(--gold2); border-color: var(--gold2); }
+.fb[data-phase="2"].active { background: var(--ocean); border-color: var(--ocean); }
+.fb[data-phase="3"].active { background: var(--bord);  border-color: var(--bord);  }
+.fb[data-phase="4"].active { background: #3A4D60;      border-color: #3A4D60;      }
 
-/* ── MODAL ── */
-.modal-bg{
-  position:fixed;inset:0;z-index:300;
-  background:rgba(31,47,68,.5);backdrop-filter:blur(14px);
-  display:flex;align-items:center;justify-content:center;padding:2rem;
-  opacity:0;pointer-events:none;transition:opacity .28s;
+.search-input {
+  font-family: var(--font-body);
+  font-size: .8rem;
+  font-weight: 300;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--gold-border);
+  padding: .36rem .15rem;
+  width: 185px;
+  outline: none;
+  transition: border-color var(--dur-mid) ease;
+  flex-shrink: 0;
 }
-.modal-bg.open{opacity:1;pointer-events:all}
-.modal{
-  background:var(--cream);max-width:520px;width:100%;position:relative;
-  transform:translateY(18px) scale(.97);transition:transform .35s cubic-bezier(.34,1.3,.64,1);
-  max-height:92svh;overflow-y:auto;border:1px solid var(--border2);
-  scrollbar-width:thin;
-}
-.modal-bg.open .modal{transform:none}
-.modal-top-line{height:2.5px}
-.modal-ph1 .modal-top-line{background:linear-gradient(to right,transparent,var(--gold) 30%,var(--gold) 70%,transparent)}
-.modal-ph2 .modal-top-line{background:linear-gradient(to right,transparent,var(--ocean) 30%,var(--ocean) 70%,transparent)}
-.modal-ph3 .modal-top-line{background:linear-gradient(to right,transparent,var(--bord) 30%,var(--bord) 70%,transparent)}
-.modal-ph4 .modal-top-line{background:linear-gradient(to right,transparent,#3A4D60 30%,#3A4D60 70%,transparent)}
-.modal-close{
-  position:absolute;top:1rem;right:1rem;
-  width:26px;height:26px;border-radius:50%;
-  border:1px solid var(--border);color:var(--text-light);font-size:.68rem;
-  display:flex;align-items:center;justify-content:center;
-  transition:border-color .2s,color .2s,transform .2s;
-}
-.modal-close:hover{border-color:var(--border2);color:var(--navy);transform:rotate(90deg)}
-.modal-head{padding:2rem 2rem 1.6rem;border-bottom:1px solid var(--gold-border)}
-.modal-tag{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.65rem;
-  letter-spacing:.09em;text-transform:uppercase;margin-bottom:.55rem;
-}
-.modal-ph1 .modal-tag{color:var(--gold)}
-.modal-ph2 .modal-tag{color:var(--ocean)}
-.modal-ph3 .modal-tag{color:var(--bord)}
-.modal-ph4 .modal-tag{color:#3A4D60}
-.modal-name{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-size:clamp(1.4rem,4vw,1.9rem);
-  color:var(--navy);line-height:1.1;margin-bottom:.28rem;
-}
-.modal-en{font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;font-size:.8rem;color:var(--text-light)}
-.modal-body{padding:1.6rem 2rem}
-.modal-sec{margin-bottom:1.2rem}
-.modal-sec-lbl{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.63rem;
-  letter-spacing:.1em;text-transform:uppercase;margin-bottom:.38rem;
-}
-.modal-ph1 .modal-sec-lbl{color:var(--gold)}
-.modal-ph2 .modal-sec-lbl{color:var(--ocean)}
-.modal-ph3 .modal-sec-lbl{color:var(--bord)}
-.modal-ph4 .modal-sec-lbl{color:#3A4D60}
-.modal-sec-txt{font-family:'DM Sans',sans-serif;font-weight:300;font-size:.87rem;line-height:1.75;color:var(--text-mid)}
-.modal-sep{height:1px;background:var(--gold-border);margin:1.2rem 0}
-.modal-signup{padding:0 2rem 2rem}
-.modal-signup-title{font-family:'Versailles','Cormorant Garamond',serif;font-weight:400;font-size:1rem;color:var(--navy);margin-bottom:.35rem}
-.modal-signup-sub{font-family:'DM Sans',sans-serif;font-weight:300;font-size:.78rem;color:var(--text-light);margin-bottom:1rem;line-height:1.65}
-.spots-display{display:flex;flex-direction:column;gap:.38rem;margin-bottom:1.2rem}
-.spot-line{display:flex;align-items:center;gap:.6rem}
-.signup-input-row{display:flex;gap:.7rem;margin-bottom:.65rem}
-.signup-input{
-  flex:1;font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;font-size:.95rem;
-  color:var(--navy);background:transparent;border:none;
-  border-bottom:1.5px solid var(--border2);padding:.38rem .1rem;outline:none;transition:border-color .2s;
-}
-.signup-input::placeholder{color:var(--text-light)}
-.signup-input:focus{border-color:var(--ocean)}
-.btn-join{
-  font-family:'DM Sans',sans-serif;font-weight:400;font-size:.68rem;
-  letter-spacing:.06em;text-transform:uppercase;
-  color:var(--cream);background:var(--navy);padding:.78rem 1.2rem;
-  white-space:nowrap;transition:background .2s;
-}
-.btn-join:hover{background:var(--ocean)}
-.btn-join:disabled{background:rgba(31,47,68,.25);cursor:not-allowed}
-.modal-msg{font-family:'DM Sans',sans-serif;font-size:.78rem;padding:.4rem .65rem;margin-top:.4rem}
-.modal-msg.success{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
-.modal-msg.error{background:var(--red-bg);color:var(--bord);border:1px solid var(--red-border)}
-.modal-full{font-family:'DM Sans',sans-serif;font-size:.84rem;color:var(--text-mid);padding:.8rem;border:1px solid var(--gold-border);background:var(--cream2);text-align:center}
+.search-input::placeholder { color: var(--text-light); }
+.search-input:focus { border-color: var(--ocean); }
 
-.empty{padding:5rem 2rem;text-align:center;grid-column:1/-1}
-.empty p{font-family:'Versailles','Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--text-light)}
-
-@media(max-width:900px){
-  .nav{padding:0 1.2rem;height:64px}
-  .nav-logo{height:46px}.nav-logo img{height:46px}
-  .nav-links{display:none}
-  .page-head{padding:3.5rem 1.4rem 2.8rem}
-  .filter-bar{padding:.65rem .9rem;top:64px}
-  .content{padding:2rem 1.2rem 4rem}
-  .modal-head,.modal-body,.modal-signup{padding-left:1.4rem;padding-right:1.4rem}
+/* ═══════════════════════════════════════════════
+   CONTENT
+   ═══════════════════════════════════════════════ */
+.content {
+  padding: 3rem var(--page-pad) 5rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
-@media(max-width:560px){.role-grid{grid-template-columns:1fr}}
+
+/* ─── Phase groups ─── */
+.phase-group { margin-bottom: 4.5rem; }
+
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding-bottom: .85rem;
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid var(--gold-border);
+}
+.phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ph1 .phase-dot { background: var(--gold); }
+.ph2 .phase-dot { background: var(--ocean); }
+.ph3 .phase-dot { background: var(--bord); }
+.ph4 .phase-dot { background: #3A4D60; }
+
+.phase-num {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 2rem;
+  line-height: 1;
+}
+.ph1 .phase-num { color: rgba(201,168,108,.28); }
+.ph2 .phase-num { color: rgba(79,109,138,.22); }
+.ph3 .phase-num { color: rgba(107,32,53,.2); }
+.ph4 .phase-num { color: rgba(31,47,68,.18); }
+
+.phase-name {
+  font-family: var(--font-sub);
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--navy);
+  letter-spacing: .02em;
+}
+.phase-info {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .65rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-left: auto;
+}
+
+/* ─── Role cards ─── */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: 1rem;
+}
+
+.role-card {
+  background: #fff;
+  padding: 1.7rem 1.5rem 1.5rem;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  min-height: 205px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .48s var(--ease-out),
+              transform .48s var(--ease-out),
+              box-shadow var(--dur-mid) ease,
+              border-color var(--dur-mid) ease;
+}
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  transition: opacity var(--dur-mid) ease;
+}
+.ph1 .role-card::before { background: linear-gradient(to right, transparent, var(--gold),  transparent); opacity: .45; }
+.ph2 .role-card::before { background: linear-gradient(to right, transparent, var(--ocean), transparent); opacity: .45; }
+.ph3 .role-card::before { background: linear-gradient(to right, transparent, var(--bord),  transparent); opacity: .45; }
+.ph4 .role-card::before { background: linear-gradient(to right, transparent, #3A4D60,      transparent); opacity: .45; }
+
+.role-card.anim-in { opacity: 1; transform: translateY(0); }
+.role-card:hover {
+  box-shadow: 0 10px 36px rgba(31,47,68,.10);
+  border-color: var(--border2);
+  transform: translateY(-3px) !important;
+}
+.role-card:hover::before { opacity: 1; }
+.role-card.full { background: var(--cream2); }
+
+/* ─── Inside card ─── */
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  margin-bottom: .8rem;
+}
+.badge-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.badge-dot.open    { background: var(--green); }
+.badge-dot.partial { background: var(--ocean); }
+.badge-dot.full    { background: var(--bord);  }
+.badge-text {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .63rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.role-num {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 2.2rem;
+  line-height: 1;
+  margin-bottom: .55rem;
+}
+.ph1 .role-num { color: rgba(201,168,108,.18); }
+.ph2 .role-num { color: rgba(79,109,138,.15);  }
+.ph3 .role-num { color: rgba(107,32,53,.15);   }
+.ph4 .role-num { color: rgba(31,47,68,.12);    }
+
+.role-phase {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .6rem;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  margin-bottom: .25rem;
+}
+.ph1 .role-phase { color: var(--gold); }
+.ph2 .role-phase { color: var(--ocean); }
+.ph3 .role-phase { color: var(--bord); }
+.ph4 .role-phase { color: #3A4D60; }
+
+.role-name {
+  font-family: var(--font-sub);
+  font-weight: 400;
+  font-size: .98rem;
+  color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: .18rem;
+}
+.role-en {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-style: italic;
+  font-size: .73rem;
+  color: var(--text-light);
+  margin-bottom: .8rem;
+}
+.role-spots { margin-top: auto; }
+.spot-row { display: flex; align-items: center; gap: .4rem; margin-bottom: .25rem; }
+.spot-circle {
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  flex-shrink: 0;
+}
+.spot-circle.taken { background: var(--ocean); border-color: var(--ocean); }
+.spot-circle-name { font-family: var(--font-body); font-weight: 300; font-size: .78rem; color: var(--navy); font-style: italic; }
+.spot-circle-empty { font-family: var(--font-body); font-weight: 300; font-size: .62rem; letter-spacing: .04em; text-transform: uppercase; color: var(--text-light); }
+
+.role-cta-hint {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .64rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-top: .6rem;
+  opacity: 0;
+  transition: opacity var(--dur-mid) ease;
+}
+.ph1 .role-cta-hint { color: var(--gold); }
+.ph2 .role-cta-hint { color: var(--ocean); }
+.ph3 .role-cta-hint { color: var(--bord);  }
+.ph4 .role-cta-hint { color: #3A4D60; }
+.role-card:hover .role-cta-hint { opacity: 1; }
+
+/* ═══════════════════════════════════════════════
+   MODAL
+   ═══════════════════════════════════════════════ */
+.modal-bg {
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(31,47,68,.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-mid) ease;
+}
+.modal-bg.open { opacity: 1; pointer-events: all; }
+
+.modal {
+  background: var(--cream);
+  max-width: 520px;
+  width: 100%;
+  position: relative;
+  transform: translateY(18px) scale(.97);
+  transition: transform .35s var(--ease-spring);
+  max-height: 92svh;
+  overflow-y: auto;
+  border: 1px solid var(--border2);
+  scrollbar-width: thin;
+}
+.modal-bg.open .modal { transform: none; }
+
+.modal-top-line { height: 2.5px; }
+.modal-ph1 .modal-top-line { background: linear-gradient(to right, transparent, var(--gold)  30%, var(--gold)  70%, transparent); }
+.modal-ph2 .modal-top-line { background: linear-gradient(to right, transparent, var(--ocean) 30%, var(--ocean) 70%, transparent); }
+.modal-ph3 .modal-top-line { background: linear-gradient(to right, transparent, var(--bord)  30%, var(--bord)  70%, transparent); }
+.modal-ph4 .modal-top-line { background: linear-gradient(to right, transparent, #3A4D60 30%, #3A4D60 70%, transparent); }
+
+.modal-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  font-size: .68rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  background: none;
+  transition: border-color var(--dur-mid) ease, color var(--dur-mid) ease, transform var(--dur-slow) var(--ease-spring);
+}
+.modal-close:hover { border-color: var(--border2); color: var(--navy); transform: rotate(90deg); }
+
+.modal-head {
+  padding: 2rem 2rem 1.6rem;
+  border-bottom: 1px solid var(--gold-border);
+}
+.modal-tag {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .65rem;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  margin-bottom: .55rem;
+}
+.modal-ph1 .modal-tag { color: var(--gold); }
+.modal-ph2 .modal-tag { color: var(--ocean); }
+.modal-ph3 .modal-tag { color: var(--bord); }
+.modal-ph4 .modal-tag { color: #3A4D60; }
+
+.modal-name {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: .28rem;
+}
+.modal-en { font-family: var(--font-body); font-weight: 300; font-style: italic; font-size: .8rem; color: var(--text-light); }
+
+.modal-body { padding: 1.6rem 2rem; }
+.modal-sec { margin-bottom: 1.2rem; }
+.modal-sec-lbl {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .63rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: .38rem;
+}
+.modal-ph1 .modal-sec-lbl { color: var(--gold); }
+.modal-ph2 .modal-sec-lbl { color: var(--ocean); }
+.modal-ph3 .modal-sec-lbl { color: var(--bord); }
+.modal-ph4 .modal-sec-lbl { color: #3A4D60; }
+.modal-sec-txt { font-family: var(--font-body); font-weight: 300; font-size: .87rem; line-height: 1.75; color: var(--text-mid); }
+
+.modal-sep { height: 1px; background: var(--gold-border); margin: 1.2rem 0; }
+
+.modal-signup { padding: 0 2rem 2rem; }
+.modal-signup-title { font-family: var(--font-sub); font-weight: 400; font-size: 1rem; color: var(--navy); margin-bottom: .35rem; }
+.modal-signup-sub { font-family: var(--font-body); font-weight: 300; font-size: .78rem; color: var(--text-light); margin-bottom: 1rem; line-height: 1.65; }
+
+.spots-display { display: flex; flex-direction: column; gap: .38rem; margin-bottom: 1.2rem; }
+.spot-line { display: flex; align-items: center; gap: .6rem; }
+
+.signup-input-row { display: flex; gap: .7rem; margin-bottom: .65rem; }
+.signup-input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-style: italic;
+  font-size: .95rem;
+  color: var(--navy);
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--border2);
+  padding: .38rem .1rem;
+  outline: none;
+  transition: border-color var(--dur-mid) ease;
+}
+.signup-input::placeholder { color: var(--text-light); }
+.signup-input:focus { border-color: var(--ocean); }
+
+.btn-join {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: .68rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--navy);
+  padding: .78rem 1.2rem;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  transition: background var(--dur-mid) ease;
+}
+.btn-join:hover { background: var(--ocean); }
+.btn-join:disabled { background: rgba(31,47,68,.25); cursor: not-allowed; }
+
+.modal-msg { font-family: var(--font-body); font-size: .78rem; padding: .4rem .65rem; margin-top: .4rem; }
+.modal-msg.success { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.modal-msg.error   { background: var(--red-bg);   color: var(--bord);  border: 1px solid var(--red-border); }
+
+.modal-full { font-family: var(--font-body); font-size: .84rem; color: var(--text-mid); padding: .8rem; border: 1px solid var(--gold-border); background: var(--cream2); text-align: center; }
+
+.empty { padding: 5rem 2rem; text-align: center; grid-column: 1 / -1; }
+.empty p { font-family: var(--font-sub); font-style: italic; font-size: 1.1rem; color: var(--text-light); }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .page-head   { padding: 3.5rem 1.4rem 2.8rem; }
+  .filter-bar  { padding: .65rem .9rem; }
+  .content     { padding: 2rem 1.2rem 4rem; }
+  .ph-ghost-logo { display: none; }
+  .modal-head, .modal-body, .modal-signup { padding-left: 1.4rem; padding-right: 1.4rem; }
+}
+@media (max-width: 560px) {
+  .role-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <a href="index.html" class="nav-logo" aria-label="Accueil">
-    <img src="logo noir sans fond.png" alt="T & F">
+<!-- ═══ PAGE TRANSITION OVERLAY ═══ -->
+<div id="t-overlay" aria-hidden="true">
+  <div class="t-door t-door-l"></div>
+  <div class="t-door t-door-r"></div>
+  <div class="t-center">
+    <span class="t-eyebrow" id="t-eyebrow"></span>
+    <span class="t-title" id="t-title"></span>
+  </div>
+</div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="nav" id="mainNav" aria-label="Navigation principale">
+  <a href="index.html" class="nav-logo" aria-label="Accueil T & F">
+    <img src="Logo.png" alt="T & F">
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" role="list">
     <li><a href="index.html">Accueil</a></li>
     <li><a href="quiz.html">Questionnaire</a></li>
     <li><a href="resultat.html">Mes résultats</a></li>
@@ -345,48 +523,53 @@ button{font-family:inherit;cursor:pointer;background:none;border:none}
   <a href="quiz.html" class="nav-cta">Trouver mon rôle</a>
 </nav>
 
-<div class="page-head">
+<!-- ═══ PAGE HEADER ═══ -->
+<header class="page-head" aria-labelledby="page-title">
   <div class="ph-inner">
-    <p class="ph-script">Les 30 missions</p>
-    <h1 class="ph-title">Rôles d'Honneur</h1>
-    <p class="ph-desc">Cliquez sur un rôle pour en voir le détail et vous inscrire. Chaque rôle accueille 2 personnes maximum.</p>
+    <span class="ph-script">Les 30 missions</span>
+    <h1 class="ph-title" id="page-title">Rôles d'Honneur</h1>
+    <p class="ph-desc">Cliquez sur un rôle pour en voir le détail et vous inscrire. Chaque rôle accueille deux personnes maximum.</p>
   </div>
-  <div class="ph-ghost" aria-hidden="true">T&F</div>
-</div>
+  <!-- Logo ghost — img direct -->
+  <img class="ph-ghost-logo" src="Logo.png" alt="" aria-hidden="true">
+</header>
 
-<div class="filter-bar" id="filterBar">
+<!-- ═══ FILTER BAR ═══ -->
+<div class="filter-bar" id="filterBar" role="toolbar" aria-label="Filtres">
   <div class="filter-section">
     <button class="fb active" data-phase="all" onclick="setPhase('all',this)">Tous</button>
     <button class="fb" data-phase="1" onclick="setPhase('1',this)">Le Matin</button>
-    <button class="fb" data-phase="2" onclick="setPhase('2',this)">La Cérémonie</button>
+    <button class="fb" data-phase="2" onclick="setPhase('2',this)">L'Après-midi</button>
     <button class="fb" data-phase="3" onclick="setPhase('3',this)">Le Cocktail</button>
     <button class="fb" data-phase="4" onclick="setPhase('4',this)">La Soirée</button>
   </div>
   <div class="filter-section">
-    <button class="fb active" data-status="all" onclick="setStatus('all',this)">Tous</button>
+    <button class="fb active" data-status="all"  onclick="setStatus('all',this)">Tous</button>
     <button class="fb" data-status="open" onclick="setStatus('open',this)">Disponibles</button>
     <button class="fb" data-status="full" onclick="setStatus('full',this)">Complets</button>
   </div>
   <div class="filter-section">
-    <input class="search-input" id="searchInput" type="text" placeholder="Rechercher un prénom…" oninput="onSearch(this.value)">
+    <input class="search-input" id="searchInput" type="search" placeholder="Rechercher un prénom…" oninput="onSearch(this.value)" aria-label="Recherche par prénom">
   </div>
 </div>
 
-<main class="content" id="content"></main>
+<!-- ═══ CONTENT ═══ -->
+<main class="content" id="content" aria-live="polite"></main>
 
-<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+<!-- ═══ MODAL ═══ -->
+<div class="modal-bg" id="modalBg" onclick="closeModal(event)" role="dialog" aria-modal="true" aria-labelledby="mName">
   <div class="modal" id="modal">
     <div class="modal-top-line"></div>
     <button class="modal-close" onclick="closeModal()" aria-label="Fermer">✕</button>
     <div class="modal-head">
       <p class="modal-tag" id="mTag"></p>
       <h2 class="modal-name" id="mName"></h2>
-      <p class="modal-en" id="mEn"></p>
+      <p class="modal-en"   id="mEn"></p>
     </div>
     <div class="modal-body">
       <div class="modal-sec"><p class="modal-sec-lbl">Importance</p><p class="modal-sec-txt" id="mImp"></p></div>
-      <div class="modal-sec"><p class="modal-sec-lbl">Mission</p><p class="modal-sec-txt" id="mMis"></p></div>
-      <div class="modal-sec"><p class="modal-sec-lbl">Impact</p><p class="modal-sec-txt" id="mImpact"></p></div>
+      <div class="modal-sec"><p class="modal-sec-lbl">Mission</p><p class="modal-sec-txt"    id="mMis"></p></div>
+      <div class="modal-sec"><p class="modal-sec-lbl">Impact</p><p class="modal-sec-txt"     id="mImpact"></p></div>
     </div>
     <div class="modal-sep"></div>
     <div class="modal-signup" id="mSignup"></div>
@@ -394,125 +577,289 @@ button{font-family:inherit;cursor:pointer;background:none;border:none}
 </div>
 
 <script>
-const PHASE_CLS={1:'ph1',2:'ph2',3:'ph3',4:'ph4'};
-const ROLES=[
-  {id:1,ph:1,phName:'Le Matin',num:'01',nom:'Gardienne de la Mariée',en:'The Bridal Bodyguard',importance:'Confiance intime absolue pour préserver la paix intérieure de la mariée.',mission:'Filtrer les appels, gérer la logistique de dernière minute des prestataires et éloigner le stress.',impact:'Sérénité totale pour la mariée, coupée des perturbations extérieures.'},
-  {id:2,ph:1,phName:'Le Matin',num:'02',nom:'Styliste',en:'The Chief of Elegance',importance:"Valorise son sens de l'esthétique. Dernier rempart visuel de la mariée.",mission:"Ajuster le voile et la traîne, coordonner les accessoires du cortège pour les photos.",impact:"Apparence irréprochable et clichés officiels parfaits dès la première seconde."},
-  {id:3,ph:1,phName:'Le Matin',num:'03',nom:'Animatrice des Préparatifs',en:'The Morning Hype Woman',importance:"Célèbre son énergie positive pour détendre l'atmosphère.",mission:"Gérer la playlist du matin, l'espace de préparation et servir les rafraîchissements.",impact:"Préparatifs mémorables et fluides, chassant instantanément le trac."},
-  {id:4,ph:1,phName:'Le Matin',num:'04',nom:'Vidéaste des Coulisses',en:'The Cinematic Content Creator',importance:"Reconnaît son talent moderne pour capter la beauté instantanée.",mission:"Filmer de courtes séquences esthétiques en coulisses : rires, détails de la robe, parfum.",impact:"Capsules vidéos poétiques disponibles dès le lendemain."},
-  {id:5,ph:1,phName:'Le Matin',num:'05',nom:'Gardienne des Vœux',en:'The Vow Custodian',importance:"Fait d'elle la complice des mots les plus profonds en amont.",mission:"Détenir les copies officielles et doubles des vœux, et les tendre au moment précis.",impact:"Élimine la peur panique d'égarer ses papiers juste avant l'autel."},
-  {id:6,ph:1,phName:'Le Matin',num:'06',nom:'Responsable des Fragrances',en:'The Scent Curator',importance:"Confie la création de l'identité olfactive à une amie sensible.",mission:"Parfumer les espaces clés et veiller à ce que la mariée dispose de son flacon pour les retouches.",impact:"Crée un ancrage sensoriel unique associé à la magie de la journée."},
-  {id:7,ph:2,phName:"L'Après-midi",num:'07',nom:'Lanceuse de Pétales',en:'The Premium Flower Girl',importance:"Sublime une tradition avec une touche adulte chic et assurée.",mission:"Ouvrir la marche de la procession d'entrée en parsemant l'allée de pétales.",impact:"Installe immédiatement une atmosphère solennelle et magique."},
-  {id:8,ph:2,phName:"L'Après-midi",num:'08',nom:'Gardienne des Alliances',en:'The Ring Keeper',importance:"Responsabilité suprême sur les objets les plus symboliques.",mission:"Conserver les alliances sous haute sécurité et les présenter lors des vœux.",impact:"Garantie absolue contre la perte ou l'oubli des bagues."},
-  {id:9,ph:2,phName:"L'Après-midi",num:'09',nom:'Coordinatrice des Confettis',en:'The Confetti Conductor',importance:"Confie la gestion du moment de sortie le plus explosif et joyeux.",mission:"Briefer les invités, distribuer les éléments à lancer et organiser la haie d'honneur.",impact:"Une sortie de cérémonie grandiose, parfaitement synchronisée."},
-  {id:10,ph:2,phName:"L'Après-midi",num:'10',nom:"Hôtesse d'Accueil",en:'The Welcome Connoisseur',importance:"Premier visage hospitalier et bienveillant du couple pour les convives.",mission:"Accueillir chaleureusement les invités, distribuer les programmes et orienter.",impact:"Élimine toute confusion et installe un sentiment d'organisation haut de gamme."},
-  {id:11,ph:2,phName:"L'Après-midi",num:'11',nom:'Relais pour les Absents',en:'The Legacy Keeper',importance:"Mission à haute valeur humaine honorant sa sensibilité.",mission:"Superviser la retransmission vidéo privée ou organiser un hommage discret pour les défunts.",impact:"Permet d'inclure l'ensemble du cercle affectif avec douceur."},
-  {id:12,ph:2,phName:"L'Après-midi",num:'12',nom:'Dame aux Mouchoirs',en:'The Tear Catcher',importance:"Met en lumière son empathie naturelle pour le cercle proche.",mission:"Distribuer des mouchoirs élégants et attentions de réconfort aux premiers rangs.",impact:"Permet aux proches de vivre pleinement leurs larmes de joie."},
-  {id:13,ph:3,phName:'Le Cocktail',num:'13',nom:'Intendante du Couple',en:'The Secret Concierge',importance:"Protection physique et bienveillante directe des mariés.",mission:"Intercepter le couple pour leur apporter de l'eau, des pièces du buffet et préserver leur énergie.",impact:"Prévient l'épuisement des mariés au milieu des sollicitations continues."},
-  {id:14,ph:3,phName:'Le Cocktail',num:'14',nom:'Photographe des Coulisses',en:'The VIP Paparazzi',importance:"Valorise sa complicité pour documenter l'envers du décor.",mission:"Saisir des instants volés, éclats de rire et accolades en marge du photographe officiel.",impact:"Offre un album photo/vidéo d'une vérité brute et touchante dès le lendemain."},
-  {id:15,ph:3,phName:'Le Cocktail',num:'15',nom:'Animatrice des Invités',en:'The Social Catalyst',importance:"Met à contribution son aisance relationnelle et son charisme.",mission:"Naviguer activement entre les différents cercles d'invités pour initier des conversations.",impact:"Unifie l'assemblée et fait disparaître toute sensation d'isolement."},
-  {id:16,ph:3,phName:'Le Cocktail',num:'16',nom:"Responsable du Livre d'Or",en:'The Guestbook Curator',importance:"Gardienne des écrits précieux qui traverseront le temps.",mission:"Dynamiser l'espace du livre d'or ou de la borne audio en motivant les invités à contribuer.",impact:"Garantit un recueil de témoignages d'amour complet et soigné."},
-  {id:17,ph:3,phName:'Le Cocktail',num:'17',nom:'Animatrice du Bar',en:'The Cocktail Ambassador',importance:"Associe son image à la convivialité et l'épicurisme de la fête.",mission:"Inaugurer le bar à thèmes, présenter les cocktails signatures et veiller à la tenue du bar.",impact:"Transforme le buffet en animation interactive et fluidifie le service."},
-  {id:18,ph:3,phName:'Le Cocktail',num:'18',nom:'Coordinatrice Décoration',en:'The Decor Transformer',importance:"S'appuie sur sa rigueur esthétique pour optimiser la décoration.",mission:"Coordonner le transfert des compositions florales ou bougies de la cérémonie vers le dîner.",impact:"Maximise les investissements floraux et crée un effet de surprise visuel."},
-  {id:19,ph:3,phName:'Le Cocktail',num:'19',nom:'Responsable Photobooth',en:'The Photobooth Director',importance:"Responsable directe du lâcher-prise ludique des invités.",mission:"Superviser la borne photo, proposer des thématiques de poses et aider les moins technophiles.",impact:"Garantit l'obtention de clichés décalés et mémorables de chaque convive."},
-  {id:20,ph:4,phName:'La Soirée',num:'20',nom:'Responsable des Urgences',en:'The Emergency Officer',importance:"Statut officiel de super-héroïne face à l'imprévu matériel.",mission:"Détenir le kit d'urgence ultime (couture, pharmacie, détachant) et intervenir discrètement.",impact:"Résolution immédiate des petits incidents sans générer de stress."},
-  {id:21,ph:4,phName:'La Soirée',num:'21',nom:'Coordinatrice de Soirée',en:'The Surprise Strategist',importance:"Position de haute confiance, garante du rythme général de la soirée.",mission:"Centraliser et planifier les interventions ou discours en lien avec le traiteur et le DJ.",impact:"Un dîner fluide, vivant, évitant les longueurs et assurant le service parfait."},
-  {id:22,ph:4,phName:'La Soirée',num:'22',nom:'Maîtresse des Sparklers',en:'The Sparkler Captain',importance:"Direction du signal visuel de transition vers la fête.",mission:"Distribuer les cierges magiques, rappeler la sécurité et coordonner l'allumage synchrone.",impact:"Atmosphère féerique instantanée et photographies d'ouverture de bal spectaculaires."},
-  {id:23,ph:4,phName:'La Soirée',num:'23',nom:'Capitaine de Danse',en:'The Dancefloor Captain',importance:"Valide son leadership festif et son dynamisme naturel.",mission:"Ouvrir la piste aux côtés des mariés et motiver chaleureusement les invités timides.",impact:"Piste de danse constamment habitée, synergie festive maximale toute la nuit."},
-  {id:24,ph:4,phName:'La Soirée',num:'24',nom:'Gardienne de Fin de Nuit',en:'The Guardian of the Temple',importance:"Rôle de confiance rigoureux protégeant la sérénité matérielle du couple.",mission:"Sécuriser l'urne et la boîte aux cadeaux, gérer les départs et fermer le bal.",impact:"Permet aux mariés de se retirer l'esprit totalement libéré."},
-  {id:25,ph:4,phName:'La Soirée',num:'25',nom:'Responsable Confort',en:'The Cozy Officer',importance:"Incarne l'esprit d'attention délicate porté à la fatigue physique.",mission:"Déployer les paniers de chaussures plates de danse et distribuer des plaids si besoin.",impact:"Prolonge le confort et la présence des convives à la fête."},
-  {id:26,ph:4,phName:'La Soirée',num:'26',nom:'Coordinatrice des Toasts',en:'The Toast Liaison',importance:"Assure l'unanimité de chaque geste de célébration dans la salle.",mission:"Vérifier discrètement que les verres soient remplis avant le lancement d'un toast officiel.",impact:"Toasts unanimes et chaleureux, où chaque invité participe pleinement."},
-  {id:27,ph:4,phName:'La Soirée',num:'27',nom:'Collectrice de Playlists',en:'The Dance-List Collector',importance:"Donne un pouvoir d'influence musicale contrôlé et sur mesure aux tables.",mission:"Récolter les souhaits musicaux des convives et soumettre le tri qualitatif au DJ.",impact:"Programmation nocturne en phase absolue avec les désirs réels de l'assemblée."},
-  {id:28,ph:4,phName:'La Soirée',num:'28',nom:'Coordinatrice du Buffet de Nuit',en:'The Late-Night Captain',importance:"Pilote le moment de réconfort gourmand nocturne le plus attendu.",mission:"Coordonner avec le service l'apparition théâtrale du buffet de nuit (mini-burgers, douceurs) à 2h.",impact:"Apporte un regain d'énergie massif aux invités, prolongeant la fête."},
-  {id:29,ph:4,phName:'La Soirée',num:'29',nom:"Collectrice d'Anecdotes",en:'The Quote Collector',importance:"Rôle poétique archivant l'esprit spontané immatériel du mariage.",mission:"Consigner secrètement dans un carnet les répliques cultes et anecdotes touchantes des invités.",impact:"Offre un recueil historique d'amour et d'humour brut que le couple découvrira au réveil."},
-  {id:30,ph:4,phName:'La Soirée',num:'30',nom:'Responsable des Cadeaux',en:'The Favor Queen',importance:"Dernier point de contact, remettant le témoignage final de gratitude.",mission:"S'assurer rigoureusement que chaque invité récupère son cadeau de remerciement au départ.",impact:"Supprime le risque d'oubli de cadeaux sur les tables."},
+/* ═══════════════════════════════════════════════
+   DATA
+   ═══════════════════════════════════════════════ */
+const PHASE_CLS = { 1:'ph1', 2:'ph2', 3:'ph3', 4:'ph4' };
+const PHASE_LABELS = {
+  1: { name:'Les Préparatifs',  time:'Le Matin'         },
+  2: { name:'La Cérémonie',     time:"L'Après-midi"     },
+  3: { name:'Le Cocktail',      time:"Fin d'après-midi" },
+  4: { name:'La Soirée',        time:'Soirée & Nuit'    },
+};
+
+const ROLES = [
+  {id:1, ph:1,phName:'Le Matin',      num:'01',nom:'Gardienne de la Mariée',        en:'The Bridal Bodyguard',         importance:'Confiance intime absolue pour préserver la paix intérieure de la mariée.',            mission:'Filtrer les appels, gérer la logistique de dernière minute des prestataires et éloigner le stress.',         impact:'Sérénité totale pour la mariée, coupée des perturbations extérieures.'},
+  {id:2, ph:1,phName:'Le Matin',      num:'02',nom:'Styliste',                      en:'The Chief of Elegance',        importance:"Valorise son sens de l'esthétique. Dernier rempart visuel de la mariée.",                mission:"Ajuster le voile et la traîne, coordonner les accessoires du cortège pour les photos.",                     impact:"Apparence irréprochable et clichés officiels parfaits dès la première seconde."},
+  {id:3, ph:1,phName:'Le Matin',      num:'03',nom:'Animatrice des Préparatifs',    en:'The Morning Hype Woman',       importance:"Célèbre son énergie positive pour détendre l'atmosphère.",                              mission:"Gérer la playlist du matin, l'espace de préparation et servir les rafraîchissements.",                     impact:"Préparatifs mémorables et fluides, chassant instantanément le trac."},
+  {id:4, ph:1,phName:'Le Matin',      num:'04',nom:'Vidéaste des Coulisses',        en:'The Cinematic Content Creator',importance:"Reconnaît son talent moderne pour capter la beauté instantanée.",                       mission:"Filmer de courtes séquences esthétiques en coulisses : rires, détails de la robe, parfum.",               impact:"Capsules vidéos poétiques disponibles dès le lendemain."},
+  {id:5, ph:1,phName:'Le Matin',      num:'05',nom:'Gardienne des Vœux',            en:'The Vow Custodian',            importance:"Fait d'elle la complice des mots les plus profonds en amont.",                          mission:"Détenir les copies officielles et doubles des vœux, et les tendre au moment précis.",                     impact:"Élimine la peur panique d'égarer ses papiers juste avant l'autel."},
+  {id:6, ph:1,phName:'Le Matin',      num:'06',nom:'Responsable des Fragrances',   en:'The Scent Curator',            importance:"Confie la création de l'identité olfactive à une amie sensible.",                        mission:"Parfumer les espaces clés et veiller à ce que la mariée dispose de son flacon pour les retouches.",       impact:"Crée un ancrage sensoriel unique associé à la magie de la journée."},
+  {id:7, ph:2,phName:"L'Après-midi",  num:'07',nom:'Lanceuse de Pétales',           en:'The Premium Flower Girl',      importance:"Sublime une tradition avec une touche adulte chic et assurée.",                           mission:"Ouvrir la marche de la procession d'entrée en parsemant l'allée de pétales.",                           impact:"Installe immédiatement une atmosphère solennelle et magique."},
+  {id:8, ph:2,phName:"L'Après-midi",  num:'08',nom:'Gardienne des Alliances',      en:'The Ring Keeper',              importance:"Responsabilité suprême sur les objets les plus symboliques.",                             mission:"Conserver les alliances sous haute sécurité et les présenter lors des vœux.",                           impact:"Garantie absolue contre la perte ou l'oubli des bagues."},
+  {id:9, ph:2,phName:"L'Après-midi",  num:'09',nom:'Coordinatrice des Confettis',  en:'The Confetti Conductor',       importance:"Confie la gestion du moment de sortie le plus explosif et joyeux.",                      mission:"Briefer les invités, distribuer les éléments à lancer et organiser la haie d'honneur.",                 impact:"Une sortie de cérémonie grandiose, parfaitement synchronisée."},
+  {id:10,ph:2,phName:"L'Après-midi",  num:'10',nom:"Hôtesse d'Accueil",            en:'The Welcome Connoisseur',      importance:"Premier visage hospitalier et bienveillant du couple pour les convives.",                  mission:"Accueillir chaleureusement les invités, distribuer les programmes et orienter.",                         impact:"Élimine toute confusion et installe un sentiment d'organisation haut de gamme."},
+  {id:11,ph:2,phName:"L'Après-midi",  num:'11',nom:'Relais pour les Absents',      en:'The Legacy Keeper',            importance:"Mission à haute valeur humaine honorant sa sensibilité.",                                  mission:"Superviser la retransmission vidéo privée ou organiser un hommage discret pour les défunts.",           impact:"Permet d'inclure l'ensemble du cercle affectif avec douceur."},
+  {id:12,ph:2,phName:"L'Après-midi",  num:'12',nom:'Dame aux Mouchoirs',           en:'The Tear Catcher',             importance:"Met en lumière son empathie naturelle pour le cercle proche.",                             mission:"Distribuer des mouchoirs élégants et attentions de réconfort aux premiers rangs.",                     impact:"Permet aux proches de vivre pleinement leurs larmes de joie."},
+  {id:13,ph:3,phName:'Le Cocktail',   num:'13',nom:'Intendante du Couple',         en:'The Secret Concierge',         importance:"Protection physique et bienveillante directe des mariés.",                                mission:"Intercepter le couple pour leur apporter de l'eau, des pièces du buffet et préserver leur énergie.",   impact:"Prévient l'épuisement des mariés au milieu des sollicitations continues."},
+  {id:14,ph:3,phName:'Le Cocktail',   num:'14',nom:'Photographe des Coulisses',    en:'The VIP Paparazzi',            importance:"Valorise sa complicité pour documenter l'envers du décor.",                               mission:"Saisir des instants volés, éclats de rire et accolades en marge du photographe officiel.",             impact:"Offre un album photo/vidéo d'une vérité brute et touchante dès le lendemain."},
+  {id:15,ph:3,phName:'Le Cocktail',   num:'15',nom:'Animatrice des Invités',       en:'The Social Catalyst',          importance:"Met à contribution son aisance relationnelle et son charisme.",                             mission:"Naviguer activement entre les différents cercles d'invités pour initier des conversations.",           impact:"Unifie l'assemblée et fait disparaître toute sensation d'isolement."},
+  {id:16,ph:3,phName:'Le Cocktail',   num:'16',nom:"Responsable du Livre d'Or",   en:'The Guestbook Curator',        importance:"Gardienne des écrits précieux qui traverseront le temps.",                                mission:"Dynamiser l'espace du livre d'or ou de la borne audio en motivant les invités à contribuer.",         impact:"Garantit un recueil de témoignages d'amour complet et soigné."},
+  {id:17,ph:3,phName:'Le Cocktail',   num:'17',nom:'Animatrice du Bar',            en:'The Cocktail Ambassador',      importance:"Associe son image à la convivialité et l'épicurisme de la fête.",                         mission:"Inaugurer le bar à thèmes, présenter les cocktails signatures et veiller à la tenue du bar.",         impact:"Transforme le buffet en animation interactive et fluidifie le service."},
+  {id:18,ph:3,phName:'Le Cocktail',   num:'18',nom:'Coordinatrice Décoration',     en:'The Decor Transformer',        importance:"S'appuie sur sa rigueur esthétique pour optimiser la décoration.",                          mission:"Coordonner le transfert des compositions florales ou bougies de la cérémonie vers le dîner.",         impact:"Maximise les investissements floraux et crée un effet de surprise visuel."},
+  {id:19,ph:3,phName:'Le Cocktail',   num:'19',nom:'Responsable Photobooth',       en:'The Photobooth Director',      importance:"Responsable directe du lâcher-prise ludique des invités.",                                 mission:"Superviser la borne photo, proposer des thématiques de poses et aider les moins technophiles.",       impact:"Garantit l'obtention de clichés décalés et mémorables de chaque convive."},
+  {id:20,ph:4,phName:'La Soirée',     num:'20',nom:'Responsable des Urgences',     en:'The Emergency Officer',        importance:"Statut officiel de super-héroïne face à l'imprévu matériel.",                               mission:"Détenir le kit d'urgence ultime (couture, pharmacie, détachant) et intervenir discrètement.",         impact:"Résolution immédiate des petits incidents sans générer de stress."},
+  {id:21,ph:4,phName:'La Soirée',     num:'21',nom:'Coordinatrice de Soirée',      en:'The Surprise Strategist',      importance:"Position de haute confiance, garante du rythme général de la soirée.",                      mission:"Centraliser et planifier les interventions ou discours en lien avec le traiteur et le DJ.",           impact:"Un dîner fluide, vivant, évitant les longueurs et assurant le service parfait."},
+  {id:22,ph:4,phName:'La Soirée',     num:'22',nom:'Maîtresse des Sparklers',      en:'The Sparkler Captain',         importance:"Direction du signal visuel de transition vers la fête.",                                   mission:"Distribuer les cierges magiques, rappeler la sécurité et coordonner l'allumage synchrone.",          impact:"Atmosphère féerique instantanée et photographies d'ouverture de bal spectaculaires."},
+  {id:23,ph:4,phName:'La Soirée',     num:'23',nom:'Capitaine de Danse',           en:'The Dancefloor Captain',       importance:"Valide son leadership festif et son dynamisme naturel.",                                   mission:"Ouvrir la piste aux côtés des mariés et motiver chaleureusement les invités timides.",               impact:"Piste de danse constamment habitée, synergie festive maximale toute la nuit."},
+  {id:24,ph:4,phName:'La Soirée',     num:'24',nom:'Gardienne de Fin de Nuit',     en:'The Guardian of the Temple',   importance:"Rôle de confiance rigoureux protégeant la sérénité matérielle du couple.",                   mission:"Sécuriser l'urne et la boîte aux cadeaux, gérer les départs et fermer le bal.",                     impact:"Permet aux mariés de se retirer l'esprit totalement libéré."},
+  {id:25,ph:4,phName:'La Soirée',     num:'25',nom:'Responsable Confort',          en:'The Cozy Officer',             importance:"Incarne l'esprit d'attention délicate porté à la fatigue physique.",                       mission:"Déployer les paniers de chaussures plates de danse et distribuer des plaids si besoin.",             impact:"Prolonge le confort et la présence des convives à la fête."},
+  {id:26,ph:4,phName:'La Soirée',     num:'26',nom:'Coordinatrice des Toasts',     en:'The Toast Liaison',            importance:"Assure l'unanimité de chaque geste de célébration dans la salle.",                         mission:"Vérifier discrètement que les verres soient remplis avant le lancement d'un toast officiel.",       impact:"Toasts unanimes et chaleureux, où chaque invité participe pleinement."},
+  {id:27,ph:4,phName:'La Soirée',     num:'27',nom:'Collectrice de Playlists',     en:'The Dance-List Collector',     importance:"Donne un pouvoir d'influence musicale contrôlé et sur mesure aux tables.",                    mission:"Récolter les souhaits musicaux des convives et soumettre le tri qualitatif au DJ.",                  impact:"Programmation nocturne en phase absolue avec les désirs réels de l'assemblée."},
+  {id:28,ph:4,phName:'La Soirée',     num:'28',nom:'Coordinatrice du Buffet',      en:'The Late-Night Captain',       importance:"Pilote le moment de réconfort gourmand nocturne le plus attendu.",                           mission:"Coordonner avec le service l'apparition théâtrale du buffet de nuit (mini-burgers, douceurs) à 2h.", impact:"Apporte un regain d'énergie massif aux invités, prolongeant la fête."},
+  {id:29,ph:4,phName:'La Soirée',     num:'29',nom:"Collectrice d'Anecdotes",      en:'The Quote Collector',          importance:"Rôle poétique archivant l'esprit spontané immatériel du mariage.",                          mission:"Consigner secrètement dans un carnet les répliques cultes et anecdotes touchantes des invités.",     impact:"Offre un recueil historique d'amour et d'humour brut que le couple découvrira au réveil."},
+  {id:30,ph:4,phName:'La Soirée',     num:'30',nom:'Responsable des Cadeaux',      en:'The Favor Queen',              importance:"Dernier point de contact, remettant le témoignage final de gratitude.",                       mission:"S'assurer rigoureusement que chaque invité récupère son cadeau de remerciement au départ.",         impact:"Supprime le risque d'oubli de cadeaux sur les tables."},
 ];
-const PHASE_LABELS={1:{name:'Les Préparatifs',time:'Le Matin'},2:{name:'La Cérémonie',time:"L'Après-midi"},3:{name:'Le Cocktail',time:"Fin d'après-midi"},4:{name:'La Soirée',time:'Soirée & Nuit'}};
 
-function getData(){return JSON.parse(localStorage.getItem('cgm')||'{"signups":{}}')}
-function saveData(d){localStorage.setItem('cgm',JSON.stringify(d))}
-function getRSups(id){return(getData().signups||{})[String(id)]||[]}
-function isFull(id){return getRSups(id).length>=2}
-function doJoin(id,name){if(isFull(id)||getRSups(id).map(n=>n.toLowerCase()).includes(name.toLowerCase().trim()))return false;const d=getData();if(!d.signups[id])d.signups[id]=[];d.signups[id].push(name.trim());saveData(d);return true}
-function doLeave(id,name){const d=getData();if(d.signups&&d.signups[id])d.signups[id]=d.signups[id].filter(n=>n.toLowerCase()!==name.toLowerCase().trim());saveData(d)}
+/* ═══════════════════════════════════════════════
+   LOCAL STORAGE HELPERS
+   ═══════════════════════════════════════════════ */
+function getData() {
+  try { return JSON.parse(localStorage.getItem('cgm') || '{"signups":{}}'); }
+  catch (e) { return { signups: {} }; }
+}
+function saveData(d) { localStorage.setItem('cgm', JSON.stringify(d)); }
+function getRSups(id) { return (getData().signups || {})[String(id)] || []; }
+function isFull(id)   { return getRSups(id).length >= 2; }
+function doJoin(id, name) {
+  const sups = getRSups(id);
+  if (sups.length >= 2 || sups.map(n => n.toLowerCase()).includes(name.toLowerCase().trim())) return false;
+  const d = getData();
+  if (!d.signups[id]) d.signups[id] = [];
+  d.signups[id].push(name.trim());
+  saveData(d);
+  return true;
+}
+function doLeave(id, name) {
+  const d = getData();
+  if (d.signups && d.signups[id])
+    d.signups[id] = d.signups[id].filter(n => n.toLowerCase() !== name.toLowerCase().trim());
+  saveData(d);
+}
 
-let curPhase='all',curStatus='all',curSearch='',openModalId=null;
-function setPhase(ph,btn){curPhase=ph;document.querySelectorAll('[data-phase]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');buildContent()}
-function setStatus(s,btn){curStatus=s;document.querySelectorAll('[data-status]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');buildContent()}
-function onSearch(v){curSearch=v.toLowerCase().trim();buildContent()}
+/* ═══════════════════════════════════════════════
+   FILTER STATE
+   ═══════════════════════════════════════════════ */
+let curPhase  = 'all';
+let curStatus = 'all';
+let curSearch = '';
+let openModalId = null;
 
-const cardObserver=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('anim-in'),i*50);cardObserver.unobserve(e.target)}});
-},{threshold:.06});
+function setPhase(ph, btn) {
+  curPhase = ph;
+  document.querySelectorAll('[data-phase]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildContent();
+}
+function setStatus(s, btn) {
+  curStatus = s;
+  document.querySelectorAll('[data-status]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildContent();
+}
+function onSearch(v) { curSearch = v.toLowerCase().trim(); buildContent(); }
 
-function buildContent(){
-  const content=document.getElementById('content');content.innerHTML='';
-  [1,2,3,4].forEach(ph=>{
-    if(curPhase!=='all'&&curPhase!==String(ph))return;
-    let roles=ROLES.filter(r=>r.ph===ph);
-    if(curStatus==='open')roles=roles.filter(r=>!isFull(r.id));
-    if(curStatus==='full')roles=roles.filter(r=>isFull(r.id));
-    if(curSearch)roles=roles.filter(r=>getRSups(r.id).some(n=>n.toLowerCase().includes(curSearch))||r.nom.toLowerCase().includes(curSearch));
-    if(!roles.length)return;
-    const meta=PHASE_LABELS[ph];
-    const g=document.createElement('div');g.className='phase-group '+PHASE_CLS[ph];
-    g.innerHTML=`<div class="phase-header"><div class="phase-dot"></div><span class="phase-num">0${ph}</span><span class="phase-name">${meta.name}</span><span class="phase-info">${meta.time}</span></div><div class="role-grid">${roles.map(r=>cardHtml(r)).join('')}</div>`;
+/* ═══════════════════════════════════════════════
+   INTERSECTION OBSERVER FOR CARD ANIMATION
+   ═══════════════════════════════════════════════ */
+const cardObserver = new IntersectionObserver(function (entries) {
+  entries.forEach(function (e, i) {
+    if (e.isIntersecting) {
+      setTimeout(function () { e.target.classList.add('anim-in'); }, i * 45);
+      cardObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: .06 });
+
+/* Nav scroll */
+const mainNav = document.getElementById('mainNav');
+window.addEventListener('scroll', function () {
+  mainNav.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+/* ═══════════════════════════════════════════════
+   BUILD CONTENT
+   ═══════════════════════════════════════════════ */
+function buildContent() {
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+
+  [1, 2, 3, 4].forEach(function (ph) {
+    if (curPhase !== 'all' && curPhase !== String(ph)) return;
+
+    let roles = ROLES.filter(r => r.ph === ph);
+    if (curStatus === 'open') roles = roles.filter(r => !isFull(r.id));
+    if (curStatus === 'full') roles = roles.filter(r => isFull(r.id));
+    if (curSearch) roles = roles.filter(r =>
+      getRSups(r.id).some(n => n.toLowerCase().includes(curSearch)) ||
+      r.nom.toLowerCase().includes(curSearch)
+    );
+    if (!roles.length) return;
+
+    const meta = PHASE_LABELS[ph];
+    const g    = document.createElement('div');
+    g.className = 'phase-group ' + PHASE_CLS[ph];
+    g.innerHTML =
+      '<div class="phase-header">' +
+        '<div class="phase-dot"></div>' +
+        '<span class="phase-num">0' + ph + '</span>' +
+        '<span class="phase-name">' + meta.name + '</span>' +
+        '<span class="phase-info">' + meta.time + '</span>' +
+      '</div>' +
+      '<div class="role-grid">' + roles.map(r => cardHtml(r)).join('') + '</div>';
+
     content.appendChild(g);
   });
-  if(!content.children.length)content.innerHTML='<div class="empty"><p>Aucun rôle ne correspond.</p></div>';
-  document.querySelectorAll('.role-card:not(.anim-in)').forEach(el=>cardObserver.observe(el));
+
+  if (!content.children.length) {
+    content.innerHTML = '<div class="empty"><p>Aucun rôle ne correspond à votre recherche.</p></div>';
+  }
+  document.querySelectorAll('.role-card:not(.anim-in)').forEach(el => cardObserver.observe(el));
 }
 
-function cardHtml(r){
-  const sups=getRSups(r.id),full=sups.length>=2,partial=sups.length===1;
-  const dotC=full?'full':partial?'partial':'open';
-  const badgeTxt=full?'Complet':partial?'1 place restante':'2 places disponibles';
-  const spotsHtml=[0,1].map(i=>sups[i]
-    ?`<div class="spot-row"><div class="spot-circle taken"></div><span class="spot-circle-name">${sups[i]}</span></div>`
-    :`<div class="spot-row"><div class="spot-circle"></div><span class="spot-circle-empty">Place disponible</span></div>`).join('');
-  return`<div class="role-card${full?' full':''}" onclick="openModal(${r.id})">
-    <div class="role-badge"><div class="badge-dot ${dotC}"></div><span class="badge-text">${badgeTxt}</span></div>
-    <div class="role-num">${r.num}</div>
-    <p class="role-phase">${r.phName}</p>
-    <p class="role-name">${r.nom}</p>
-    <p class="role-en">${r.en}</p>
-    <div class="role-spots">${spotsHtml}</div>
-    <p class="role-cta-hint">${full?'Voir le détail →':'Voir & m\'inscrire →'}</p>
-  </div>`;
+function cardHtml(r) {
+  const sups    = getRSups(r.id);
+  const full    = sups.length >= 2;
+  const partial = sups.length === 1;
+  const dotC    = full ? 'full' : partial ? 'partial' : 'open';
+  const badge   = full ? 'Complet' : partial ? '1 place restante' : '2 places disponibles';
+  const spots   = [0,1].map(i => sups[i]
+    ? '<div class="spot-row"><div class="spot-circle taken"></div><span class="spot-circle-name">' + sups[i] + '</span></div>'
+    : '<div class="spot-row"><div class="spot-circle"></div><span class="spot-circle-empty">Place disponible</span></div>'
+  ).join('');
+
+  return '<div class="role-card' + (full ? ' full' : '') + '" onclick="openModal(' + r.id + ')" tabindex="0" role="button" aria-label="Voir le rôle ' + r.nom + '">' +
+    '<div class="role-badge"><div class="badge-dot ' + dotC + '"></div><span class="badge-text">' + badge + '</span></div>' +
+    '<div class="role-num">' + r.num + '</div>' +
+    '<p class="role-phase">' + r.phName + '</p>' +
+    '<p class="role-name">' + r.nom + '</p>' +
+    '<p class="role-en">' + r.en + '</p>' +
+    '<div class="role-spots">' + spots + '</div>' +
+    '<p class="role-cta-hint">' + (full ? 'Voir le détail →' : "Voir & m'inscrire →") + '</p>' +
+  '</div>';
 }
 
-function openModal(id){
-  const r=ROLES.find(x=>x.id===id);if(!r)return;
-  openModalId=id;
-  const phCls='modal-ph'+r.ph;
-  const modal=document.getElementById('modal');modal.className='modal '+phCls;
-  document.getElementById('mTag').textContent=`Rôle ${r.num} — ${r.phName}`;
-  document.getElementById('mName').textContent=r.nom;
-  document.getElementById('mEn').textContent=r.en;
-  document.getElementById('mImp').textContent=r.importance;
-  document.getElementById('mMis').textContent=r.mission;
-  document.getElementById('mImpact').textContent=r.impact;
+/* ═══════════════════════════════════════════════
+   MODAL
+   ═══════════════════════════════════════════════ */
+function openModal(id) {
+  const r = ROLES.find(x => x.id === id);
+  if (!r) return;
+  openModalId = id;
+
+  const modal = document.getElementById('modal');
+  modal.className = 'modal modal-ph' + r.ph;
+  document.getElementById('mTag').textContent    = 'Rôle ' + r.num + ' — ' + r.phName;
+  document.getElementById('mName').textContent   = r.nom;
+  document.getElementById('mEn').textContent     = r.en;
+  document.getElementById('mImp').textContent    = r.importance;
+  document.getElementById('mMis').textContent    = r.mission;
+  document.getElementById('mImpact').textContent = r.impact;
+
   renderModalSignup(id);
   document.getElementById('modalBg').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
-function renderModalSignup(id){
-  const sups=getRSups(id),full=isFull(id);
-  const el=document.getElementById('mSignup');
-  const spotsHtml='<div class="spots-display">'+[0,1].map(i=>sups[i]
-    ?`<div class="spot-line"><div class="spot-circle taken"></div><span class="spot-circle-name">${sups[i]}</span></div>`
-    :`<div class="spot-line"><div class="spot-circle"></div><span class="spot-circle-empty">Place disponible</span></div>`).join('')+'</div>';
-  if(full){el.innerHTML=`<h3 class="modal-signup-title">Inscriptions</h3>${spotsHtml}<div class="modal-full">Ce rôle est complet.</div>`;return}
-  el.innerHTML=`<h3 class="modal-signup-title">Rejoindre ce rôle</h3><p class="modal-signup-sub">Entrez votre prénom. Pour vous désinscrire, entrez votre prénom et cliquez "Retirer".</p>${spotsHtml}<div class="signup-input-row"><input id="signupName" class="signup-input" type="text" placeholder="Votre prénom…" maxlength="40" autocomplete="off"><button class="btn-join" id="btnJoin" onclick="joinRole()">Rejoindre</button></div><button style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:var(--text-light);transition:color .2s;margin-top:.2rem" onmouseover="this.style.color='var(--bord)'" onmouseout="this.style.color='var(--text-light)'" onclick="leaveRole()">Retirer mon inscription</button><div id="modalMsg"></div>`;
-  document.getElementById('signupName').addEventListener('keydown',e=>{if(e.key==='Enter')joinRole()});
+
+function renderModalSignup(id) {
+  const sups = getRSups(id);
+  const full = isFull(id);
+  const el   = document.getElementById('mSignup');
+
+  const spotsHtml = '<div class="spots-display">' +
+    [0,1].map(i => sups[i]
+      ? '<div class="spot-line"><div class="spot-circle taken"></div><span class="spot-circle-name">' + sups[i] + '</span></div>'
+      : '<div class="spot-line"><div class="spot-circle"></div><span class="spot-circle-empty">Place disponible</span></div>'
+    ).join('') +
+  '</div>';
+
+  if (full) {
+    el.innerHTML = '<h3 class="modal-signup-title">Inscriptions</h3>' + spotsHtml +
+      '<div class="modal-full">Ce rôle est complet.</div>';
+    return;
+  }
+
+  el.innerHTML =
+    '<h3 class="modal-signup-title">Rejoindre ce rôle</h3>' +
+    '<p class="modal-signup-sub">Entrez votre prénom. Pour vous désinscrire, entrez votre prénom et cliquez « Retirer ».</p>' +
+    spotsHtml +
+    '<div class="signup-input-row">' +
+      '<input id="signupName" class="signup-input" type="text" placeholder="Votre prénom…" maxlength="40" autocomplete="given-name">' +
+      '<button class="btn-join" id="btnJoin" onclick="joinRole()">Rejoindre</button>' +
+    '</div>' +
+    '<button style="font-family:var(--font-body);font-weight:300;font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:var(--text-light);transition:color var(--dur-mid) ease;margin-top:.2rem;background:none;border:none;cursor:pointer" ' +
+      'onmouseover="this.style.color=\'var(--bord)\'" onmouseout="this.style.color=\'var(--text-light)\'" onclick="leaveRole()">Retirer mon inscription</button>' +
+    '<div id="modalMsg"></div>';
+
+  document.getElementById('signupName').addEventListener('keydown', e => { if (e.key === 'Enter') joinRole(); });
 }
-function joinRole(){const name=(document.getElementById('signupName')?.value||'').trim();if(name.length<2){showMsg('Entrez au moins 2 caractères.','error');return}if(doJoin(openModalId,name)){showMsg(`✓ ${name} a rejoint ce rôle.`,'success');renderModalSignup(openModalId);buildContent()}else{const s=getRSups(openModalId);if(s.map(n=>n.toLowerCase()).includes(name.toLowerCase()))showMsg(`${name} est déjà inscrit(e).`,'error');else showMsg('Impossible de rejoindre.','error')}}
-function leaveRole(){const name=(document.getElementById('signupName')?.value||'').trim();if(name.length<2){showMsg('Entrez votre prénom pour vous désinscrire.','error');return}const prev=getRSups(openModalId).length;doLeave(openModalId,name);if(getRSups(openModalId).length<prev){showMsg(`${name} retiré(e).`,'success');renderModalSignup(openModalId);buildContent()}else showMsg(`${name} n'était pas inscrit(e).`,'error')}
-function showMsg(msg,type){const el=document.getElementById('modalMsg');if(el){el.className='modal-msg '+type;el.textContent=msg}}
-function closeModal(e){if(e&&e.target!==document.getElementById('modalBg'))return;document.getElementById('modalBg').classList.remove('open');document.body.style.overflow='';openModalId=null}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+function joinRole() {
+  const name = (document.getElementById('signupName')?.value || '').trim();
+  if (name.length < 2) { showMsg('Entrez au moins 2 caractères.', 'error'); return; }
+  if (doJoin(openModalId, name)) {
+    showMsg('✓ ' + name + ' a rejoint ce rôle.', 'success');
+    renderModalSignup(openModalId);
+    buildContent();
+  } else {
+    const s = getRSups(openModalId);
+    if (s.map(n => n.toLowerCase()).includes(name.toLowerCase()))
+      showMsg(name + ' est déjà inscrit(e).', 'error');
+    else showMsg('Impossible de rejoindre ce rôle.', 'error');
+  }
+}
+
+function leaveRole() {
+  const name = (document.getElementById('signupName')?.value || '').trim();
+  if (name.length < 2) { showMsg('Entrez votre prénom pour vous désinscrire.', 'error'); return; }
+  const prev = getRSups(openModalId).length;
+  doLeave(openModalId, name);
+  if (getRSups(openModalId).length < prev) {
+    showMsg(name + ' retiré(e).', 'success');
+    renderModalSignup(openModalId);
+    buildContent();
+  } else {
+    showMsg(name + " n'était pas inscrit(e).", 'error');
+  }
+}
+
+function showMsg(msg, type) {
+  const el = document.getElementById('modalMsg');
+  if (el) { el.className = 'modal-msg ' + type; el.textContent = msg; }
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalBg')) return;
+  document.getElementById('modalBg').classList.remove('open');
+  document.body.style.overflow = '';
+  openModalId = null;
+}
+
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') {
+    const focused = document.activeElement;
+    if (focused && focused.classList.contains('role-card')) {
+      const id = focused.getAttribute('onclick')?.match(/openModal\((\d+)\)/)?.[1];
+      if (id) openModal(parseInt(id));
+    }
+  }
+});
+
+window.addEventListener('storage', buildContent);
 buildContent();
-window.addEventListener('storage',()=>buildContent());
 </script>
+
+<script src="transitions.js"></script>
 </body>
 </html>

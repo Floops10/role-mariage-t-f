@@ -4,391 +4,547 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mes Rôles — T & F Mariage</title>
+<!-- Prevent flash-of-content during page transition -->
+<script>if(sessionStorage.getItem('cgm_t'))document.documentElement.setAttribute('data-trans-in','');</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
 <style>
-@font-face{font-family:'Parfumerie Script';src:local('Parfumerie Script'),local('Parfumerie Script Pro'),local('ParfumerieScript');}
-@font-face{font-family:'TAN Angleton';src:local('TAN Angleton'),local('TAN - Angleton'),local('TANAngleton');}
-@font-face{font-family:'Versailles';src:local('Versailles'),local('ITC Versailles'),local('Versailles LT Std'),local('Versailles 55');}
-
-:root{
-  --cream:#FAF5EF;--cream2:#F2EAE0;
-  --navy:#1F2F44;--ocean:#4F6D8A;--sky:#BFD4E6;--sand:#D8CFC4;
-  --brown:#7A5040;--bord:#6B2035;--gold:#C9A86C;--gold2:#B8913A;
-  --text:#1F2F44;--text-mid:#4F6D8A;--text-light:#8A9EB8;
-  --border:rgba(31,47,68,.1);--border2:rgba(31,47,68,.22);
-  --gold-border:rgba(201,168,108,.22);
-  --green:#3B7A62;--green-bg:rgba(59,122,98,.07);--green-border:rgba(59,122,98,.22);
+/* ═══════════════════════════════════════════════
+   HERO — navy avec fond dégradé
+   ═══════════════════════════════════════════════ */
+.hero {
+  background: var(--navy);
+  padding: 5.5rem var(--page-pad) 4.5rem;
+  position: relative;
+  overflow: hidden;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth}
-body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer;background:none;border:none}
-:focus-visible{outline:2px solid var(--ocean);outline-offset:3px}
-
-/* ── NAV ── */
-.nav{
-  background:rgba(250,245,239,.97);backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--gold-border);
-  padding:0 4rem;height:72px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:100;
-}
-.nav-logo{display:flex;align-items:center;height:54px}
-.nav-logo img{height:54px;width:auto;transition:opacity .25s}
-.nav-logo:hover img{opacity:.6}
-.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
-.nav-links a{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.72rem;
-  letter-spacing:.07em;text-transform:uppercase;color:var(--text-light);
-  position:relative;padding-bottom:2px;transition:color .25s;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:0;left:0;
-  height:1px;width:0;background:var(--gold);
-  transition:width .3s cubic-bezier(.4,0,.2,1);
-}
-.nav-links a:hover{color:var(--navy)}
-.nav-links a:hover::after{width:100%}
-
-/* ── HERO ── */
-.hero{
-  background:var(--navy);
-  padding:5.5rem 4rem 4.5rem;
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 90% 80% at 85% 30%,rgba(79,109,138,.35) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 70% at 5% 90%,rgba(107,32,53,.18) 0%,transparent 55%);
-  pointer-events:none;
-}
-.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:1}
-.hero-greeting{
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:1.9rem;color:rgba(201,168,108,.65);margin-bottom:.1rem;
-}
-.hero-name{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;
-  font-size:clamp(3rem,7vw,5.8rem);
-  color:#fff;line-height:.95;margin-bottom:2.5rem;
-  letter-spacing:-.01em;
-}
-.hero-ghost{
-  position:absolute;right:3.5rem;top:50%;transform:translateY(-50%);
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:15rem;color:rgba(255,255,255,.025);
-  line-height:1;pointer-events:none;user-select:none;
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 80% at 85% 30%, rgba(79,109,138,.35) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 70% at 5% 90%, rgba(107,32,53,.18) 0%, transparent 55%);
+  pointer-events: none;
 }
 
-.hero-rule{
-  display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem;
-}
-.rule-line{width:40px;height:1px;background:rgba(201,168,108,.3)}
-.rule-dot{width:3px;height:3px;border-radius:50%;background:rgba(201,168,108,.4)}
-
-.hero-profile-lbl{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.63rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(201,168,108,.4);margin-bottom:.65rem;display:block;
-}
-.hero-profile-title{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;
-  font-size:clamp(1.3rem,2.8vw,2rem);
-  color:rgba(201,168,108,.85);line-height:1.15;margin-bottom:.9rem;
-}
-.hero-profile-desc{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.88rem;
-  line-height:1.85;color:rgba(250,245,239,.42);
-  max-width:540px;
+.hero-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
-/* ── SECTION RÔLES ── */
-.section{padding:4.5rem 4rem;max-width:880px;margin:0 auto}
-.sec-eyebrow{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.65rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ocean);margin-bottom:.6rem;display:block;
+.hero-greeting {
+  font-family: var(--font-script);
+  font-size: 1.9rem;
+  color: rgba(201,168,108,.65);
+  margin-bottom: .1rem;
+  display: block;
 }
-.sec-title{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;
-  font-size:clamp(1.7rem,3.2vw,2.4rem);
-  color:var(--navy);margin-bottom:.6rem;line-height:1.05;
+.hero-name {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  color: #fff;
+  line-height: .95;
+  margin-bottom: 2.5rem;
+  letter-spacing: -.01em;
 }
-.sec-desc{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.87rem;
-  color:var(--text-light);margin-bottom:2.8rem;line-height:1.75;
+/* Ghost letter: first letter of user's name — decorative only */
+.hero-ghost {
+  position: absolute;
+  right: 3.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-script);
+  font-size: 15rem;
+  color: rgba(255,255,255,.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
 }
-#rolesList{display:flex;flex-direction:column;gap:.8rem}
+.hero-rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+.rule-line { width: 40px; height: 1px; background: rgba(201,168,108,.3); }
+.rule-dot  { width: 3px;  height: 3px; border-radius: 50%; background: rgba(201,168,108,.4); }
 
-/* ── CARD ── */
-.role-card{
-  border:1px solid var(--border);
-  background:#fff;
-  position:relative;
-  opacity:0;transform:translateY(14px);
-  transition:opacity .5s ease,transform .5s ease;
+.hero-profile-lbl {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .63rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(201,168,108,.4);
+  margin-bottom: .65rem;
+  display: block;
 }
-.role-card.visible{opacity:1;transform:none}
-.role-card.accepted{border-color:rgba(59,122,98,.2);background:rgba(59,122,98,.02)}
-.role-card.refused{opacity:.3!important;transform:none!important}
-
-.role-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
-  background:linear-gradient(to right,transparent,var(--gold) 30%,var(--gold) 70%,transparent);
-  opacity:.3;transition:opacity .25s;
+.hero-profile-title {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+  color: rgba(201,168,108,.85);
+  line-height: 1.15;
+  margin-bottom: .9rem;
 }
-.role-card.accepted::before{background:linear-gradient(to right,transparent,var(--green) 30%,var(--green) 70%,transparent);opacity:.7}
-.role-card:hover{box-shadow:0 6px 28px rgba(31,47,68,.07)}
-.role-card:hover::before{opacity:.7}
-
-.rc-inner{
-  display:grid;grid-template-columns:1fr auto;
-  gap:2rem;padding:1.7rem 2rem;align-items:start;
-}
-.rc-meta{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.65rem;
-  letter-spacing:.09em;text-transform:uppercase;
-  color:var(--text-light);margin-bottom:.4rem;
-}
-.rc-name{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;
-  font-size:1.18rem;color:var(--navy);margin-bottom:.18rem;
-}
-.rc-en{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;
-  font-size:.76rem;color:var(--text-light);margin-bottom:.8rem;
-}
-.rc-mission{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.86rem;
-  line-height:1.75;color:var(--text-mid);
-}
-.rc-side{
-  display:flex;flex-direction:column;align-items:stretch;gap:.42rem;
-  min-width:145px;
-}
-.rc-badge{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.63rem;
-  letter-spacing:.06em;text-transform:uppercase;
-  padding:.25rem .6rem;display:inline-block;text-align:center;
-}
-.rc-badge.open{color:var(--green);border:1px solid var(--green-border);background:var(--green-bg)}
-.rc-badge.full-b{color:var(--bord);border:1px solid rgba(107,32,53,.2);background:rgba(107,32,53,.05)}
-.rc-names{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.74rem;
-  color:var(--text-light);font-style:italic;
-}
-.btn-accept{
-  font-family:'DM Sans',sans-serif;font-weight:400;font-size:.65rem;
-  letter-spacing:.07em;text-transform:uppercase;
-  color:var(--cream);background:var(--navy);
-  padding:.72rem .95rem;text-align:center;
-  position:relative;overflow:hidden;transition:background .25s;
-}
-.btn-accept::after{
-  content:'';position:absolute;bottom:0;left:0;
-  width:0;height:1.5px;background:var(--gold);
-  transition:width .3s cubic-bezier(.4,0,.2,1);
-}
-.btn-accept:hover{background:var(--ocean)}
-.btn-accept:hover::after{width:100%}
-.btn-accept:disabled{background:rgba(31,47,68,.2);cursor:not-allowed}
-.btn-refuse{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.65rem;
-  letter-spacing:.07em;text-transform:uppercase;
-  color:var(--text-light);border:1px solid var(--border);
-  padding:.72rem .95rem;text-align:center;
-  transition:border-color .2s,color .2s;
-}
-.btn-refuse:hover{border-color:rgba(107,32,53,.3);color:var(--bord)}
-.btn-accepted-badge{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.65rem;
-  letter-spacing:.07em;text-transform:uppercase;
-  color:var(--green);border:1px solid var(--green-border);
-  padding:.72rem .95rem;text-align:center;background:var(--green-bg);
-}
-.btn-remove{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.62rem;
-  letter-spacing:.04em;text-transform:uppercase;
-  color:var(--text-light);text-align:center;padding:.3rem;
-  transition:color .2s;
-}
-.btn-remove:hover{color:var(--bord)}
-
-/* ── FOOTER CTA ── */
-.footer-section{
-  background:var(--cream2);padding:4rem 4rem 5rem;
-  text-align:center;border-top:1px solid var(--gold-border);
-}
-.fs-script{
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:1.8rem;color:var(--gold);opacity:.65;margin-bottom:.3rem;
-}
-.fs-title{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;
-  font-size:1.75rem;color:var(--navy);margin-bottom:.7rem;
-}
-.fs-desc{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.87rem;
-  color:var(--text-mid);margin-bottom:2.2rem;line-height:1.8;
-}
-.fs-ctas{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
-.btn-n{
-  display:inline-block;position:relative;overflow:hidden;
-  padding:1rem 2.4rem;
-  font-family:'DM Sans',sans-serif;font-weight:400;font-size:.7rem;
-  letter-spacing:.09em;text-transform:uppercase;
-  color:var(--cream);background:var(--navy);
-  transition:background .25s;
-}
-.btn-n::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--gold);transition:width .35s cubic-bezier(.4,0,.2,1)}
-.btn-n:hover{background:var(--ocean)}
-.btn-n:hover::after{width:100%}
-.btn-b{
-  display:inline-block;position:relative;
-  padding:1rem 2.4rem;
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.7rem;
-  letter-spacing:.09em;text-transform:uppercase;
-  color:var(--navy);border:1px solid rgba(31,47,68,.2);
-  transition:border-color .25s;
-}
-.btn-b::after{content:'';position:absolute;bottom:-1px;left:-1px;width:0;height:1.5px;background:var(--gold);transition:width .35s cubic-bezier(.4,0,.2,1)}
-.btn-b:hover{border-color:var(--gold)}
-.btn-b:hover::after{width:calc(100% + 2px)}
-
-/* No data */
-.no-data{
-  min-height:80vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;
-}
-.no-data h2{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;
-  font-size:2rem;color:var(--navy);margin-bottom:1rem;
-}
-.no-data p{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.9rem;
-  color:var(--text-mid);margin-bottom:2rem;line-height:1.75;
+.hero-profile-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .88rem;
+  line-height: 1.85;
+  color: rgba(250,245,239,.42);
+  max-width: 540px;
 }
 
-@media(max-width:900px){
-  .nav{padding:0 1.4rem;height:64px}
-  .nav-logo{height:46px}.nav-logo img{height:46px}
-  .nav-links{display:none}
-  .hero{padding:4rem 1.4rem 3rem}
-  .hero-ghost{display:none}
-  .section{padding:3rem 1.4rem}
-  .rc-inner{grid-template-columns:1fr;gap:1.3rem}
-  .rc-side{flex-direction:row;flex-wrap:wrap;min-width:auto}
-  .footer-section{padding:3rem 1.4rem 4rem}
+/* ═══════════════════════════════════════════════
+   SECTION RÔLES
+   ═══════════════════════════════════════════════ */
+.section {
+  padding: 4.5rem var(--page-pad);
+  max-width: 880px;
+  margin: 0 auto;
+}
+.sec-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .65rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: .6rem;
+  display: block;
+}
+.sec-title {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+  color: var(--navy);
+  margin-bottom: .6rem;
+  line-height: 1.05;
+}
+.sec-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .87rem;
+  color: var(--text-light);
+  margin-bottom: 2.8rem;
+  line-height: 1.75;
+}
+#rolesList { display: flex; flex-direction: column; gap: .8rem; }
+
+/* ═══════════════════════════════════════════════
+   ROLE CARD
+   ═══════════════════════════════════════════════ */
+.role-card {
+  border: 1px solid var(--border);
+  background: #fff;
+  position: relative;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out),
+              box-shadow var(--dur-mid) ease;
+}
+.role-card.visible  { opacity: 1; transform: none; }
+.role-card.accepted { border-color: rgba(59,122,98,.2); background: rgba(59,122,98,.02); }
+.role-card.refused  { opacity: .3 !important; transform: none !important; }
+
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1.5px;
+  background: linear-gradient(to right, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
+  opacity: .3;
+  transition: opacity var(--dur-mid) ease;
+}
+.role-card.accepted::before {
+  background: linear-gradient(to right, transparent, var(--green) 30%, var(--green) 70%, transparent);
+  opacity: .7;
+}
+.role-card:hover { box-shadow: 0 6px 28px rgba(31,47,68,.07); }
+.role-card:hover::before { opacity: .7; }
+
+.rc-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  padding: 1.7rem 2rem;
+  align-items: start;
+}
+.rc-meta {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .65rem;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: .4rem;
+}
+.rc-name {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.18rem;
+  color: var(--navy);
+  margin-bottom: .18rem;
+}
+.rc-en {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-style: italic;
+  font-size: .76rem;
+  color: var(--text-light);
+  margin-bottom: .8rem;
+}
+.rc-mission {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .86rem;
+  line-height: 1.75;
+  color: var(--text-mid);
+}
+
+.rc-side {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: .42rem;
+  min-width: 145px;
+}
+.rc-badge {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .63rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .25rem .6rem;
+  display: inline-block;
+  text-align: center;
+}
+.rc-badge.open  { color: var(--green); border: 1px solid var(--green-border); background: var(--green-bg); }
+.rc-badge.full-b { color: var(--bord); border: 1px solid rgba(107,32,53,.2); background: rgba(107,32,53,.05); }
+
+.rc-names {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .74rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.btn-accept {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: .65rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--navy);
+  padding: .72rem .95rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  transition: background var(--dur-mid) ease;
+}
+.btn-accept::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--gold);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+.btn-accept:hover { background: var(--ocean); }
+.btn-accept:hover::after { width: 100%; }
+.btn-accept:disabled { background: rgba(31,47,68,.2); cursor: not-allowed; }
+
+.btn-refuse {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .65rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  border: 1px solid var(--border);
+  padding: .72rem .95rem;
+  text-align: center;
+  background: none;
+  cursor: pointer;
+  transition: border-color var(--dur-mid) ease, color var(--dur-mid) ease;
+}
+.btn-refuse:hover { border-color: rgba(107,32,53,.3); color: var(--bord); }
+
+.btn-accepted-badge {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .65rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--green);
+  border: 1px solid var(--green-border);
+  padding: .72rem .95rem;
+  text-align: center;
+  background: var(--green-bg);
+}
+
+.btn-remove {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .62rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  text-align: center;
+  padding: .3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--dur-mid) ease;
+}
+.btn-remove:hover { color: var(--bord); }
+
+/* ═══════════════════════════════════════════════
+   FOOTER CTA SECTION
+   ═══════════════════════════════════════════════ */
+.footer-section {
+  background: var(--cream2);
+  padding: 4rem var(--page-pad) 5rem;
+  text-align: center;
+  border-top: 1px solid var(--gold-border);
+}
+.fs-script {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  color: var(--gold);
+  opacity: .65;
+  margin-bottom: .3rem;
+  display: block;
+}
+.fs-title {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.75rem;
+  color: var(--navy);
+  margin-bottom: .7rem;
+}
+.fs-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .87rem;
+  color: var(--text-mid);
+  margin-bottom: 2.2rem;
+  line-height: 1.8;
+}
+.fs-ctas { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; }
+
+/* ═══════════════════════════════════════════════
+   NO DATA / ERROR STATE
+   ═══════════════════════════════════════════════ */
+.no-data {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+.no-data h2 {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+.no-data p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .9rem;
+  color: var(--text-mid);
+  margin-bottom: 2rem;
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .hero         { padding: 4rem 1.4rem 3rem; }
+  .hero-ghost   { display: none; }
+  .section      { padding: 3rem 1.4rem; }
+  .rc-inner     { grid-template-columns: 1fr; gap: 1.3rem; }
+  .rc-side      { flex-direction: row; flex-wrap: wrap; min-width: auto; }
+  .footer-section { padding: 3rem 1.4rem 4rem; }
 }
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <a href="index.html" class="nav-logo" aria-label="Accueil">
-    <img src="logo noir sans fond.png" alt="T & F">
+<!-- ═══ PAGE TRANSITION OVERLAY ═══ -->
+<div id="t-overlay" aria-hidden="true">
+  <div class="t-door t-door-l"></div>
+  <div class="t-door t-door-r"></div>
+  <div class="t-center">
+    <span class="t-eyebrow" id="t-eyebrow"></span>
+    <span class="t-title" id="t-title"></span>
+  </div>
+</div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="nav" id="mainNav" aria-label="Navigation principale">
+  <a href="index.html" class="nav-logo" aria-label="Accueil T & F">
+    <img src="Logo.png" alt="T & F">
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" role="list">
     <li><a href="quiz.html">Recommencer</a></li>
     <li><a href="roles.html">Tous les rôles</a></li>
     <li><a href="index.html">Accueil</a></li>
   </ul>
 </nav>
 
-<div id="app"></div>
+<!-- ═══ MAIN CONTENT (injecté par JS) ═══ -->
+<main id="app"></main>
 
 <script>
-const TRAIT_META={
-  orga:{label:'Organisation & Rigueur',desc:'Vous êtes le pilier discret. Là où vous êtes, rien ne peut déraper — votre rigueur naturelle transforme le chaos en harmonie élégante.'},
-  creat:{label:'Créativité & Sensibilité',desc:'Votre regard transforme l\'ordinaire en mémorable. Vous voyez la beauté avant que les autres ne la remarquent, et vous savez comment la révéler.'},
-  ener:{label:'Énergie & Enthousiasme',desc:'Votre présence met tout le monde en mouvement. Vous êtes la flamme qui embrase une pièce entière et donne envie d\'y rester.'},
-  empa:{label:'Empathie & Présence',desc:'Vous ressentez ce que les autres n\'expriment pas encore. Votre sensibilité est un don rare — elle crée des liens profonds là où d\'autres ne voient rien.'},
-  social:{label:'Lien social & Entregent',desc:'Vous faites exister les connexions là où elles n\'étaient pas. Les gens se souviennent toujours de vous, et de comment vous les avez mis à l\'aise.'},
-  fiab:{label:'Fiabilité & Confiance',desc:'On vous confie les choses les plus précieuses parce que vous ne les trahissez jamais. Votre constance est une rareté qui se mérite.'},
-  docu:{label:'Mémoire & Observation',desc:'Vous êtes la mémoire vivante des moments précieux. Ce que vous observez ne se perd jamais — vous transformez l\'éphémère en souvenir.'},
-  coord:{label:'Coordination & Vision',desc:'Vous voyez le tableau d\'ensemble et orchestrez chaque pièce avec une précision remarquable. Sans vous, certains moments n\'auraient jamais existé.'},
+/* ═══════════════════════════════════════════════
+   PROFIL TRAITS
+   ═══════════════════════════════════════════════ */
+const TRAIT_META = {
+  orga:  { label:'Organisation & Rigueur',   desc:"Vous êtes le pilier discret. Là où vous êtes, rien ne peut déraper — votre rigueur naturelle transforme le chaos en harmonie élégante." },
+  creat: { label:'Créativité & Sensibilité', desc:"Votre regard transforme l'ordinaire en mémorable. Vous voyez la beauté avant que les autres ne la remarquent, et vous savez comment la révéler." },
+  ener:  { label:'Énergie & Enthousiasme',   desc:"Votre présence met tout le monde en mouvement. Vous êtes la flamme qui embrase une pièce entière et donne envie d'y rester." },
+  empa:  { label:'Empathie & Présence',      desc:"Vous ressentez ce que les autres n'expriment pas encore. Votre sensibilité est un don rare — elle crée des liens profonds là où d'autres ne voient rien." },
+  social:{ label:'Lien social & Entregent',  desc:"Vous faites exister les connexions là où elles n'étaient pas. Les gens se souviennent toujours de vous, et de comment vous les avez mis à l'aise." },
+  fiab:  { label:'Fiabilité & Confiance',    desc:"On vous confie les choses les plus précieuses parce que vous ne les trahissez jamais. Votre constance est une rareté qui se mérite." },
+  docu:  { label:'Mémoire & Observation',    desc:"Vous êtes la mémoire vivante des moments précieux. Ce que vous observez ne se perd jamais — vous transformez l'éphémère en souvenir." },
+  coord: { label:'Coordination & Vision',    desc:"Vous voyez le tableau d'ensemble et orchestrez chaque pièce avec une précision remarquable. Sans vous, certains moments n'auraient jamais existé." },
 };
 
-const ROLES={
-  1:{num:'01',nom:'Gardienne de la Mariée',en:'The Bridal Bodyguard',phase:'Le Matin',mission:'Filtrer les appels, gérer la logistique de dernière minute des prestataires et éloigner le stress.'},
-  2:{num:'02',nom:'Styliste',en:'The Chief of Elegance',phase:'Le Matin',mission:"Ajuster le voile et la traîne, coordonner les accessoires du cortège pour les photos."},
-  3:{num:'03',nom:'Animatrice des Préparatifs',en:'The Morning Hype Woman',phase:'Le Matin',mission:"Gérer la playlist du matin, l'espace de préparation et servir les rafraîchissements."},
-  4:{num:'04',nom:'Vidéaste des Coulisses',en:'The Cinematic Content Creator',phase:'Le Matin',mission:"Filmer de courtes séquences esthétiques en coulisses : rires, détails de la robe, parfum."},
-  5:{num:'05',nom:'Gardienne des Vœux',en:'The Vow Custodian',phase:'Le Matin',mission:"Détenir les copies officielles et doubles des vœux, et les tendre au moment précis."},
-  6:{num:'06',nom:'Responsable des Fragrances',en:'The Scent Curator',phase:'Le Matin',mission:"Parfumer les espaces clés et veiller à ce que la mariée dispose de son flacon pour les retouches."},
-  7:{num:'07',nom:'Lanceuse de Pétales',en:'The Premium Flower Girl',phase:"L'Après-midi",mission:"Ouvrir la marche de la procession d'entrée en parsemant l'allée de pétales."},
-  8:{num:'08',nom:'Gardienne des Alliances',en:'The Ring Keeper',phase:"L'Après-midi",mission:"Conserver les alliances sous haute sécurité et les présenter lors des vœux."},
-  9:{num:'09',nom:'Coordinatrice des Confettis',en:'The Confetti Conductor',phase:"L'Après-midi",mission:"Briefer les invités, distribuer les éléments à lancer et organiser la haie d'honneur."},
-  10:{num:'10',nom:"Hôtesse d'Accueil",en:'The Welcome Connoisseur',phase:"L'Après-midi",mission:"Accueillir chaleureusement les invités, distribuer les programmes et orienter."},
-  11:{num:'11',nom:'Relais pour les Absents',en:'The Legacy Keeper',phase:"L'Après-midi",mission:"Superviser la retransmission vidéo privée ou organiser un hommage discret pour les défunts."},
-  12:{num:'12',nom:'Dame aux Mouchoirs',en:'The Tear Catcher',phase:"L'Après-midi",mission:"Distribuer des mouchoirs élégants et attentions de réconfort aux premiers rangs."},
-  13:{num:'13',nom:'Intendante du Couple',en:'The Secret Concierge',phase:"Le Cocktail",mission:"Intercepter le couple pour leur apporter de l'eau, des pièces du buffet et préserver leur énergie."},
-  14:{num:'14',nom:'Photographe des Coulisses',en:'The VIP Paparazzi',phase:"Le Cocktail",mission:"Saisir des instants volés, éclats de rire et accolades en marge du photographe officiel."},
-  15:{num:'15',nom:'Animatrice des Invités',en:'The Social Catalyst',phase:"Le Cocktail",mission:"Naviguer activement entre les différents cercles d'invités pour initier des conversations."},
-  16:{num:'16',nom:"Responsable du Livre d'Or",en:'The Guestbook Curator',phase:"Le Cocktail",mission:"Dynamiser l'espace du livre d'or ou de la borne audio en motivant les invités à contribuer."},
-  17:{num:'17',nom:'Animatrice du Bar',en:'The Cocktail Ambassador',phase:"Le Cocktail",mission:"Inaugurer le bar à thèmes, présenter les cocktails signatures et veiller à la tenue du bar."},
-  18:{num:'18',nom:'Coordinatrice Décoration',en:'The Decor Transformer',phase:"Le Cocktail",mission:"Coordonner le transfert des compositions florales ou bougies de la cérémonie vers le dîner."},
-  19:{num:'19',nom:'Responsable Photobooth',en:'The Photobooth Director',phase:"Le Cocktail",mission:"Superviser la borne photo, proposer des thématiques de poses et aider les moins technophiles."},
-  20:{num:'20',nom:'Responsable des Urgences',en:'The Emergency Officer',phase:'La Soirée',mission:"Détenir le kit d'urgence ultime (couture, pharmacie, détachant) et intervenir discrètement."},
-  21:{num:'21',nom:'Coordinatrice de Soirée',en:'The Surprise Strategist',phase:'La Soirée',mission:"Centraliser et planifier les interventions ou discours en lien avec le traiteur et le DJ."},
-  22:{num:'22',nom:'Maîtresse des Sparklers',en:'The Sparkler Captain',phase:'La Soirée',mission:"Distribuer les cierges magiques, rappeler la sécurité et coordonner l'allumage synchrone."},
-  23:{num:'23',nom:'Capitaine de Danse',en:'The Dancefloor Captain',phase:'La Soirée',mission:"Ouvrir la piste aux côtés des mariés et motiver chaleureusement les invités timides."},
-  24:{num:'24',nom:'Gardienne de Fin de Nuit',en:'The Guardian of the Temple',phase:'La Soirée',mission:"Sécuriser l'urne et la boîte aux cadeaux, gérer les départs et fermer le bal."},
-  25:{num:'25',nom:'Responsable Confort',en:'The Cozy Officer',phase:'La Soirée',mission:"Déployer les paniers de chaussures plates de danse et distribuer des plaids si besoin."},
-  26:{num:'26',nom:'Coordinatrice des Toasts',en:'The Toast Liaison',phase:'La Soirée',mission:"Vérifier discrètement que les verres soient remplis avant le lancement d'un toast officiel."},
-  27:{num:'27',nom:'Collectrice de Playlists',en:'The Dance-List Collector',phase:'La Soirée',mission:"Récolter les souhaits musicaux des convives et soumettre le tri qualitatif au DJ."},
-  28:{num:'28',nom:'Coordinatrice du Buffet de Nuit',en:'The Late-Night Captain',phase:'La Soirée',mission:"Coordonner avec le service l'apparition théâtrale du buffet de nuit (mini-burgers, douceurs) à 2h."},
-  29:{num:'29',nom:"Collectrice d'Anecdotes",en:'The Quote Collector',phase:'La Soirée',mission:"Consigner secrètement dans un carnet les répliques cultes et anecdotes touchantes des invités."},
-  30:{num:'30',nom:'Responsable des Cadeaux',en:'The Favor Queen',phase:'La Soirée',mission:"S'assurer rigoureusement que chaque invité récupère son cadeau de remerciement au départ."},
+/* ═══════════════════════════════════════════════
+   RÔLES (résumé pour affichage résultats)
+   ═══════════════════════════════════════════════ */
+const ROLES = {
+  1: {num:'01',nom:'Gardienne de la Mariée',       en:'The Bridal Bodyguard',         phase:'Le Matin',      mission:"Filtrer les appels, gérer la logistique de dernière minute des prestataires et éloigner le stress."},
+  2: {num:'02',nom:'Styliste',                     en:'The Chief of Elegance',        phase:'Le Matin',      mission:"Ajuster le voile et la traîne, coordonner les accessoires du cortège pour les photos."},
+  3: {num:'03',nom:'Animatrice des Préparatifs',   en:'The Morning Hype Woman',       phase:'Le Matin',      mission:"Gérer la playlist du matin, l'espace de préparation et servir les rafraîchissements."},
+  4: {num:'04',nom:'Vidéaste des Coulisses',       en:'The Cinematic Content Creator',phase:'Le Matin',      mission:"Filmer de courtes séquences esthétiques en coulisses : rires, détails de la robe, parfum."},
+  5: {num:'05',nom:'Gardienne des Vœux',           en:'The Vow Custodian',            phase:'Le Matin',      mission:"Détenir les copies officielles et doubles des vœux, et les tendre au moment précis."},
+  6: {num:'06',nom:'Responsable des Fragrances',  en:'The Scent Curator',            phase:'Le Matin',      mission:"Parfumer les espaces clés et veiller à ce que la mariée dispose de son flacon pour les retouches."},
+  7: {num:'07',nom:'Lanceuse de Pétales',          en:'The Premium Flower Girl',      phase:"L'Après-midi",  mission:"Ouvrir la marche de la procession d'entrée en parsemant l'allée de pétales."},
+  8: {num:'08',nom:'Gardienne des Alliances',     en:'The Ring Keeper',              phase:"L'Après-midi",  mission:"Conserver les alliances sous haute sécurité et les présenter lors des vœux."},
+  9: {num:'09',nom:'Coordinatrice des Confettis', en:'The Confetti Conductor',       phase:"L'Après-midi",  mission:"Briefer les invités, distribuer les éléments à lancer et organiser la haie d'honneur."},
+  10:{num:'10',nom:"Hôtesse d'Accueil",           en:'The Welcome Connoisseur',      phase:"L'Après-midi",  mission:"Accueillir chaleureusement les invités, distribuer les programmes et orienter."},
+  11:{num:'11',nom:'Relais pour les Absents',     en:'The Legacy Keeper',            phase:"L'Après-midi",  mission:"Superviser la retransmission vidéo privée ou organiser un hommage discret pour les défunts."},
+  12:{num:'12',nom:'Dame aux Mouchoirs',          en:'The Tear Catcher',             phase:"L'Après-midi",  mission:"Distribuer des mouchoirs élégants et attentions de réconfort aux premiers rangs."},
+  13:{num:'13',nom:'Intendante du Couple',        en:'The Secret Concierge',         phase:'Le Cocktail',   mission:"Intercepter le couple pour leur apporter de l'eau, des pièces du buffet et préserver leur énergie."},
+  14:{num:'14',nom:'Photographe des Coulisses',   en:'The VIP Paparazzi',            phase:'Le Cocktail',   mission:"Saisir des instants volés, éclats de rire et accolades en marge du photographe officiel."},
+  15:{num:'15',nom:'Animatrice des Invités',      en:'The Social Catalyst',          phase:'Le Cocktail',   mission:"Naviguer activement entre les différents cercles d'invités pour initier des conversations."},
+  16:{num:'16',nom:"Responsable du Livre d'Or",  en:'The Guestbook Curator',        phase:'Le Cocktail',   mission:"Dynamiser l'espace du livre d'or ou de la borne audio en motivant les invités à contribuer."},
+  17:{num:'17',nom:'Animatrice du Bar',           en:'The Cocktail Ambassador',      phase:'Le Cocktail',   mission:"Inaugurer le bar à thèmes, présenter les cocktails signatures et veiller à la tenue du bar."},
+  18:{num:'18',nom:'Coordinatrice Décoration',    en:'The Decor Transformer',        phase:'Le Cocktail',   mission:"Coordonner le transfert des compositions florales ou bougies de la cérémonie vers le dîner."},
+  19:{num:'19',nom:'Responsable Photobooth',      en:'The Photobooth Director',      phase:'Le Cocktail',   mission:"Superviser la borne photo, proposer des thématiques de poses et aider les moins technophiles."},
+  20:{num:'20',nom:'Responsable des Urgences',    en:'The Emergency Officer',        phase:'La Soirée',     mission:"Détenir le kit d'urgence ultime (couture, pharmacie, détachant) et intervenir discrètement."},
+  21:{num:'21',nom:'Coordinatrice de Soirée',     en:'The Surprise Strategist',      phase:'La Soirée',     mission:"Centraliser et planifier les interventions ou discours en lien avec le traiteur et le DJ."},
+  22:{num:'22',nom:'Maîtresse des Sparklers',     en:'The Sparkler Captain',         phase:'La Soirée',     mission:"Distribuer les cierges magiques, rappeler la sécurité et coordonner l'allumage synchrone."},
+  23:{num:'23',nom:'Capitaine de Danse',          en:'The Dancefloor Captain',       phase:'La Soirée',     mission:"Ouvrir la piste aux côtés des mariés et motiver chaleureusement les invités timides."},
+  24:{num:'24',nom:'Gardienne de Fin de Nuit',    en:'The Guardian of the Temple',   phase:'La Soirée',     mission:"Sécuriser l'urne et la boîte aux cadeaux, gérer les départs et fermer le bal."},
+  25:{num:'25',nom:'Responsable Confort',         en:'The Cozy Officer',             phase:'La Soirée',     mission:"Déployer les paniers de chaussures plates de danse et distribuer des plaids si besoin."},
+  26:{num:'26',nom:'Coordinatrice des Toasts',    en:'The Toast Liaison',            phase:'La Soirée',     mission:"Vérifier discrètement que les verres soient remplis avant le lancement d'un toast officiel."},
+  27:{num:'27',nom:'Collectrice de Playlists',    en:'The Dance-List Collector',     phase:'La Soirée',     mission:"Récolter les souhaits musicaux des convives et soumettre le tri qualitatif au DJ."},
+  28:{num:'28',nom:'Coordinatrice du Buffet',     en:'The Late-Night Captain',       phase:'La Soirée',     mission:"Coordonner avec le service l'apparition théâtrale du buffet de nuit (mini-burgers, douceurs) à 2h."},
+  29:{num:'29',nom:"Collectrice d'Anecdotes",     en:'The Quote Collector',          phase:'La Soirée',     mission:"Consigner secrètement dans un carnet les répliques cultes et anecdotes touchantes des invités."},
+  30:{num:'30',nom:'Responsable des Cadeaux',     en:'The Favor Queen',              phase:'La Soirée',     mission:"S'assurer rigoureusement que chaque invité récupère son cadeau de remerciement au départ."},
 };
 
-/* ─── localStorage helpers ─── */
-function getData(){return JSON.parse(localStorage.getItem('cgm')||'{"signups":{}}')}
-function saveData(d){localStorage.setItem('cgm',JSON.stringify(d))}
-function getRoleSignups(id){return(getData().signups||{})[String(id)]||[]}
-function isRoleFull(id){return getRoleSignups(id).length>=2}
-function doSignup(id,name){
-  const d=getData();if(!d.signups)d.signups={};
-  if(getRoleSignups(id).length>=2||getRoleSignups(id).map(n=>n.toLowerCase()).includes(name.toLowerCase().trim()))return false;
-  if(!d.signups[id])d.signups[id]=[];
-  d.signups[id].push(name.trim());saveData(d);return true;
+/* ═══════════════════════════════════════════════
+   LOCAL STORAGE
+   ═══════════════════════════════════════════════ */
+function getData()  { try { return JSON.parse(localStorage.getItem('cgm') || '{"signups":{}}'); } catch(e) { return {signups:{}}; } }
+function saveData(d){ localStorage.setItem('cgm', JSON.stringify(d)); }
+function getRoleSignups(id){ return (getData().signups || {})[String(id)] || []; }
+function isRoleFull(id)    { return getRoleSignups(id).length >= 2; }
+
+function doSignup(id, name) {
+  const d = getData();
+  if (!d.signups) d.signups = {};
+  if (getRoleSignups(id).length >= 2 || getRoleSignups(id).map(n=>n.toLowerCase()).includes(name.toLowerCase().trim())) return false;
+  if (!d.signups[id]) d.signups[id] = [];
+  d.signups[id].push(name.trim());
+  saveData(d);
+  return true;
 }
-function doWithdraw(id,name){
-  const d=getData();if(d.signups&&d.signups[id])d.signups[id]=d.signups[id].filter(n=>n.toLowerCase()!==name.toLowerCase().trim());saveData(d);
+function doWithdraw(id, name) {
+  const d = getData();
+  if (d.signups && d.signups[id])
+    d.signups[id] = d.signups[id].filter(n => n.toLowerCase() !== name.toLowerCase().trim());
+  saveData(d);
 }
 
-let userName='';let top5Ids=[];const decisions={};
+/* ═══════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════ */
+let userName = '';
+let top5Ids  = [];
+const decisions = {};
 
-/* ─── Scroll animations ─── */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*70);observer.unobserve(e.target)}});
-},{threshold:.08});
+/* ═══════════════════════════════════════════════
+   SCROLL REVEAL
+   ═══════════════════════════════════════════════ */
+const observer = new IntersectionObserver(function (entries) {
+  entries.forEach(function (e, i) {
+    if (e.isIntersecting) {
+      setTimeout(function () { e.target.classList.add('visible'); }, i * 70);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: .08 });
 
-function render(data){
-  const{top5,topTraits,userName:uName}=data;
-  userName=uName||'Vous';top5Ids=top5;
-  const t1=topTraits[0]||'orga';const t2=topTraits[1]||'creat';
-  const profileTitle=`${TRAIT_META[t1].label}`;
-  const profileDesc=TRAIT_META[t1].desc;
-  const initLetter=userName[0]||'✦';
+/* Nav scroll */
+window.addEventListener('scroll', function () {
+  const nav = document.getElementById('mainNav');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
 
-  document.getElementById('app').innerHTML=`
-    <div class="hero">
+/* ═══════════════════════════════════════════════
+   RENDER
+   ═══════════════════════════════════════════════ */
+function render(data) {
+  const { top5, topTraits, userName: uName } = data;
+  userName = uName || 'Vous';
+  top5Ids  = top5;
+
+  const t1 = topTraits[0] || 'orga';
+  const tm = TRAIT_META[t1] || TRAIT_META.orga;
+  const initLetter = userName[0] || '✦';
+
+  document.getElementById('app').innerHTML = `
+    <div class="hero" aria-labelledby="hero-name">
       <div class="hero-inner">
-        <p class="hero-greeting">Votre profil,</p>
-        <h1 class="hero-name">${userName}</h1>
-        <div class="hero-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+        <span class="hero-greeting">Votre profil,</span>
+        <h1 class="hero-name" id="hero-name">${userName}</h1>
+        <div class="hero-rule">
+          <div class="rule-line"></div>
+          <div class="rule-dot"></div>
+          <div class="rule-line"></div>
+        </div>
         <span class="hero-profile-lbl">Personnalité dominante</span>
-        <h2 class="hero-profile-title">${profileTitle}</h2>
-        <p class="hero-profile-desc">${profileDesc}</p>
+        <h2 class="hero-profile-title">${tm.label}</h2>
+        <p class="hero-profile-desc">${tm.desc}</p>
       </div>
       <span class="hero-ghost" aria-hidden="true">${initLetter}</span>
     </div>
@@ -397,83 +553,105 @@ function render(data){
       <span class="sec-eyebrow">Vos correspondances</span>
       <h2 class="sec-title">Les 5 rôles faits pour vous</h2>
       <p class="sec-desc">Deux places maximum par rôle — rejoignez ceux qui vous parlent, passez les autres.</p>
-      <div id="rolesList"></div>
+      <div id="rolesList" aria-live="polite"></div>
     </div>
 
     <div class="footer-section">
-      <p class="fs-script">Et maintenant ?</p>
+      <span class="fs-script">Et maintenant ?</span>
       <h3 class="fs-title">Explorer tous les rôles</h3>
       <p class="fs-desc">Consultez la liste complète des 30 rôles et inscrivez-vous directement.</p>
       <div class="fs-ctas">
-        <a href="roles.html" class="btn-n">Voir les 30 rôles</a>
-        <a href="quiz.html" class="btn-b">Recommencer</a>
+        <a href="roles.html" class="btn btn-primary">Voir les 30 rôles</a>
+        <a href="quiz.html"  class="btn btn-outline">Recommencer</a>
       </div>
-    </div>`;
+    </div>
+  `;
 
   renderRoleCards();
 }
 
-function renderRoleCards(){
-  const list=document.getElementById('rolesList');if(!list)return;
-  list.innerHTML=top5Ids.map(id=>{
-    const r=ROLES[id];if(!r)return'';
-    const sups=getRoleSignups(id);const full=sups.length>=2;
-    const accepted=decisions[id]==='accepted';const refused=decisions[id]==='refused';
-    const userIn=sups.map(n=>n.toLowerCase()).includes(userName.toLowerCase());
+function renderRoleCards() {
+  const list = document.getElementById('rolesList');
+  if (!list) return;
 
-    let badgeH='';
-    if(!full)badgeH=`<span class="rc-badge open">${sups.length===0?'2 places':'1 restante'}</span>`;
-    else badgeH=`<span class="rc-badge full-b">Complet</span>`;
-    const namesH=sups.length?`<p class="rc-names">${sups.join(' · ')}</p>`:'';
+  list.innerHTML = top5Ids.map(function (id) {
+    const r = ROLES[id];
+    if (!r) return '';
 
-    let actionsH='';
-    if(userIn||accepted){
-      actionsH=`<div class="btn-accepted-badge">✓ Inscrit(e)</div><button class="btn-remove" onclick="withdrawRole(${id})">Retirer</button>`;
-    }else if(refused){
-      actionsH=`<div style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:.73rem;color:var(--text-light);padding:.4rem 0">Décliné</div><button class="btn-remove" onclick="undecide(${id})">Reconsidérer</button>`;
-    }else if(full){
-      actionsH=`<button class="btn-accept" disabled>Complet</button>`;
-    }else{
-      actionsH=`<button class="btn-accept" onclick="acceptRole(${id})">Rejoindre</button><button class="btn-refuse" onclick="refuseRole(${id})">Passer</button>`;
+    const sups     = getRoleSignups(id);
+    const full     = sups.length >= 2;
+    const accepted = decisions[id] === 'accepted';
+    const refused  = decisions[id] === 'refused';
+    const userIn   = sups.map(n => n.toLowerCase()).includes(userName.toLowerCase());
+
+    const badgeH = !full
+      ? '<span class="rc-badge open">' + (sups.length === 0 ? '2 places' : '1 restante') + '</span>'
+      : '<span class="rc-badge full-b">Complet</span>';
+    const namesH = sups.length
+      ? '<p class="rc-names">' + sups.join(' · ') + '</p>'
+      : '';
+
+    let actionsH = '';
+    if (userIn || accepted) {
+      actionsH = '<div class="btn-accepted-badge">✓ Inscrit(e)</div><button class="btn-remove" onclick="withdrawRole(' + id + ')">Retirer</button>';
+    } else if (refused) {
+      actionsH = '<div style="font-family:var(--font-body);font-weight:300;font-size:.73rem;color:var(--text-light);padding:.4rem 0">Décliné</div>' +
+                 '<button class="btn-remove" onclick="undecide(' + id + ')">Reconsidérer</button>';
+    } else if (full) {
+      actionsH = '<button class="btn-accept" disabled>Complet</button>';
+    } else {
+      actionsH = '<button class="btn-accept" onclick="acceptRole(' + id + ')">Rejoindre</button>' +
+                 '<button class="btn-refuse" onclick="refuseRole(' + id + ')">Passer</button>';
     }
 
-    return`<div class="role-card${userIn||accepted?' accepted':''}${refused?' refused':''}" id="rc${id}">
-      <div class="rc-inner">
-        <div>
-          <p class="rc-meta">Rôle ${r.num} — ${r.phase}</p>
-          <h3 class="rc-name">${r.nom}</h3>
-          <p class="rc-en">${r.en}</p>
-          <p class="rc-mission">${r.mission}</p>
-        </div>
-        <div class="rc-side">${badgeH}${namesH}${actionsH}</div>
-      </div>
-    </div>`;
+    return '<div class="role-card' + (userIn||accepted?' accepted':'') + (refused?' refused':'') + '" id="rc' + id + '">' +
+      '<div class="rc-inner">' +
+        '<div>' +
+          '<p class="rc-meta">Rôle ' + r.num + ' — ' + r.phase + '</p>' +
+          '<h3 class="rc-name">' + r.nom + '</h3>' +
+          '<p class="rc-en">' + r.en + '</p>' +
+          '<p class="rc-mission">' + r.mission + '</p>' +
+        '</div>' +
+        '<div class="rc-side">' + badgeH + namesH + actionsH + '</div>' +
+      '</div>' +
+    '</div>';
   }).join('');
-  document.querySelectorAll('.role-card:not(.visible)').forEach(el=>observer.observe(el));
+
+  document.querySelectorAll('.role-card:not(.visible)').forEach(el => observer.observe(el));
 }
 
-function acceptRole(id){doSignup(id,userName);decisions[id]='accepted';renderRoleCards()}
-function refuseRole(id){decisions[id]='refused';renderRoleCards()}
-function undecide(id){delete decisions[id];renderRoleCards()}
-function withdrawRole(id){doWithdraw(id,userName);delete decisions[id];renderRoleCards()}
+function acceptRole(id) { doSignup(id, userName); decisions[id] = 'accepted'; renderRoleCards(); }
+function refuseRole(id) { decisions[id] = 'refused'; renderRoleCards(); }
+function undecide(id)   { delete decisions[id]; renderRoleCards(); }
+function withdrawRole(id) { doWithdraw(id, userName); delete decisions[id]; renderRoleCards(); }
 
-const raw=sessionStorage.getItem('phf_results');
-if(!raw){
-  document.getElementById('app').innerHTML=`
+/* ═══════════════════════════════════════════════
+   BOOT
+   ═══════════════════════════════════════════════ */
+const raw = sessionStorage.getItem('phf_results');
+if (!raw) {
+  document.getElementById('app').innerHTML = `
     <div class="no-data">
       <h2>Aucun résultat</h2>
       <p>Remplissez d'abord le questionnaire pour découvrir vos rôles.</p>
-      <a href="quiz.html" class="btn-n" style="display:inline-block;margin-top:1rem">Commencer →</a>
+      <a href="quiz.html" class="btn btn-primary" style="margin-top:1rem">Commencer →</a>
     </div>`;
-}else{
-  try{const d=JSON.parse(raw);if(!d.top5?.length)throw 0;render(d)}
-  catch{document.getElementById('app').innerHTML=`
-    <div class="no-data">
-      <h2>Données expirées</h2>
-      <p>Veuillez recommencer le questionnaire.</p>
-      <a href="quiz.html" class="btn-n" style="display:inline-block;margin-top:1rem">Recommencer →</a>
-    </div>`}
+} else {
+  try {
+    const d = JSON.parse(raw);
+    if (!d.top5?.length) throw new Error('invalid');
+    render(d);
+  } catch (e) {
+    document.getElementById('app').innerHTML = `
+      <div class="no-data">
+        <h2>Données expirées</h2>
+        <p>Veuillez recommencer le questionnaire.</p>
+        <a href="quiz.html" class="btn btn-primary" style="margin-top:1rem">Recommencer →</a>
+      </div>`;
+  }
 }
 </script>
+
+<script src="transitions.js"></script>
 </body>
 </html>

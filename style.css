@@ -1,0 +1,474 @@
+/*
+ * style.css — T & F Mariage
+ * Feuille de style partagée : variables, typo, nav, overlay transitions, utilities.
+ *
+ * Polices locales (fichiers dans /fonts/) :
+ *   fonts/TANAngleton-Regular.ttf    → TAN Angleton (grands titres)
+ *   fonts/Versailles-Regular.ttf     → Versailles / jen-wagner (sous-titres)
+ *   fonts/ParfumerieScript-Regular.otf → Parfumerie Script (noms, script)
+ * Google Fonts (CDN) : DM Sans
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   @FONT-FACE — Polices locales (compatibles GitHub Pages)
+   ═══════════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'TAN Angleton';
+  src: local('TAN Angleton'),
+       local('TAN - Angleton'),
+       url('fonts/TANAngleton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* Pas de fichier italic disponible : le navigateur génère l'italique synthétique */
+@font-face {
+  font-family: 'TAN Angleton';
+  src: local('TAN Angleton'),
+       local('TAN - Angleton'),
+       url('fonts/TANAngleton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Versailles';
+  src: local('Versailles'),
+       local('ITC Versailles'),
+       local('Versailles LT Std'),
+       url('fonts/Versailles-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Versailles';
+  src: local('Versailles'),
+       url('fonts/Versailles-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Parfumerie Script';
+  src: local('Parfumerie Script'),
+       local('ParfumerieScript'),
+       url('fonts/ParfumerieScript-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  /* Palette Direction Artistique */
+  --cream:        #FAF5EF;
+  --cream2:       #F2EAE0;
+  --cream3:       #EDE3D6;
+  --navy:         #1F2F44;
+  --navy2:        #172437;
+  --ocean:        #4F6D8A;
+  --ocean2:       #3D5870;
+  --sky:          #BFD4E6;
+  --sand:         #D8CFC4;
+  --brown:        #7A5040;
+  --bord:         #6B2035;
+  --bord2:        #521928;
+  --gold:         #C9A86C;
+  --gold2:        #B8913A;
+  --gold3:        #D4B97C;
+
+  /* Semantic */
+  --text:         var(--navy);
+  --text-mid:     var(--ocean);
+  --text-light:   #8A9EB8;
+  --text-lighter: #A8BAC8;
+
+  /* Borders */
+  --border:       rgba(31,47,68,.09);
+  --border2:      rgba(31,47,68,.2);
+  --border3:      rgba(31,47,68,.35);
+  --gold-border:  rgba(201,168,108,.2);
+  --gold-border2: rgba(201,168,108,.4);
+
+  /* Status */
+  --green:        #3B7A62;
+  --green-bg:     rgba(59,122,98,.06);
+  --green-border: rgba(59,122,98,.22);
+
+  /* Typography stacks */
+  --font-title:   'TAN Angleton', 'Bodoni Moda', 'Playfair Display', Georgia, serif;
+  --font-sub:     'Versailles', 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --font-script:  'Parfumerie Script', 'Pinyon Script', cursive;
+  --font-body:    'DM Sans', 'Inter', system-ui, sans-serif;
+
+  /* Transitions */
+  --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout:   cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:     160ms;
+  --dur-mid:      280ms;
+  --dur-slow:     520ms;
+  --dur-xslow:    900ms;
+
+  /* Spacing */
+  --nav-h:        72px;
+  --page-pad:     4rem;
+  --page-pad-sm:  1.4rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESET + BASE
+   ═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; background: none; border: none; padding: 0; }
+img { display: block; max-width: 100%; height: auto; }
+ul, ol { list-style: none; }
+
+:focus-visible {
+  outline: 2px solid var(--ocean);
+  outline-offset: 3px;
+}
+
+/* Prevent FOUC during page transition */
+[data-trans-in] .t-door-l { transform: translateX(0) !important; transition: none !important; }
+[data-trans-in] .t-door-r { transform: translateX(0) !important; transition: none !important; }
+[data-trans-in] .t-center  { opacity: 1 !important;              transition: none !important; }
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVIGATION (shared across all pages)
+   ═══════════════════════════════════════════════════════════════ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: var(--nav-h);
+  padding: 0 var(--page-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background: rgba(250,245,239,.97);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--gold-border);
+  transition: border-color var(--dur-mid) ease;
+}
+
+.nav.scrolled { border-color: var(--gold-border2); }
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  height: 54px;
+  flex-shrink: 0;
+}
+/* Logo — direct <img>, no filter, no mask → rendu natif SVG, net à toutes résolutions */
+.nav-logo img {
+  width: 54px;
+  height: auto;
+  display: block;
+  transition: opacity var(--dur-mid) ease, transform var(--dur-slow) var(--ease-spring);
+}
+.nav-logo:hover img {
+  opacity: .55;
+  transform: scale(1.04);
+}
+
+/* ══════════════════════════════════════════════════
+   LOGO MASK — universal utility
+   Usage: <span class="logo-mask logo-mask-[variant]" style="width:Xpx;height:Ypx"></span>
+   ══════════════════════════════════════════════════ */
+.logo-mask {
+  display: block;
+  flex-shrink: 0;
+  /* Background shows through the logo shape */
+  background: var(--navy);               /* dark logo — default for light backgrounds */
+  mask:          url("logo noir sans fond.svg") center / contain no-repeat;
+  -webkit-mask:  url("logo noir sans fond.svg") center / contain no-repeat;
+  transition: opacity var(--dur-mid) ease, transform var(--dur-slow) var(--ease-spring);
+}
+/* White logo (for dark / navy backgrounds) */
+.logo-mask-white  { background: rgba(255, 255, 255, .90); }
+/* Very faint white ghost (decorative, low opacity on dark bg) */
+.logo-mask-ghost  { background: rgba(255, 255, 255, .05); }
+/* Dim dark (subtle watermark on light/cream backgrounds) */
+.logo-mask-dim    { background: rgba(31, 47, 68, .12); }
+
+.nav-links {
+  display: flex;
+  gap: 2.8rem;
+  align-items: center;
+}
+.nav-links a {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  position: relative;
+  padding-bottom: 3px;
+  transition: color var(--dur-mid) ease;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 1px;
+  width: 0;
+  background: var(--gold);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+.nav-links a:hover { color: var(--navy); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--navy);
+  padding: .62rem 1.6rem;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--dur-mid) ease;
+  white-space: nowrap;
+}
+.nav-cta::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 1.5px;
+  width: 0;
+  background: var(--gold);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+.nav-cta:hover { background: var(--ocean); }
+.nav-cta:hover::after { width: 100%; }
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE TRANSITION OVERLAY
+   ═══════════════════════════════════════════════════════════════ */
+#t-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.t-door {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 51%;
+  background: var(--navy);
+  overflow: visible;
+  will-change: transform;
+}
+.t-door-l {
+  left: 0;
+  transform: translateX(-102%);
+}
+.t-door-r {
+  right: 0;
+  transform: translateX(102%);
+}
+
+/* Transition timings */
+#t-overlay[data-state="closing"] .t-door,
+#t-overlay[data-state="opening"] .t-door {
+  transition: transform var(--dur-xslow) var(--ease-inout);
+}
+
+/* Closed / Closing → doors in center */
+#t-overlay[data-state="closing"] .t-door-l,
+#t-overlay[data-state="closed"]  .t-door-l { transform: translateX(0); }
+#t-overlay[data-state="closing"] .t-door-r,
+#t-overlay[data-state="closed"]  .t-door-r { transform: translateX(0); }
+
+/* Opening → doors slide out */
+#t-overlay[data-state="opening"] .t-door-l { transform: translateX(-102%); }
+#t-overlay[data-state="opening"] .t-door-r { transform: translateX(102%); }
+
+/* Title shown on closed doors */
+.t-center {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+  padding: 0 2rem;
+}
+#t-overlay[data-state="closing"]  .t-center { opacity: 1; transition-delay: .42s; }
+#t-overlay[data-state="closed"]   .t-center { opacity: 1; }
+#t-overlay[data-state="opening"]  .t-center { opacity: 0; transition-delay: 0s; }
+
+.t-eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .6rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(201,168,108,.55);
+  margin-bottom: .45rem;
+}
+.t-title {
+  display: block;
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  color: rgba(255,255,255,.92);
+  line-height: 1.1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHARED BUTTONS
+   ═══════════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--dur-mid) ease, color var(--dur-mid) ease, border-color var(--dur-mid) ease;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 1.5px;
+  width: 0;
+  background: var(--gold);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+.btn:hover::after { width: 100%; }
+
+.btn-primary {
+  color: var(--cream);
+  background: var(--navy);
+  padding: 1rem 2.6rem;
+}
+.btn-primary:hover { background: var(--ocean); }
+
+.btn-outline {
+  color: var(--navy);
+  background: transparent;
+  padding: 1rem 2.6rem;
+  border: 1px solid rgba(31,47,68,.2);
+}
+.btn-outline:hover { border-color: var(--gold); }
+
+.btn-sm {
+  font-size: .65rem;
+  padding: .72rem 1.4rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL REVEAL UTILITY
+   ═══════════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+.reveal-delay-5 { transition-delay: 400ms; }
+
+/* Fade only (no translate) */
+.reveal-fade {
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+.reveal-fade.in-view { opacity: 1; }
+
+/* Slide from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+}
+.reveal-left.in-view { opacity: 1; transform: translateX(0); }
+
+/* ═══════════════════════════════════════════════════════════════
+   GOLD RULE (decorative separator)
+   ═══════════════════════════════════════════════════════════════ */
+.gold-rule {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+}
+.gold-rule-line {
+  flex: 1;
+  max-width: 48px;
+  height: 1px;
+  background: var(--gold-border2);
+}
+.gold-rule-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: .55;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  :root { --nav-h: 64px; --page-pad: 1.4rem; }
+  .nav { padding: 0 1.2rem; }
+  .nav-logo { height: 46px; }
+  .nav-logo img { height: 46px; }
+  .nav-links { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INIT — IntersectionObserver activé globalement
+   Les éléments .reveal deviennent .in-view quand visibles.
+   ═══════════════════════════════════════════════════════════════ */

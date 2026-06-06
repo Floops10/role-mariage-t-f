@@ -4,252 +4,439 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Questionnaire — T & F Mariage</title>
+<!-- Prevent flash-of-content during page transition -->
+<script>if(sessionStorage.getItem('cgm_t'))document.documentElement.setAttribute('data-trans-in','');</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
 <style>
-@font-face{font-family:'Parfumerie Script';src:local('Parfumerie Script'),local('Parfumerie Script Pro'),local('ParfumerieScript');}
-@font-face{font-family:'TAN Angleton';src:local('TAN Angleton'),local('TAN - Angleton'),local('TANAngleton');}
-@font-face{font-family:'Versailles';src:local('Versailles'),local('ITC Versailles'),local('Versailles LT Std'),local('Versailles 55');}
-
-:root{
-  --cream:#FAF5EF;--cream2:#F2EAE0;
-  --navy:#1F2F44;--ocean:#4F6D8A;--sky:#BFD4E6;--sand:#D8CFC4;
-  --brown:#7A5040;--bord:#6B2035;--gold:#C9A86C;--gold2:#B8913A;
-  --text:#1F2F44;--text-mid:#4F6D8A;--text-light:#8A9EB8;
-  --border:rgba(31,47,68,.1);--border2:rgba(31,47,68,.22);
-  --gold-border:rgba(201,168,108,.22);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px}
-body{
-  background:var(--cream);color:var(--text);
-  font-family:'DM Sans',sans-serif;font-weight:400;
-  min-height:100svh;display:flex;flex-direction:column;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
-}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer;background:none;border:none}
-:focus-visible{outline:2px solid var(--ocean);outline-offset:3px}
-
-/* ── TOP BAR ── */
-.bar{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(250,245,239,.97);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--gold-border);
-  padding:0 3rem;height:72px;
-  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
-}
-.bar-logo{display:flex;align-items:center;height:54px}
-.bar-logo img{height:54px;width:auto;transition:opacity .25s}
-.bar-logo:hover img{opacity:.6}
-.bar-progress{flex:1;max-width:280px}
-.bar-prog-row{display:flex;justify-content:space-between;margin-bottom:.4rem}
-.bar-prog-lbl{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.65rem;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--text-light);
-}
-.bar-track{height:1.5px;background:rgba(79,109,138,.12)}
-.bar-fill{
-  height:100%;
-  background:linear-gradient(to right,var(--ocean),var(--gold));
-  transition:width .55s cubic-bezier(.4,0,.2,1);width:0%;
-}
-.bar-back{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.7rem;
-  letter-spacing:.05em;text-transform:uppercase;color:var(--text-light);
-  transition:color .2s;
-}
-.bar-back:hover{color:var(--navy)}
-
-/* ── SCREENS ── */
-.screen{
-  flex:1;display:none;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:8rem 2rem 5rem;min-height:100svh;
-}
-.screen.active{display:flex}
-
-/* ── NAME SCREEN ── */
-.name-wrap{text-align:center;max-width:480px}
-.name-script{
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:2.4rem;color:var(--gold);opacity:.8;margin-bottom:.25rem;
-}
-.name-title{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;
-  font-size:clamp(1.7rem,4vw,2.6rem);
-  color:var(--navy);margin-bottom:.8rem;line-height:1.1;
-}
-.name-sub{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.87rem;
-  color:var(--text-mid);line-height:1.75;margin-bottom:2.8rem;
-}
-.name-input{
-  display:block;width:100%;max-width:340px;margin:0 auto 1rem;
-  font-family:'Parfumerie Script','Pinyon Script',cursive;font-size:1.9rem;
-  color:var(--navy);background:transparent;border:none;
-  border-bottom:1.5px solid var(--border2);
-  padding:.55rem .2rem;text-align:center;
-  outline:none;transition:border-color .25s;
-}
-.name-input::placeholder{color:var(--text-light);font-style:italic}
-.name-input:focus{border-color:var(--ocean)}
-.name-hint{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.72rem;
-  color:var(--text-light);margin-bottom:2.5rem;
+/* ─── Quiz layout ─── */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  overflow-x: hidden;
 }
 
-/* decorative monogram */
-.name-mono{
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:7rem;color:rgba(79,109,138,.07);
-  line-height:1;margin-bottom:1.5rem;pointer-events:none;
+/* ─── TOP BAR ─── */
+.bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(250,245,239,.97);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--gold-border);
+  padding: 0 var(--page-pad);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.bar-logo { display: flex; align-items: center; height: 54px; flex-shrink: 0; }
+.bar-logo img { height: 54px; width: auto; transition: opacity var(--dur-mid) ease; }
+.bar-logo:hover img { opacity: .6; }
+
+.bar-progress { flex: 1; max-width: 300px; }
+.bar-prog-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .45rem;
+}
+.bar-prog-lbl {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .64rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+.bar-track { height: 1px; background: rgba(79,109,138,.12); }
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--ocean), var(--gold));
+  transition: width .55s var(--ease-out);
+  width: 0%;
+}
+.bar-back {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .7rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  transition: color var(--dur-mid) ease;
+  white-space: nowrap;
+}
+.bar-back:hover { color: var(--navy); }
+
+/* ─── SCREENS ─── */
+.screen {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--nav-h) + 3rem) var(--page-pad) 4rem;
+  min-height: 100svh;
+}
+.screen.active { display: flex; }
+
+/* ─── NAME SCREEN ─── */
+.name-wrap { text-align: center; max-width: 480px; }
+
+.name-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.name-logo {
+  width: 72px;
+  height: auto;
+  opacity: .18;
 }
 
-/* ── QUESTION SCREEN ── */
-.q-panel{width:100%;max-width:660px}
-.q-eyebrow{
-  font-family:'DM Sans',sans-serif;font-weight:300;
-  font-size:.65rem;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--text-light);margin-bottom:1rem;
+.name-script {
+  font-family: var(--font-script);
+  font-size: 2.4rem;
+  color: var(--gold);
+  opacity: .8;
+  margin-bottom: .25rem;
 }
-.q-eyebrow em{color:var(--ocean);font-style:normal;font-weight:500}
-.q-text{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;
-  font-size:clamp(1.22rem,2.8vw,1.7rem);
-  line-height:1.38;color:var(--navy);margin-bottom:2.2rem;
+.name-title {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  color: var(--navy);
+  margin-bottom: .8rem;
+  line-height: 1.1;
 }
-.q-answers{display:flex;flex-direction:column;gap:.42rem}
-.q-ans{
-  display:flex;align-items:flex-start;gap:1.1rem;
-  padding:1.05rem 1.4rem;
-  border:1px solid var(--border);
-  text-align:left;color:var(--text-mid);
-  background:rgba(250,245,239,.5);
-  transition:border-color .2s,background .2s,color .2s,transform .22s cubic-bezier(.34,1.3,.64,1);
+.name-sub {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .87rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: 2.8rem;
 }
-.q-ans:hover{
-  border-color:var(--border2);
-  color:var(--text);
-  background:#fff;
-  transform:translateX(6px);
+.name-input {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 1rem;
+  font-family: var(--font-script);
+  font-size: 1.9rem;
+  color: var(--navy);
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--border2);
+  padding: .55rem .2rem;
+  text-align: center;
+  outline: none;
+  transition: border-color var(--dur-mid) ease;
 }
-.q-ans.sel{
-  border-color:var(--ocean);
-  background:rgba(79,109,138,.07);
-  color:var(--navy);
-  transform:translateX(6px);
-}
-.q-ans-n{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-size:1.1rem;font-style:italic;
-  color:rgba(79,109,138,.25);min-width:1.4rem;line-height:1.55;flex-shrink:0;
-  transition:color .2s;
-}
-.q-ans.sel .q-ans-n{color:var(--ocean)}
-.q-ans-t{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.9rem;line-height:1.6;
+.name-input::placeholder { color: var(--text-light); font-style: italic; }
+.name-input:focus { border-color: var(--ocean); }
+
+.name-hint {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .72rem;
+  color: var(--text-lighter);
+  margin-bottom: 2.5rem;
+  letter-spacing: .04em;
 }
 
-/* ── NAV ── */
-.q-nav{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-top:2.2rem;gap:1rem;width:100%;max-width:660px;
+.btn-start {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--navy);
+  padding: .95rem 2.4rem;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--dur-mid) ease;
+  cursor: pointer;
+  border: none;
 }
-.btn-prev{
-  font-family:'DM Sans',sans-serif;font-weight:300;
-  font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;
-  color:var(--text-light);border:1px solid var(--border);
-  padding:.78rem 1.6rem;
-  transition:border-color .2s,color .2s;
+.btn-start::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 1.5px; width: 0;
+  background: var(--gold);
+  transition: width var(--dur-slow) var(--ease-out);
 }
-.btn-prev:hover:not(:disabled){border-color:var(--border2);color:var(--navy)}
-.btn-prev:disabled{opacity:.3;cursor:not-allowed}
-.btn-next{
-  font-family:'DM Sans',sans-serif;font-weight:500;
-  font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;
-  color:var(--cream);background:var(--navy);
-  padding:.78rem 1.9rem;
-  transition:background .25s;
-}
-.btn-next:hover:not(:disabled){background:var(--ocean)}
-.btn-next:disabled{background:rgba(31,47,68,.2);cursor:not-allowed;color:rgba(250,245,239,.4)}
+.btn-start:hover:not(:disabled) { background: var(--ocean); }
+.btn-start:hover::after { width: 100%; }
+.btn-start:disabled { background: rgba(31,47,68,.18); cursor: not-allowed; color: rgba(250,245,239,.4); }
 
-/* START BUTTON */
-.btn-start{
-  font-family:'DM Sans',sans-serif;font-weight:500;
-  font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--cream);background:var(--navy);
-  padding:.95rem 2.4rem;
-  transition:background .25s;
-}
-.btn-start:hover:not(:disabled){background:var(--ocean)}
-.btn-start:disabled{background:rgba(31,47,68,.2);cursor:not-allowed}
+/* ─── QUESTION SCREEN ─── */
+.q-panel { width: 100%; max-width: 660px; }
 
-/* ── SLIDE TRANSITIONS ── */
-.slide-out-l{animation:sol .22s ease forwards}
-.slide-out-r{animation:sor .22s ease forwards}
-.slide-in-r{animation:sir .28s ease forwards}
-.slide-in-l{animation:sil .28s ease forwards}
-@keyframes sol{to{opacity:0;transform:translateX(-32px)}}
-@keyframes sor{to{opacity:0;transform:translateX(32px)}}
-@keyframes sir{from{opacity:0;transform:translateX(32px)}}
-@keyframes sil{from{opacity:0;transform:translateX(-32px)}}
-
-/* ── KBD HINT ── */
-.kbd{
-  position:fixed;bottom:1.3rem;left:50%;transform:translateX(-50%);
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.64rem;
-  color:var(--text-light);display:flex;gap:.45rem;align-items:center;
-  background:rgba(250,245,239,.96);padding:.4rem .85rem;
-  border:1px solid var(--border);backdrop-filter:blur(8px);
+.q-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .65rem;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 1rem;
 }
-.kbd kbd{
-  border:1px solid var(--border2);padding:.1rem .3rem;font-size:.6rem;
-  font-family:'DM Sans',sans-serif;color:var(--text-mid);
+.q-eyebrow em { color: var(--ocean); font-style: normal; font-weight: 500; }
+
+.q-text {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.22rem, 2.8vw, 1.7rem);
+  line-height: 1.38;
+  color: var(--navy);
+  margin-bottom: 2.2rem;
 }
 
-@media(max-width:640px){
-  .bar{padding:.85rem 1.2rem;height:64px}
-  .bar-logo{height:44px}.bar-logo img{height:44px}
-  .bar-progress{display:none}
-  .screen{padding:7rem 1.1rem 4rem}
-  .kbd{display:none}
-  .q-ans{padding:.9rem 1rem}
+.q-answers { display: flex; flex-direction: column; gap: .42rem; }
+
+.q-ans {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  padding: 1.05rem 1.4rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  color: var(--text-mid);
+  background: rgba(250,245,239,.5);
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+  transition: border-color var(--dur-mid) ease,
+              background var(--dur-mid) ease,
+              color var(--dur-mid) ease,
+              transform .22s var(--ease-spring);
+}
+.q-ans:hover {
+  border-color: var(--border2);
+  color: var(--text);
+  background: #fff;
+  transform: translateX(5px);
+}
+.q-ans.sel {
+  border-color: var(--ocean);
+  background: rgba(79,109,138,.07);
+  color: var(--navy);
+  transform: translateX(5px);
+}
+.q-ans.just-selected {
+  border-color: var(--gold);
+  background: rgba(201,168,108,.06);
+  transform: translateX(5px) scale(1.005);
+}
+
+.q-ans-n {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: rgba(79,109,138,.22);
+  min-width: 1.4rem;
+  line-height: 1.55;
+  flex-shrink: 0;
+  transition: color var(--dur-mid) ease;
+}
+.q-ans.sel .q-ans-n { color: var(--ocean); }
+.q-ans.just-selected .q-ans-n { color: var(--gold2); }
+
+.q-ans-t {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+/* ─── NAVIGATION BUTTONS ─── */
+.q-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.2rem;
+  gap: 1rem;
+  width: 100%;
+  max-width: 660px;
+}
+
+.btn-prev {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .7rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  border: 1px solid var(--border);
+  padding: .78rem 1.6rem;
+  cursor: pointer;
+  background: none;
+  transition: border-color var(--dur-mid) ease, color var(--dur-mid) ease;
+}
+.btn-prev:hover:not(:disabled) { border-color: var(--border2); color: var(--navy); }
+.btn-prev:disabled { opacity: .3; cursor: not-allowed; }
+
+.btn-next {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: .7rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--navy);
+  padding: .78rem 1.9rem;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--dur-mid) ease;
+}
+.btn-next::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 1.5px; width: 0;
+  background: var(--gold);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+.btn-next:hover:not(:disabled) { background: var(--ocean); }
+.btn-next:hover::after { width: 100%; }
+.btn-next:disabled { background: rgba(31,47,68,.2); cursor: not-allowed; color: rgba(250,245,239,.4); }
+
+/* ─── SLIDE TRANSITIONS ─── */
+.slide-out-l { animation: sol .22s var(--ease-inout) forwards; }
+.slide-out-r { animation: sor .22s var(--ease-inout) forwards; }
+.slide-in-r   { animation: sir .28s var(--ease-out) forwards; }
+.slide-in-l   { animation: sil .28s var(--ease-out) forwards; }
+@keyframes sol { to { opacity: 0; transform: translateX(-32px); } }
+@keyframes sor { to { opacity: 0; transform: translateX(32px); } }
+@keyframes sir { from { opacity: 0; transform: translateX(32px); } }
+@keyframes sil { from { opacity: 0; transform: translateX(-32px); } }
+
+/* ─── KEYBOARD HINT ─── */
+.kbd {
+  position: fixed;
+  bottom: 1.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .64rem;
+  color: var(--text-light);
+  display: flex;
+  gap: .45rem;
+  align-items: center;
+  background: rgba(250,245,239,.96);
+  padding: .4rem .85rem;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  opacity: .7;
+  transition: opacity var(--dur-mid) ease;
+}
+.kbd:hover { opacity: 1; }
+.kbd kbd {
+  border: 1px solid var(--border2);
+  padding: .1rem .3rem;
+  font-size: .6rem;
+  font-family: var(--font-body);
+  color: var(--text-mid);
+}
+
+/* ─── AUTO-ADVANCE INDICATOR ─── */
+.auto-indicator {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1.4rem;
+  justify-content: center;
+}
+.auto-dots { display: flex; gap: 3px; }
+.auto-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+  animation: dotPulse .5s ease infinite alternate;
+}
+.auto-dot:nth-child(2) { animation-delay: .15s; }
+.auto-dot:nth-child(3) { animation-delay: .3s; }
+@keyframes dotPulse { from { opacity: .15; } to { opacity: .8; } }
+.auto-label {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .64rem;
+  letter-spacing: .06em;
+  color: var(--text-lighter);
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .bar { padding: .85rem 1.2rem; height: 64px; }
+  .bar-logo { height: 44px; }
+  .bar-logo img { height: 44px; }
+  .bar-progress { display: none; }
+  .screen { padding: 6rem 1.1rem 4rem; }
+  .kbd { display: none; }
+  .q-ans { padding: .9rem 1rem; }
 }
 </style>
 </head>
 <body>
 
-<div class="bar">
-  <a href="index.html" class="bar-logo" aria-label="Accueil">
-    <img src="logo noir sans fond.png" alt="T & F">
+<!-- ═══ PAGE TRANSITION OVERLAY ═══ -->
+<div id="t-overlay" aria-hidden="true">
+  <div class="t-door t-door-l"></div>
+  <div class="t-door t-door-r"></div>
+  <div class="t-center">
+    <span class="t-eyebrow" id="t-eyebrow"></span>
+    <span class="t-title" id="t-title"></span>
+  </div>
+</div>
+
+<!-- ═══ TOP BAR ═══ -->
+<div class="bar" role="banner">
+  <a href="index.html" class="bar-logo" aria-label="Accueil T & F">
+    <img src="Logo.png" alt="T & F">
   </a>
-  <div class="bar-progress">
+  <div class="bar-progress" role="progressbar" aria-label="Progression du questionnaire">
     <div class="bar-prog-row">
       <span class="bar-prog-lbl" id="barLabel">Profil</span>
       <span class="bar-prog-lbl" id="barPct">—</span>
     </div>
     <div class="bar-track"><div class="bar-fill" id="barFill"></div></div>
   </div>
-  <a href="index.html" class="bar-back">← Retour</a>
+  <a href="index.html" class="bar-back" aria-label="Retour à l'accueil">← Retour</a>
 </div>
 
-<div class="screen active" id="screenName">
+<!-- ═══ SCREEN: PRÉNOM ═══ -->
+<div class="screen active" id="screenName" aria-label="Saisie du prénom">
   <div class="name-wrap">
-    <p class="name-mono" aria-hidden="true">T&F</p>
+    <div class="name-logo-wrap" aria-hidden="true">
+      <img src="Logo.png" class="name-logo" alt="" aria-hidden="true">
+    </div>
     <p class="name-script">Bienvenue,</p>
     <h1 class="name-title">Quel est votre prénom ?</h1>
     <p class="name-sub">Il apparaîtra sur votre rôle et dans la liste des participants.</p>
-    <input id="nameInput" class="name-input" type="text" placeholder="Votre prénom" maxlength="40" autocomplete="off">
+    <input id="nameInput" class="name-input" type="text" placeholder="Votre prénom" maxlength="40" autocomplete="given-name" aria-label="Votre prénom">
     <p class="name-hint">Appuyez sur Entrée ou cliquez ci-dessous</p>
-    <button class="btn-start" id="btnName" onclick="startQuiz()" disabled>Commencer le questionnaire →</button>
+    <button class="btn-start" id="btnName" onclick="startQuiz()" disabled>Commencer →</button>
   </div>
 </div>
 
-<div class="screen" id="screenQuiz">
+<!-- ═══ SCREEN: QUESTIONS ═══ -->
+<div class="screen" id="screenQuiz" aria-live="polite">
   <div class="q-panel" id="qPanel"></div>
   <div class="q-nav">
     <button class="btn-prev" id="qPrev" onclick="prevQ()" disabled>← Précédent</button>
@@ -257,245 +444,325 @@ button{font-family:inherit;cursor:pointer;background:none;border:none}
   </div>
 </div>
 
-<div class="kbd">
-  Raccourcis : <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> sélectionner &nbsp;·&nbsp; <kbd>→</kbd> suivant
+<!-- ═══ KEYBOARD HINT ═══ -->
+<div class="kbd" aria-hidden="true">
+  Raccourcis :
+  <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd>&nbsp; sélectionner
+  &nbsp;·&nbsp;
+  <kbd>←</kbd><kbd>→</kbd>&nbsp; naviguer
 </div>
 
 <script>
-const QS=[
-  {q:"Le matin d'un grand événement, vous vous sentez le plus utile quand vous…",a:[
-    {t:"Préparez une check-list et vérifiez que tout est prévu",tr:{orga:3}},
-    {t:"Créez l'ambiance avec la musique et les petites attentions",tr:{ener:2,social:1}},
-    {t:"Vous occupez de quelqu'un qui stresse en silence",tr:{empa:3}},
-    {t:"Documentez les coulisses pour en garder le souvenir",tr:{docu:3}},
+/* ═══════════════════════════════════════════════
+   QUESTIONS
+   ═══════════════════════════════════════════════ */
+const QS = [
+  { q: "Le matin d'un grand événement, vous vous sentez le plus utile quand vous…", a: [
+    { t: "Préparez une check-list et vérifiez que tout est prévu", tr: { orga:3 } },
+    { t: "Créez l'ambiance avec la musique et les petites attentions", tr: { ener:2, social:1 } },
+    { t: "Vous occupez de quelqu'un qui stresse en silence", tr: { empa:3 } },
+    { t: "Documentez les coulisses pour en garder le souvenir", tr: { docu:3 } },
   ]},
-  {q:"Quelqu'un vous confie quelque chose d'irremplaçable. Vous…",a:[
-    {t:"Le mettez en sécurité immédiatement et ne vous en dessaisissez plus",tr:{fiab:3}},
-    {t:"Planifiez mentalement le 'comment et quand' le restituer",tr:{orga:2,coord:1}},
-    {t:"Ressentez le poids de la confiance accordée",tr:{empa:2}},
-    {t:"Le documentez ou le photographiez discrètement",tr:{docu:2}},
+  { q: "Quelqu'un vous confie quelque chose d'irremplaçable. Vous…", a: [
+    { t: "Le mettez en sécurité immédiatement et ne vous en dessaisissez plus", tr: { fiab:3 } },
+    { t: "Planifiez mentalement le 'comment et quand' le restituer", tr: { orga:2, coord:1 } },
+    { t: "Ressentez le poids de la confiance accordée", tr: { empa:2 } },
+    { t: "Le documentez ou le photographiez discrètement", tr: { docu:2 } },
   ]},
-  {q:"Pour vous préparer à un événement important, vous…",a:[
-    {t:"Planifiez à l'avance et anticipez chaque scénario possible",tr:{orga:3}},
-    {t:"Imaginez l'ambiance idéale et cherchez à la créer",tr:{creat:3}},
-    {t:"Pensez à chacun des invités pour qu'ils ne se sentent pas seuls",tr:{empa:2,social:1}},
-    {t:"Improvisez sur le moment selon l'énergie",tr:{ener:3}},
+  { q: "Pour vous préparer à un événement important, vous…", a: [
+    { t: "Planifiez à l'avance et anticipez chaque scénario possible", tr: { orga:3 } },
+    { t: "Imaginez l'ambiance idéale et cherchez à la créer", tr: { creat:3 } },
+    { t: "Pensez à chacun des invités pour qu'ils ne se sentent pas seuls", tr: { empa:2, social:1 } },
+    { t: "Improvisez sur le moment selon l'énergie", tr: { ener:3 } },
   ]},
-  {q:"Dans une fête qui s'essouffle, vous êtes celle qui…",a:[
-    {t:"Reprend l'organisation et donne une nouvelle direction",tr:{orga:2,coord:2}},
-    {t:"Crée un moment fort pour relancer l'énergie",tr:{ener:3}},
-    {t:"Repère discrètement la personne la moins à l'aise et l'inclut",tr:{empa:3}},
-    {t:"Capture les derniers moments de la soirée",tr:{docu:2}},
+  { q: "Dans une fête qui s'essouffle, vous êtes celle qui…", a: [
+    { t: "Reprend l'organisation et donne une nouvelle direction", tr: { orga:2, coord:2 } },
+    { t: "Crée un moment fort pour relancer l'énergie", tr: { ener:3 } },
+    { t: "Repère discrètement la personne la moins à l'aise et l'inclut", tr: { empa:3 } },
+    { t: "Capture les derniers moments de la soirée", tr: { docu:2 } },
   ]},
-  {q:"Quand vous regardez une photo de groupe, vous remarquez d'abord…",a:[
-    {t:"Si tout le monde est bien cadré et l'image réussie",tr:{creat:2,orga:1}},
-    {t:"Les expressions et les émotions des personnes",tr:{empa:3}},
-    {t:"Les petits détails drôles ou insolites que personne ne voit",tr:{docu:2,creat:1}},
-    {t:"Si tout le monde est là, si quelqu'un manque à l'appel",tr:{fiab:2,empa:1}},
+  { q: "Quand vous regardez une photo de groupe, vous remarquez d'abord…", a: [
+    { t: "Si tout le monde est bien cadré et l'image réussie", tr: { creat:2, orga:1 } },
+    { t: "Les expressions et les émotions des personnes", tr: { empa:3 } },
+    { t: "Les petits détails drôles ou insolites que personne ne voit", tr: { docu:2, creat:1 } },
+    { t: "Si tout le monde est là, si quelqu'un manque à l'appel", tr: { fiab:2, empa:1 } },
   ]},
-  {q:"Votre rôle naturel dans un projet d'équipe…",a:[
-    {t:"Celle qui structure, planifie et distribue les tâches",tr:{orga:3}},
-    {t:"Celle qui apporte les idées créatives et la vision",tr:{creat:3}},
-    {t:"Celle qui fédère, motive et crée la bonne ambiance",tr:{ener:2,social:2}},
-    {t:"Celle qui s'occupe du bien-être de chacun",tr:{empa:3}},
+  { q: "Votre rôle naturel dans un projet d'équipe…", a: [
+    { t: "Celle qui structure, planifie et distribue les tâches", tr: { orga:3 } },
+    { t: "Celle qui apporte les idées créatives et la vision", tr: { creat:3 } },
+    { t: "Celle qui fédère, motive et crée la bonne ambiance", tr: { ener:2, social:2 } },
+    { t: "Celle qui s'occupe du bien-être de chacun", tr: { empa:3 } },
   ]},
-  {q:"Une personne arrive seule à une fête et semble perdue. Vous…",a:[
-    {t:"L'accueillez immédiatement et la présentez à des gens",tr:{social:3}},
-    {t:"La rejoignez discrètement et engagez la conversation",tr:{empa:2,social:1}},
-    {t:"Lui trouvez une place et vous assurez qu'elle a tout ce qu'il faut",tr:{orga:1,empa:2}},
-    {t:"La remarquez et observez la situation avant d'agir",tr:{docu:1,empa:2}},
+  { q: "Une personne arrive seule à une fête et semble perdue. Vous…", a: [
+    { t: "L'accueillez immédiatement et la présentez à des gens", tr: { social:3 } },
+    { t: "La rejoignez discrètement et engagez la conversation", tr: { empa:2, social:1 } },
+    { t: "Lui trouvez une place et vous assurez qu'elle a tout ce qu'il faut", tr: { orga:1, empa:2 } },
+    { t: "La remarquez et observez la situation avant d'agir", tr: { docu:1, empa:2 } },
   ]},
-  {q:"Pour vous, un mariage réussi, c'est avant tout…",a:[
-    {t:"Un événement parfaitement organisé où rien ne rate",tr:{orga:2,coord:2}},
-    {t:"Un espace visuellement beau et sensoriel",tr:{creat:3}},
-    {t:"Une fête où tout le monde danse et rit",tr:{ener:2,social:2}},
-    {t:"Un moment dont on gardera le souvenir pour toujours",tr:{docu:3}},
+  { q: "Pour vous, un mariage réussi, c'est avant tout…", a: [
+    { t: "Un événement parfaitement organisé où rien ne rate", tr: { orga:2, coord:2 } },
+    { t: "Un espace visuellement beau et sensoriel", tr: { creat:3 } },
+    { t: "Une fête où tout le monde danse et rit", tr: { ener:2, social:2 } },
+    { t: "Un moment dont on gardera le souvenir pour toujours", tr: { docu:3 } },
   ]},
-  {q:"Face à un imprévu de dernière minute…",a:[
-    {t:"Vous identifiez la solution méthodiquement et gérez sans paniquer",tr:{orga:2,fiab:2}},
-    {t:"Vous trouvez une solution créative que personne n'avait envisagée",tr:{creat:3}},
-    {t:"Vous soutenez d'abord les personnes que ça affecte",tr:{empa:3}},
-    {t:"Vous notez tout pour analyser et améliorer après",tr:{docu:2}},
+  { q: "Face à un imprévu de dernière minute…", a: [
+    { t: "Vous identifiez la solution méthodiquement et gérez sans paniquer", tr: { orga:2, fiab:2 } },
+    { t: "Vous trouvez une solution créative que personne n'avait envisagée", tr: { creat:3 } },
+    { t: "Vous soutenez d'abord les personnes que ça affecte", tr: { empa:3 } },
+    { t: "Vous notez tout pour analyser et améliorer après", tr: { docu:2 } },
   ]},
-  {q:"Chez vous, votre intérieur témoigne de…",a:[
-    {t:"Une organisation exemplaire, chaque chose à sa place",tr:{orga:3}},
-    {t:"Un espace curatté avec soin, beau et très personnel",tr:{creat:3}},
-    {t:"Des photos partout, des carnets, des objets de souvenir",tr:{docu:3}},
-    {t:"Quelque chose de chaleureux où les gens se sentent bienvenus",tr:{social:2,empa:1}},
+  { q: "Chez vous, votre intérieur témoigne de…", a: [
+    { t: "Une organisation exemplaire, chaque chose à sa place", tr: { orga:3 } },
+    { t: "Un espace curatté avec soin, beau et très personnel", tr: { creat:3 } },
+    { t: "Des photos partout, des carnets, des objets de souvenir", tr: { docu:3 } },
+    { t: "Quelque chose de chaleureux où les gens se sentent bienvenus", tr: { social:2, empa:1 } },
   ]},
-  {q:"Les gens viennent naturellement vous confier leurs projets car…",a:[
-    {t:"Vous les aidez à les structurer et à ne rien oublier",tr:{orga:3}},
-    {t:"Vous avez toujours des idées nouvelles et inspirantes",tr:{creat:3}},
-    {t:"Vous les écoutez vraiment, sans juger",tr:{empa:3}},
-    {t:"Vous connaissez tout le monde et pouvez les mettre en relation",tr:{social:3}},
+  { q: "Les gens viennent naturellement vous confier leurs projets car…", a: [
+    { t: "Vous les aidez à les structurer et à ne rien oublier", tr: { orga:3 } },
+    { t: "Vous avez toujours des idées nouvelles et inspirantes", tr: { creat:3 } },
+    { t: "Vous les écoutez vraiment, sans juger", tr: { empa:3 } },
+    { t: "Vous connaissez tout le monde et pouvez les mettre en relation", tr: { social:3 } },
   ]},
-  {q:"Au moment de dire au revoir à la fin d'une soirée…",a:[
-    {t:"Vous vous assurez que tout le monde est rentré en sécurité",tr:{fiab:2,empa:1}},
-    {t:"Vous récapitulez mentalement les meilleurs moments",tr:{docu:3}},
-    {t:"Vous organisez la logistique du retour ou du rangement",tr:{coord:3}},
-    {t:"Vous prolongez la fête autant que possible",tr:{ener:3}},
+  { q: "Au moment de dire au revoir à la fin d'une soirée…", a: [
+    { t: "Vous vous assurez que tout le monde est rentré en sécurité", tr: { fiab:2, empa:1 } },
+    { t: "Vous récapitulez mentalement les meilleurs moments", tr: { docu:3 } },
+    { t: "Vous organisez la logistique du retour ou du rangement", tr: { coord:3 } },
+    { t: "Vous prolongez la fête autant que possible", tr: { ener:3 } },
   ]},
-  {q:"Si vous deviez résumer votre valeur en un seul mot…",a:[
-    {t:"Fiabilité",tr:{fiab:3}},
-    {t:"Sensibilité",tr:{empa:3}},
-    {t:"Créativité",tr:{creat:3}},
-    {t:"Énergie",tr:{ener:3}},
+  { q: "Si vous deviez résumer votre valeur en un seul mot…", a: [
+    { t: "Fiabilité", tr: { fiab:3 } },
+    { t: "Sensibilité", tr: { empa:3 } },
+    { t: "Créativité", tr: { creat:3 } },
+    { t: "Énergie", tr: { ener:3 } },
   ]},
-  {q:"Quand vous vous préparez pour quelque chose d'important…",a:[
-    {t:"Vous préparez tout la veille, rien n'est laissé au hasard",tr:{orga:3,fiab:1}},
-    {t:"Vous vous concentrez sur l'ambiance que vous voulez créer",tr:{creat:2}},
-    {t:"Vous pensez aux personnes que vous allez retrouver",tr:{social:2,empa:1}},
-    {t:"Vous improvisez le matin même, vous êtes meilleure sous pression",tr:{ener:2}},
+  { q: "Quand vous vous préparez pour quelque chose d'important…", a: [
+    { t: "Vous préparez tout la veille, rien n'est laissé au hasard", tr: { orga:3, fiab:1 } },
+    { t: "Vous vous concentrez sur l'ambiance que vous voulez créer", tr: { creat:2 } },
+    { t: "Vous pensez aux personnes que vous allez retrouver", tr: { social:2, empa:1 } },
+    { t: "Vous improvisez le matin même, vous êtes meilleure sous pression", tr: { ener:2 } },
   ]},
-  {q:"Ce que vous ne supportez pas dans un événement…",a:[
-    {t:"Le désordre et l'improvisation permanente",tr:{orga:3}},
-    {t:"Le manque d'esthétique, que rien ne soit beau ni pensé",tr:{creat:3}},
-    {t:"L'indifférence aux autres, les gens qui s'ignorent",tr:{empa:2,social:1}},
-    {t:"Que les moments forts ne soient pas capturés",tr:{docu:3}},
+  { q: "Ce que vous ne supportez pas dans un événement…", a: [
+    { t: "Le désordre et l'improvisation permanente", tr: { orga:3 } },
+    { t: "Le manque d'esthétique, que rien ne soit beau ni pensé", tr: { creat:3 } },
+    { t: "L'indifférence aux autres, les gens qui s'ignorent", tr: { empa:2, social:1 } },
+    { t: "Que les moments forts ne soient pas capturés", tr: { docu:3 } },
   ]},
-  {q:"Après un événement important, vous…",a:[
-    {t:"Débriefez ce qui a bien marché et ce qu'il faudra améliorer",tr:{orga:2,coord:1}},
-    {t:"Vous souvenez de chaque détail visuel, des belles images",tr:{creat:2,docu:1}},
-    {t:"Pensez aux personnes et à comment chacun a vécu ça",tr:{empa:3}},
-    {t:"Partagez immédiatement les photos et revivez l'ambiance",tr:{social:2,ener:1}},
+  { q: "Après un événement important, vous…", a: [
+    { t: "Débriefez ce qui a bien marché et ce qu'il faudra améliorer", tr: { orga:2, coord:1 } },
+    { t: "Vous souvenez de chaque détail visuel, des belles images", tr: { creat:2, docu:1 } },
+    { t: "Pensez aux personnes et à comment chacun a vécu ça", tr: { empa:3 } },
+    { t: "Partagez immédiatement les photos et revivez l'ambiance", tr: { social:2, ener:1 } },
   ]},
-  {q:"Gérer un groupe de personnes différentes est pour vous…",a:[
-    {t:"Naturel, vous savez créer une dynamique de groupe",tr:{social:3}},
-    {t:"Stimulant, vous aimez organiser et déléguer",tr:{orga:2,coord:2}},
-    {t:"Important, vous faites attention à ce que chacun se sente inclus",tr:{empa:3}},
-    {t:"Difficile, vous préférez les responsabilités individuelles précises",tr:{fiab:2}},
+  { q: "Gérer un groupe de personnes différentes est pour vous…", a: [
+    { t: "Naturel, vous savez créer une dynamique de groupe", tr: { social:3 } },
+    { t: "Stimulant, vous aimez organiser et déléguer", tr: { orga:2, coord:2 } },
+    { t: "Important, vous faites attention à ce que chacun se sente inclus", tr: { empa:3 } },
+    { t: "Difficile, vous préférez les responsabilités individuelles précises", tr: { fiab:2 } },
   ]},
-  {q:"La dernière fois que vous avez rendu service à quelqu'un, c'était en…",a:[
-    {t:"Organisant quelque chose de concret pour lui",tr:{orga:2}},
-    {t:"Lui créant ou offrant quelque chose de beau et personnel",tr:{creat:2}},
-    {t:"L'écoutant pendant une heure, vraiment",tr:{empa:3}},
-    {t:"Le présentant à quelqu'un qui pouvait l'aider",tr:{social:3}},
+  { q: "La dernière fois que vous avez rendu service à quelqu'un, c'était en…", a: [
+    { t: "Organisant quelque chose de concret pour lui", tr: { orga:2 } },
+    { t: "Lui créant ou offrant quelque chose de beau et personnel", tr: { creat:2 } },
+    { t: "L'écoutant pendant une heure, vraiment", tr: { empa:3 } },
+    { t: "Le présentant à quelqu'un qui pouvait l'aider", tr: { social:3 } },
   ]},
 ];
 
-const RT={
-  1:{fiab:3,orga:3,empa:1},2:{creat:3,orga:1},3:{ener:3,social:2},
-  4:{creat:3,docu:2},5:{fiab:3,orga:2},6:{creat:2,empa:1},
-  7:{creat:2,social:1},8:{fiab:3,orga:2},9:{coord:3,orga:2,ener:1},
-  10:{social:3,empa:1},11:{empa:3,fiab:2},12:{empa:3},
-  13:{orga:2,empa:2,fiab:2},14:{docu:3,creat:2},15:{social:3,ener:2},
-  16:{social:2,docu:2},17:{social:2,ener:2,coord:1},18:{creat:3,coord:2},
-  19:{creat:2,social:2,coord:1},20:{fiab:3,orga:2},21:{orga:3,coord:2,fiab:2},
-  22:{ener:3,coord:2},23:{ener:3,social:2},24:{fiab:3,orga:2},
-  25:{empa:3,orga:1},26:{orga:2,coord:2},27:{social:2,ener:1,docu:1},
-  28:{coord:2,ener:2},29:{docu:3,creat:1},30:{fiab:2,orga:1,empa:1},
+/* Trait → role affinity weights */
+const RT = {
+  1:{fiab:3,orga:3,empa:1}, 2:{creat:3,orga:1}, 3:{ener:3,social:2},
+  4:{creat:3,docu:2}, 5:{fiab:3,orga:2}, 6:{creat:2,empa:1},
+  7:{creat:2,social:1}, 8:{fiab:3,orga:2}, 9:{coord:3,orga:2,ener:1},
+  10:{social:3,empa:1}, 11:{empa:3,fiab:2}, 12:{empa:3},
+  13:{orga:2,empa:2,fiab:2}, 14:{docu:3,creat:2}, 15:{social:3,ener:2},
+  16:{social:2,docu:2}, 17:{social:2,ener:2,coord:1}, 18:{creat:3,coord:2},
+  19:{creat:2,social:2,coord:1}, 20:{fiab:3,orga:2}, 21:{orga:3,coord:2,fiab:2},
+  22:{ener:3,coord:2}, 23:{ener:3,social:2}, 24:{fiab:3,orga:2},
+  25:{empa:3,orga:1}, 26:{orga:2,coord:2}, 27:{social:2,ener:1,docu:1},
+  28:{coord:2,ener:2}, 29:{docu:3,creat:1}, 30:{fiab:2,orga:1,empa:1},
 };
-const ROLES_IDS=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 
-let userName='';
-let cur=0;
-const chosen=new Array(QS.length).fill(null);
+const ROLES_IDS = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 
-const nameInput=document.getElementById('nameInput');
-nameInput.addEventListener('keydown',e=>{if(e.key==='Enter')startQuiz()});
-nameInput.addEventListener('input',()=>{
-  document.getElementById('btnName').disabled=nameInput.value.trim().length<2;
+/* ═══════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════ */
+let userName = '';
+let cur = 0;
+const chosen = new Array(QS.length).fill(null);
+let autoTimer = null;
+
+/* ═══════════════════════════════════════════════
+   NAME INPUT
+   ═══════════════════════════════════════════════ */
+const nameInput = document.getElementById('nameInput');
+const btnName   = document.getElementById('btnName');
+
+nameInput.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') startQuiz();
+});
+nameInput.addEventListener('input', function () {
+  btnName.disabled = nameInput.value.trim().length < 2;
 });
 
-function startQuiz(){
-  const n=nameInput.value.trim();
-  if(n.length<2)return;
-  userName=n;
+function startQuiz() {
+  const n = nameInput.value.trim();
+  if (n.length < 2) return;
+  userName = n;
   document.getElementById('screenName').classList.remove('active');
   document.getElementById('screenQuiz').classList.add('active');
-  updateBar();render('');
-}
-
-function updateBar(){
-  const pct=Math.round(cur/QS.length*100);
-  document.getElementById('barFill').style.width=pct+'%';
-  document.getElementById('barLabel').textContent=`Question ${cur+1} / ${QS.length}`;
-  document.getElementById('barPct').textContent=pct+' %';
-}
-
-function render(dir){
-  const q=QS[cur];
   updateBar();
-  document.getElementById('qPrev').disabled=cur===0;
-  const nb=document.getElementById('qNext');
-  nb.textContent=cur===QS.length-1?'Voir mes rôles →':'Suivant →';
-  nb.disabled=chosen[cur]===null;
+  render('');
+}
 
-  const panel=document.getElementById('qPanel');
-  const outC=dir==='next'?'slide-out-l':'slide-out-r';
-  const inC=dir==='next'?'slide-in-r':'slide-in-l';
+/* ═══════════════════════════════════════════════
+   PROGRESS BAR
+   ═══════════════════════════════════════════════ */
+function updateBar() {
+  const pct = Math.round(cur / QS.length * 100);
+  document.getElementById('barFill').style.width = pct + '%';
+  document.getElementById('barLabel').textContent = 'Question ' + (cur + 1) + ' / ' + QS.length;
+  document.getElementById('barPct').textContent   = pct + ' %';
+  document.getElementById('qPrev').disabled = cur === 0;
+  const nb = document.getElementById('qNext');
+  nb.textContent = cur === QS.length - 1 ? 'Voir mes rôles →' : 'Suivant →';
+  nb.disabled = chosen[cur] === null;
+}
 
-  if(panel.children.length&&dir){
+/* ═══════════════════════════════════════════════
+   RENDER QUESTION
+   ═══════════════════════════════════════════════ */
+function render(dir) {
+  updateBar();
+  const panel  = document.getElementById('qPanel');
+  const q      = QS[cur];
+  const outC   = dir === 'next' ? 'slide-out-l' : 'slide-out-r';
+  const inC    = dir === 'next' ? 'slide-in-r'  : 'slide-in-l';
+
+  if (panel.children.length && dir) {
     panel.firstElementChild.classList.add(outC);
-    setTimeout(()=>inject(panel,q,inC),240);
-  }else{
-    inject(panel,q,'');
+    setTimeout(function () { inject(panel, q, inC); }, 230);
+  } else {
+    inject(panel, q, '');
   }
 }
 
-function inject(panel,q,animC){
-  panel.innerHTML='';
-  const d=document.createElement('div');
-  if(animC)d.classList.add(animC);
-  const nums=['①','②','③','④'];
-  d.innerHTML=
-    `<p class="q-eyebrow">Question <em>${String(cur+1).padStart(2,'0')}</em> sur ${String(QS.length).padStart(2,'0')}</p>`+
-    `<p class="q-text">${q.q}</p>`+
-    `<div class="q-answers">`+
-    q.a.map((a,i)=>`
-      <button class="q-ans${chosen[cur]===i?' sel':''}" onclick="pick(${i})">
-        <span class="q-ans-n">${nums[i]}</span>
-        <span class="q-ans-t">${a.t}</span>
-      </button>`).join('')+
-    `</div>`;
+function inject(panel, q, animC) {
+  panel.innerHTML = '';
+  const d = document.createElement('div');
+  if (animC) d.className = animC;
+  const nums = ['①','②','③','④'];
+  d.innerHTML =
+    '<p class="q-eyebrow">Question <em>' + String(cur + 1).padStart(2,'0') + '</em> sur ' + String(QS.length).padStart(2,'0') + '</p>' +
+    '<p class="q-text">' + q.q + '</p>' +
+    '<div class="q-answers">' +
+    q.a.map(function (a, i) {
+      return '<button class="q-ans' + (chosen[cur] === i ? ' sel' : '') + '" onclick="pick(' + i + ')" aria-label="Réponse ' + (i+1) + '">' +
+        '<span class="q-ans-n">' + nums[i] + '</span>' +
+        '<span class="q-ans-t">' + a.t + '</span>' +
+        '</button>';
+    }).join('') +
+    '</div>';
   panel.appendChild(d);
 }
 
-function pick(ai){
-  chosen[cur]=ai;
-  document.querySelectorAll('.q-ans').forEach((b,i)=>b.classList.toggle('sel',i===ai));
-  document.getElementById('qNext').disabled=false;
+/* ═══════════════════════════════════════════════
+   PICK — auto-advance after 380ms
+   ═══════════════════════════════════════════════ */
+function pick(ai) {
+  /* Clear any pending auto-advance */
+  clearTimeout(autoTimer);
+
+  chosen[cur] = ai;
+
+  /* Visual feedback on selected button */
+  document.querySelectorAll('.q-ans').forEach(function (b, i) {
+    b.classList.toggle('sel', i === ai);
+    b.classList.remove('just-selected');
+  });
+  var selBtn = document.querySelectorAll('.q-ans')[ai];
+  if (selBtn) selBtn.classList.add('just-selected');
+
+  document.getElementById('qNext').disabled = false;
+
+  /* Auto-advance after 380ms */
+  autoTimer = setTimeout(function () {
+    if (cur < QS.length - 1) {
+      cur++;
+      render('next');
+    } else {
+      submit();
+    }
+  }, 380);
 }
 
-function nextQ(){
-  if(chosen[cur]===null)return;
-  if(cur<QS.length-1){cur++;render('next');}
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════ */
+function nextQ() {
+  clearTimeout(autoTimer);
+  if (chosen[cur] === null) return;
+  if (cur < QS.length - 1) { cur++; render('next'); }
   else submit();
 }
-function prevQ(){
-  if(cur>0){cur--;render('prev');}
+function prevQ() {
+  clearTimeout(autoTimer);
+  if (cur > 0) { cur--; render('prev'); }
 }
 
-function submit(){
-  const traits={orga:0,creat:0,ener:0,empa:0,social:0,fiab:0,docu:0,coord:0};
-  chosen.forEach((ai,qi)=>{
-    if(ai===null)return;
-    Object.entries(QS[qi].a[ai].tr).forEach(([k,v])=>{traits[k]=(traits[k]||0)+v;});
+/* ═══════════════════════════════════════════════
+   SUBMIT — compute results + navigate via transition
+   ═══════════════════════════════════════════════ */
+function submit() {
+  const traits = { orga:0, creat:0, ener:0, empa:0, social:0, fiab:0, docu:0, coord:0 };
+
+  chosen.forEach(function (ai, qi) {
+    if (ai === null) return;
+    Object.entries(QS[qi].a[ai].tr).forEach(function ([k, v]) {
+      traits[k] = (traits[k] || 0) + v;
+    });
   });
-  const scored=ROLES_IDS.map(id=>{
-    const rt=RT[id]||{};
-    let s=0;
-    Object.entries(rt).forEach(([k,w])=>{s+=(traits[k]||0)*w;});
-    return{id,score:s};
-  }).sort((a,b)=>b.score-a.score);
-  const top5=scored.slice(0,5).map(s=>s.id);
-  const sortedTraits=Object.entries(traits).sort((a,b)=>b[1]-a[1]);
-  const topTraits=sortedTraits.slice(0,2).map(t=>t[0]);
-  sessionStorage.setItem('phf_results',JSON.stringify({top5,topTraits,traits,userName}));
-  window.location.href='resultat.html';
+
+  const scored = ROLES_IDS.map(function (id) {
+    const rt = RT[id] || {};
+    let s = 0;
+    Object.entries(rt).forEach(function ([k, w]) { s += (traits[k] || 0) * w; });
+    return { id, score: s };
+  }).sort(function (a, b) { return b.score - a.score; });
+
+  const top5 = scored.slice(0, 5).map(function (s) { return s.id; });
+  const sortedTraits = Object.entries(traits).sort(function (a, b) { return b[1] - a[1]; });
+  const topTraits = sortedTraits.slice(0, 2).map(function (t) { return t[0]; });
+
+  sessionStorage.setItem('phf_results', JSON.stringify({ top5, topTraits, traits, userName }));
+
+  /* Trigger page transition via synthetic click on a temporary link */
+  var a = document.createElement('a');
+  a.href = 'resultat.html';
+  a.style.position = 'fixed';
+  a.style.opacity  = '0';
+  a.style.pointerEvents = 'none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function () {
+    if (document.body.contains(a)) document.body.removeChild(a);
+  }, 1500);
 }
 
-document.addEventListener('keydown',e=>{
-  if(document.getElementById('screenQuiz').classList.contains('active')){
-    if(['1','2','3','4'].includes(e.key)){
-      const i=parseInt(e.key)-1;
-      const btns=document.querySelectorAll('.q-ans');
-      if(btns[i])btns[i].click();
-    }
-    if(e.key==='ArrowRight'&&!document.getElementById('qNext').disabled)nextQ();
-    if(e.key==='ArrowLeft'&&!document.getElementById('qPrev').disabled)prevQ();
+/* ═══════════════════════════════════════════════
+   KEYBOARD SHORTCUTS
+   ═══════════════════════════════════════════════ */
+document.addEventListener('keydown', function (e) {
+  if (!document.getElementById('screenQuiz').classList.contains('active')) return;
+  if (['1','2','3','4'].includes(e.key)) {
+    const i = parseInt(e.key) - 1;
+    const btns = document.querySelectorAll('.q-ans');
+    if (btns[i]) btns[i].click();
   }
+  if (e.key === 'ArrowRight' && !document.getElementById('qNext').disabled) nextQ();
+  if (e.key === 'ArrowLeft'  && !document.getElementById('qPrev').disabled) prevQ();
 });
 </script>
+
+<script src="transitions.js"></script>
 </body>
 </html>

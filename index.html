@@ -4,438 +4,515 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>T & F — Rôles d'Honneur</title>
+<!-- Prevent flash-of-content during page transition -->
+<script>if(sessionStorage.getItem('cgm_t'))document.documentElement.setAttribute('data-trans-in','');</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,300;1,6..96,400;1,6..96,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
 <style>
-/* ── Premium fonts (local install on Mac) ── */
-@font-face{font-family:'Parfumerie Script';src:local('Parfumerie Script'),local('Parfumerie Script Pro'),local('Parfumerie Script Regular'),local('ParfumerieScript');}
-@font-face{font-family:'TAN Angleton';src:local('TAN Angleton'),local('TAN - Angleton'),local('TANAngleton'),local('TAN Angleton Regular');}
-@font-face{font-family:'Versailles';src:local('Versailles'),local('ITC Versailles'),local('Versailles LT Std'),local('Versailles 55 Roman'),local('Versailles 55');}
+/* ═══════════════════════════════════════════════
+   ONE-VIEWPORT LOCK — aucun scroll sur l'accueil
+   ═══════════════════════════════════════════════ */
+html, body { height: 100svh; overflow: hidden; }
 
-/* ─── Palette officielle — DA document ─── */
-:root{
-  --cream:  #FAF5EF;
-  --cream2: #F2EAE0;
-  --navy:   #1F2F44;   /* Deep Navy — DA */
-  --ocean:  #4F6D8A;   /* Ocean Blue — DA */
-  --sky:    #BFD4E6;   /* Soft Sky — DA */
-  --sand:   #D8CFC4;   /* Warm Sand — DA */
-  --brown:  #7A5040;   /* Amethyst = cognac/brun premium */
-  --bord:   #6B2035;   /* Rich Plum Pink = Bordeaux */
-  --gold:   #C9A86C;
-  --gold2:  #B8913A;
-  --text:   #1F2F44;
-  --text-mid:#4F6D8A;
-  --text-light:#8A9EB8;
-  --border: rgba(31,47,68,.1);
-  --border2:rgba(31,47,68,.22);
-  --gold-border:rgba(201,168,108,.22);
+/* ═══════════════════════════════════════════════
+   INTRO — Porte d'entrée (première visite)
+   ═══════════════════════════════════════════════ */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  cursor: pointer;
+  overflow: hidden;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth}
-body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer;background:none;border:none}
-:focus-visible{outline:2px solid var(--ocean);outline-offset:3px}
+#intro.gone { display: none; }
 
-/* ════════════════════════════════════════
-   PORTE D'ENTRÉE
-════════════════════════════════════════ */
-#intro{
-  position:fixed;inset:0;z-index:2000;
-  background:var(--navy);    /* fond navy = aucun gap visible à l'ouverture */
-  cursor:pointer;user-select:none;
-  transition:opacity .6s ease;
+.intro-door {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 51%;
+  background: var(--navy);
+  will-change: transform;
+  transition: transform 1.55s var(--ease-inout);
 }
-#intro.fading{opacity:0;pointer-events:none}
-#intro.gone{display:none}
+.intro-door-l { left: 0; }
+.intro-door-r { right: 0; }
+#intro.open .intro-door-l { transform: translateX(-102%); }
+#intro.open .intro-door-r { transform: translateX(102%); }
 
-.door{
-  position:absolute;top:0;height:100%;
-  background:var(--navy);
-  display:flex;align-items:center;
-  overflow:visible;          /* lettre jamais coupée */
-  will-change:transform;
-  transition:transform 1.65s cubic-bezier(0.76,0,0.24,1);
-}
-.door-l{left:0;width:51%;justify-content:flex-end;padding-right:9vw}
-.door-r{right:0;width:51%;justify-content:flex-start;padding-left:9vw}
-#intro.open .door-l{transform:translateX(-102%)}
-#intro.open .door-r{transform:translateX(102%)}
-
-.dletter{
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:clamp(8rem,23vw,20rem);
-  color:var(--gold);opacity:.9;
-  line-height:1.1;display:block;
+.intro-center {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  pointer-events: none;
 }
 
-/* Séparateur central */
-.icenter{
-  position:absolute;left:50%;top:0;bottom:0;
-  transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;
-  z-index:10;pointer-events:none;
+/* Logo sur fond navy : inversé pour apparaître blanc — PNG plat, aucune perte */
+.intro-logo {
+  width: clamp(90px, 15vw, 170px);
+  height: auto;
+  display: block;
+  filter: invert(1);
+  opacity: 0;
+  transform: translateY(14px);
+  animation: introLogoIn 1.1s 0.3s var(--ease-out) forwards;
 }
-.iline{
-  flex:1;width:1px;
-  background:linear-gradient(to bottom,transparent,rgba(201,168,108,.5) 20%,rgba(201,168,108,.5) 80%,transparent);
+@keyframes introLogoIn { to { opacity: .88; transform: translateY(0); } }
+
+.intro-rule {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  opacity: 0;
+  animation: introFadeIn .7s .9s ease forwards;
 }
-.iamp{
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:2.6rem;color:var(--gold);
-  padding:.5rem .7rem;background:var(--navy);line-height:1;
+.intro-rule-line    { display: block; width: 38px; height: 1px; background: rgba(201,168,108,.4); }
+.intro-rule-diamond { font-size: .45rem; color: var(--gold); opacity: .6; }
+.intro-date {
+  font-family: var(--font-body);
+  font-weight: 200;
+  font-size: .72rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(250,245,239,.35);
+  opacity: 0;
+  animation: introFadeIn .7s 1.1s ease forwards;
+}
+.intro-hint {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .6rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(201,168,108,.3);
+  margin-top: .6rem;
+  opacity: 0;
+  animation: introFadeIn .7s 1.8s ease forwards;
+}
+@keyframes introFadeIn { to { opacity: 1; } }
+
+/* ═══════════════════════════════════════════════
+   LAYOUT — flex colonne, une seule hauteur d'écran
+   ═══════════════════════════════════════════════ */
+#home {
+  display: flex;
+  flex-direction: column;
+  height: calc(100svh - var(--nav-h));
+  overflow: hidden;
 }
 
-/* Bas */
-.ifoot{
-  position:absolute;bottom:0;left:0;right:0;
-  display:flex;flex-direction:column;align-items:center;gap:.45rem;
-  padding-bottom:3.5rem;z-index:10;pointer-events:none;
+/* ═══════════════════════════════════════════════
+   HERO — grille 2 colonnes
+   ═══════════════════════════════════════════════ */
+#hero {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: clamp(1.5rem, 3vh, 3rem) var(--page-pad);
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
 }
-.inames{
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:1.8rem;color:rgba(201,168,108,.65);
-}
-.ihint{
-  font-family:'DM Sans',sans-serif;font-weight:300;
-  font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(201,168,108,.38);
-  animation:hint-pulse 2.8s ease-in-out infinite;
-}
-@keyframes hint-pulse{0%,100%{opacity:.28}55%{opacity:.72}}
-
-/* ════════════════════════════════════════
-   MAIN
-════════════════════════════════════════ */
-#main{opacity:0;transition:opacity .9s ease}
-#main.visible{opacity:1}
-
-/* ─── NAV ─── */
-.nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(250,245,239,.97);backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--gold-border);
-  padding:0 4rem;height:72px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.nav-logo{display:flex;align-items:center;height:54px}
-.nav-logo img{height:54px;width:auto;transition:opacity .25s}
-.nav-logo:hover img{opacity:.7}
-.nav-links{display:flex;align-items:center;gap:2.8rem;list-style:none}
-.nav-links a{
-  font-family:'DM Sans',sans-serif;font-weight:300;font-size:.7rem;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);
-  position:relative;padding-bottom:2px;transition:color .25s;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:0;left:0;
-  height:1px;width:0;background:var(--gold);
-  transition:width .32s cubic-bezier(.4,0,.2,1);
-}
-.nav-links a:hover{color:var(--navy)}
-.nav-links a:hover::after{width:100%}
-
-/* ─── HERO ─── */
-.hero{
-  min-height:calc(100svh - 72px);
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  text-align:center;padding:4rem 2rem 3rem;
-  position:relative;overflow:hidden;
-}
-.hero-ghost{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-55%);
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:clamp(12rem,32vw,26rem);
-  color:var(--navy);opacity:.038;
-  line-height:1;pointer-events:none;white-space:nowrap;user-select:none;
-}
-.hero-date{
-  font-family:'DM Sans',sans-serif;font-weight:300;
-  font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--text-light);margin-bottom:2rem;position:relative;
-}
-.hero-script{
-  font-family:'Parfumerie Script','Pinyon Script',cursive;
-  font-size:clamp(1.6rem,3.2vw,2.4rem);
-  color:var(--ocean);opacity:.72;
-  margin-bottom:.3rem;position:relative;
-}
-.hero-h{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;
-  font-size:clamp(3rem,7.5vw,7rem);
-  line-height:.95;color:var(--navy);
-  margin-bottom:2.8rem;position:relative;
-  letter-spacing:-.01em;
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 65% 80% at 105% 50%, var(--cream2) 0%, transparent 55%);
+  pointer-events: none;
 }
 
-/* Countdown éditorial — jours large / HH:MM:SS discret */
-.countdown{
-  display:flex;align-items:center;justify-content:center;
-  gap:0;margin-bottom:3.2rem;position:relative;
+/* ─── Colonne gauche ─── */
+.hero-left { position: relative; z-index: 1; }
+
+.hero-script {
+  font-family: var(--font-script);
+  font-size: clamp(1.5rem, 2.5vw, 2.4rem);
+  color: var(--gold);
+  opacity: .75;
+  line-height: 1.1;
+  margin-bottom: .2rem;
+  display: block;
 }
-.cd-days{text-align:center;padding-right:3rem}
-.cd-days-n{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;
-  font-size:clamp(5.5rem,14vw,11rem);
-  color:var(--navy);line-height:1;display:block;
-  font-variant-numeric:tabular-nums;
+.hero-h1 {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+  color: var(--navy);
+  line-height: .92;
+  letter-spacing: -.02em;
+  margin-bottom: clamp(.6rem, 1.5vh, 1.4rem);
 }
-.cd-days-l{
-  font-family:'DM Sans',sans-serif;font-weight:300;
-  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--text-light);display:block;margin-top:.4rem;
+.hero-date {
+  font-family: var(--font-body);
+  font-weight: 200;
+  font-size: .7rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: clamp(.8rem, 2vh, 2rem);
 }
-.cd-sep-line{
-  width:1px;height:5.5rem;
-  background:var(--gold-border);
-  flex-shrink:0;
-}
-.cd-hms{text-align:center;padding-left:3rem}
-.cd-hms-n{
-  font-family:'DM Sans',sans-serif;font-weight:300;
-  font-size:clamp(1.4rem,3.5vw,2.8rem);
-  color:var(--navy);line-height:1;display:block;
-  font-variant-numeric:tabular-nums;letter-spacing:.04em;
-}
-.cd-hms-l{
-  font-family:'DM Sans',sans-serif;font-weight:300;
-  font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--text-light);display:block;margin-top:.55rem;
+.hero-ctas { display: flex; gap: .8rem; flex-wrap: wrap; }
+
+/* ─── Colonne droite : logo + compte à rebours ─── */
+.hero-right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.6rem, 1.5vh, 1.4rem);
 }
 
-/* ─── CTAs ─── */
-.ctas{
-  display:flex;gap:1.1rem;justify-content:center;
-  flex-wrap:wrap;position:relative;
+.hero-logo {
+  display: block;
+  width: clamp(70px, 8vw, 115px);
+  height: auto;
+  opacity: .85;
+  transition: opacity var(--dur-slow) ease;
 }
-.btn-p{
-  display:inline-block;position:relative;overflow:hidden;
-  padding:1.05rem 2.8rem;
-  font-family:'DM Sans',sans-serif;font-weight:400;
-  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--cream);background:var(--navy);
-  transition:background .3s ease;
-}
-.btn-p::after{
-  content:'';position:absolute;bottom:0;left:0;
-  width:0;height:1.5px;background:var(--gold);
-  transition:width .38s cubic-bezier(.4,0,.2,1);
-}
-.btn-p:hover{background:var(--ocean)}
-.btn-p:hover::after{width:100%}
+.hero-logo:hover { opacity: 1; }
 
-.btn-s{
-  display:inline-block;position:relative;
-  padding:1.05rem 2.8rem;
-  font-family:'DM Sans',sans-serif;font-weight:300;
-  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--navy);border:1px solid rgba(31,47,68,.22);
-  transition:border-color .3s ease;
-}
-.btn-s::after{
-  content:'';position:absolute;bottom:-1px;left:-1px;
-  width:0;height:1.5px;background:var(--gold);
-  transition:width .38s cubic-bezier(.4,0,.2,1);
-}
-.btn-s:hover{border-color:var(--gold)}
-.btn-s:hover::after{width:calc(100% + 2px)}
+/* ─── Compte à rebours centré ─── */
+.cd-block { text-align: center; line-height: 1; }
 
-/* ─── STATS STRIP ─── */
-.stats-strip{
-  background:var(--navy);
-  display:flex;justify-content:center;align-items:stretch;
-  flex-wrap:wrap;
+.cd-label {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .58rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: .3rem;
 }
-.ss-block{
-  padding:2.2rem 5rem;text-align:center;
-  border-right:1px solid rgba(255,255,255,.05);
-  display:flex;flex-direction:column;align-items:center;gap:.42rem;
-  transition:background .3s;
+.cd-days {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(5rem, 12vw, 10.5rem);
+  line-height: 1;
+  color: var(--navy);
+  letter-spacing: -.03em;
+  display: block;
 }
-.ss-block:last-child{border-right:none}
-.ss-block:hover{background:rgba(255,255,255,.025)}
-.ss-n{
-  font-family:'TAN Angleton','Bodoni Moda','Playfair Display',serif;
-  font-weight:400;font-style:italic;
-  font-size:2.8rem;color:var(--gold);line-height:1;
-  transition:color .3s;font-variant-numeric:tabular-nums;
+.cd-days-l {
+  font-family: var(--font-body);
+  font-weight: 200;
+  font-size: .63rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  display: block;
+  margin-top: .1rem;
+  margin-bottom: .55rem;
 }
-.ss-block:hover .ss-n{color:#d9bc82}
-.ss-l{
-  font-family:'DM Sans',sans-serif;font-weight:300;
-  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(250,245,239,.28);
+.cd-sep-h {
+  width: 36px;
+  height: 1px;
+  background: var(--gold-border2);
+  margin: 0 auto .5rem;
+}
+.cd-hms {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(.88rem, 1.7vw, 1.4rem);
+  letter-spacing: .04em;
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+.cd-hms-l {
+  font-family: var(--font-body);
+  font-weight: 200;
+  font-size: .57rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--text-lighter);
+  display: block;
+  margin-top: .22rem;
 }
 
-/* ─── SIGN-OFF ─── */
-.sign-off{
-  padding:2rem;text-align:center;
+/* ═══════════════════════════════════════════════
+   DASHBOARD — bande navy en bas
+   ═══════════════════════════════════════════════ */
+#dashboard {
+  flex-shrink: 0;
+  background: var(--navy);
+  padding: 1.2rem var(--page-pad);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(201,168,108,.1);
 }
-.sign-off img{
-  height:44px;width:auto;opacity:.14;
-  transition:opacity .3s;
+#dashboard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 140% at 110% 50%, rgba(79,109,138,.28) 0%, transparent 55%);
+  pointer-events: none;
 }
-.sign-off:hover img{opacity:.3}
+.db-grid {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.db-item {
+  flex: 1;
+  padding-right: 2.5rem;
+  margin-right: 2.5rem;
+  border-right: 1px solid rgba(201,168,108,.12);
+}
+.db-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+.db-n {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.9rem, 3.5vw, 3.2rem);
+  line-height: 1;
+  color: var(--gold);
+  letter-spacing: -.01em;
+  display: block;
+  margin-bottom: .18rem;
+}
+.db-l {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: .61rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(250,245,239,.35);
+}
 
-/* ─── RESPONSIVE ─── */
-@media(max-width:900px){
-  .nav{padding:0 1.4rem;height:64px}
-  .nav-logo{height:46px}
-  .nav-logo img{height:46px}
-  .hero{padding:3rem 1.4rem 2.5rem;min-height:calc(100svh - 64px)}
-  .cd-days-n{font-size:clamp(4rem,18vw,7rem)}
-  .stats-strip{flex-direction:column}
-  .ss-block{padding:1.8rem 2rem;border-right:none;border-bottom:1px solid rgba(255,255,255,.05)}
-  .ss-block:last-child{border-bottom:none}
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — mobile : débloque le scroll
+   ═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  html, body { height: auto; overflow: auto; }
+  #home      { height: auto; overflow: visible; }
+  #hero {
+    grid-template-columns: 1fr;
+    padding: 2.5rem var(--page-pad) 2rem;
+    gap: 2rem;
+  }
+  .hero-right {
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: flex-start;
+  }
+  .cd-days { font-size: clamp(4rem, 18vw, 6rem); }
+  #dashboard { padding: 1.6rem var(--page-pad); }
 }
-@media(max-width:560px){
-  .nav-links{display:none}
-  .ctas{flex-direction:column;align-items:center}
-  .ctas .btn-p,.ctas .btn-s{width:100%;max-width:280px;text-align:center}
-  .cd-days{padding-right:1.6rem}
-  .cd-hms{padding-left:1.6rem}
-  .dletter{font-size:clamp(6rem,28vw,14rem)}
+@media (max-width: 640px) {
+  #hero { padding: 2rem 1.4rem 2rem; }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas .btn-primary,
+  .hero-ctas .btn-outline { width: 100%; text-align: center; justify-content: center; }
+  .hero-right { flex-direction: column; align-items: flex-start; }
+  #dashboard { padding: 1.4rem 1.4rem; }
+  .db-grid   { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .db-item   { border-right: none; border-bottom: 1px solid rgba(201,168,108,.12); padding: 0 0 1rem; margin: 0 0 1rem; }
+  .db-item:last-child { border-bottom: none; padding: 0; margin: 0; }
 }
 </style>
 </head>
+
 <body>
 
-<!-- ═══ PORTE ═══ -->
-<div id="intro">
-  <div class="door door-l"><span class="dletter">T</span></div>
-  <div class="door door-r"><span class="dletter">F</span></div>
-  <div class="icenter">
-    <div class="iline"></div>
-    <span class="iamp">&</span>
-    <div class="iline"></div>
-  </div>
-  <div class="ifoot">
-    <span class="inames">Thomy &amp; Florian</span>
-    <span class="ihint">— Cliquer pour entrer —</span>
+<!-- ═══ INTRO OVERLAY (première visite) ═══ -->
+<div id="intro" role="presentation" aria-hidden="true">
+  <div class="intro-door intro-door-l"></div>
+  <div class="intro-door intro-door-r"></div>
+  <div class="intro-center">
+    <img src="Logo.png" class="intro-logo" alt="" aria-hidden="true" draggable="false">
+    <div class="intro-rule">
+      <span class="intro-rule-line"></span>
+      <span class="intro-rule-diamond">◆</span>
+      <span class="intro-rule-line"></span>
+    </div>
+    <p class="intro-date">12 · XII · MMXXVI</p>
+    <p class="intro-hint">Toucher pour entrer</p>
   </div>
 </div>
 
-<!-- ═══ CONTENU ═══ -->
-<div id="main">
-
-  <nav class="nav">
-    <a href="index.html" class="nav-logo" aria-label="Accueil">
-      <img src="logo noir sans fond.png" alt="T & F">
-    </a>
-    <ul class="nav-links">
-      <li><a href="roles.html">Les rôles</a></li>
-      <li><a href="quiz.html">Questionnaire</a></li>
-      <li><a href="resultat.html">Mes résultats</a></li>
-    </ul>
-  </nav>
-
-  <main>
-
-    <section class="hero">
-      <span class="hero-ghost" aria-hidden="true">T&amp;F</span>
-      <p class="hero-date">12 · XII · MMXXVI</p>
-      <p class="hero-script">Thomy &amp; Florian</p>
-      <h1 class="hero-h">Rôles d'Honneur</h1>
-
-      <div class="countdown">
-        <div class="cd-days">
-          <span class="cd-days-n" id="cdDays">—</span>
-          <span class="cd-days-l">Jours</span>
-        </div>
-        <div class="cd-sep-line"></div>
-        <div class="cd-hms">
-          <span class="cd-hms-n">
-            <span id="cdH">—</span> · <span id="cdM">—</span> · <span id="cdS">—</span>
-          </span>
-          <span class="cd-hms-l">H &nbsp;·&nbsp; Min &nbsp;·&nbsp; Sec</span>
-        </div>
-      </div>
-
-      <div class="ctas">
-        <a href="quiz.html" class="btn-p">Trouver mon rôle</a>
-        <a href="roles.html" class="btn-s">Voir les 30 rôles</a>
-      </div>
-    </section>
-
-    <div class="stats-strip">
-      <div class="ss-block">
-        <span class="ss-n" id="sbReg">—</span>
-        <span class="ss-l">Inscrits</span>
-      </div>
-      <div class="ss-block">
-        <span class="ss-n" id="sbFree">—</span>
-        <span class="ss-l">Places disponibles</span>
-      </div>
-      <div class="ss-block">
-        <span class="ss-n" id="sbFull">—</span>
-        <span class="ss-l">Rôles complets</span>
-      </div>
-    </div>
-
-    <div class="sign-off">
-      <img src="logo noir sans fond.png" alt="">
-    </div>
-
-  </main>
+<!-- ═══ PAGE TRANSITION OVERLAY (shared, géré par transitions.js) ═══ -->
+<div id="t-overlay" aria-hidden="true">
+  <div class="t-door t-door-l"></div>
+  <div class="t-door t-door-r"></div>
+  <div class="t-center">
+    <span class="t-eyebrow" id="t-eyebrow"></span>
+    <span class="t-title" id="t-title"></span>
+  </div>
 </div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="nav" id="mainNav" aria-label="Navigation principale">
+  <a href="index.html" class="nav-logo" aria-label="Accueil T & F">
+    <img src="Logo.png" alt="T & F">
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="roles.html">Les Rôles</a></li>
+    <li><a href="quiz.html">Questionnaire</a></li>
+    <li><a href="resultat.html">Mes Résultats</a></li>
+  </ul>
+  <a href="quiz.html" class="nav-cta" aria-label="Trouver mon rôle">Trouver mon rôle</a>
+</nav>
+
+<!-- ═══ MAIN — locked to one viewport ═══ -->
+<div id="home">
+
+  <!-- HERO -->
+  <section id="hero" aria-labelledby="hero-h1">
+    <!-- Colonne gauche : titres + CTA -->
+    <div class="hero-left">
+      <span class="hero-script">Thomy & Florian</span>
+      <h1 class="hero-h1" id="hero-h1">Rôles<br>d'Honneur</h1>
+      <p class="hero-date">12 · XII · MMXXVI · Paris</p>
+      <div class="hero-ctas">
+        <a href="quiz.html" class="btn btn-primary">Trouver mon rôle</a>
+        <a href="roles.html" class="btn btn-outline">Les 30 rôles</a>
+      </div>
+    </div>
+
+    <!-- Colonne droite : logo + compte à rebours en grand -->
+    <div class="hero-right">
+      <img src="Logo.png" class="hero-logo" alt="" aria-hidden="true" draggable="false">
+      <div class="cd-block" aria-label="Compte à rebours jusqu'au mariage">
+        <span class="cd-label">Compte à rebours</span>
+        <span class="cd-days" id="cdDays">—</span>
+        <span class="cd-days-l">Jours</span>
+        <div class="cd-sep-h"></div>
+        <p class="cd-hms">
+          <span id="cdH">—</span>&thinsp;<span style="opacity:.3">·</span>&thinsp;<span id="cdM">—</span>&thinsp;<span style="opacity:.3">·</span>&thinsp;<span id="cdS">—</span>
+        </p>
+        <span class="cd-hms-l">H &thinsp;·&thinsp; Min &thinsp;·&thinsp; Sec</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD STRIP -->
+  <section id="dashboard" aria-label="Inscriptions">
+    <div class="db-grid">
+      <div class="db-item">
+        <span class="db-n" id="dbSignups">0</span>
+        <span class="db-l">Personnes inscrites</span>
+      </div>
+      <div class="db-item">
+        <span class="db-n" id="dbFree">60</span>
+        <span class="db-l">Places encore libres</span>
+      </div>
+      <div class="db-item">
+        <span class="db-n" id="dbFull">0</span>
+        <span class="db-l">Rôles complets</span>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /#home -->
 
 <script>
-/* ─── Porte ─── */
-(function(){
-  const intro=document.getElementById('intro');
-  const main=document.getElementById('main');
-  function open(){
-    intro.classList.add('open');
-    setTimeout(()=>main.classList.add('visible'),600);
-    setTimeout(()=>intro.classList.add('fading'),1500);
-    setTimeout(()=>intro.classList.add('gone'),2150);
-    sessionStorage.setItem('introSeen','1');
-  }
-  if(sessionStorage.getItem('introSeen')){
+/* ═══════════════════════════════════════════════
+   INTRO — première visite
+   ═══════════════════════════════════════════════ */
+(function () {
+  var intro = document.getElementById('intro');
+  if (document.documentElement.hasAttribute('data-trans-in') || sessionStorage.getItem('introSeen')) {
     intro.classList.add('gone');
-    main.classList.add('visible');
-  }else{
-    intro.addEventListener('click',open,{once:true});
+    return;
   }
-})();
 
-/* ─── Compte à rebours — 12/12/2026 à 14h00 Paris (UTC+1) ─── */
-(function(){
-  const WEDDING=new Date('2026-12-12T14:00:00+01:00').getTime();
-  const pad=n=>String(n).padStart(2,'0');
-  function tick(){
-    const diff=WEDDING-Date.now();
-    if(diff<=0){
-      document.getElementById('cdDays').textContent='0';
-      ['cdH','cdM','cdS'].forEach(id=>document.getElementById(id).textContent='00');
+  function openIntro() {
+    sessionStorage.setItem('introSeen', '1');
+    intro.classList.add('open');
+    setTimeout(function () { intro.classList.add('gone'); }, 1700);
+  }
+
+  intro.addEventListener('click', openIntro, { once: true });
+  setTimeout(openIntro, 3000);
+}());
+
+/* ═══════════════════════════════════════════════
+   COUNTDOWN
+   ═══════════════════════════════════════════════ */
+(function () {
+  var WEDDING = new Date('2026-12-12T14:00:00+01:00').getTime();
+  var dEl = document.getElementById('cdDays');
+  var hEl = document.getElementById('cdH');
+  var mEl = document.getElementById('cdM');
+  var sEl = document.getElementById('cdS');
+
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  function tick() {
+    var diff = WEDDING - Date.now();
+    if (diff <= 0) {
+      dEl.textContent = '0';
+      hEl.textContent = '00';
+      mEl.textContent = '00';
+      sEl.textContent = '00';
       return;
     }
-    document.getElementById('cdDays').textContent=Math.floor(diff/864e5);
-    document.getElementById('cdH').textContent=pad(Math.floor((diff%864e5)/36e5));
-    document.getElementById('cdM').textContent=pad(Math.floor((diff%36e5)/6e4));
-    document.getElementById('cdS').textContent=pad(Math.floor((diff%6e4)/1e3));
+    var total = Math.floor(diff / 1000);
+    var s = total % 60;
+    var m = Math.floor(total / 60) % 60;
+    var h = Math.floor(total / 3600) % 24;
+    var d = Math.floor(total / 86400);
+    dEl.textContent = d;
+    sEl.style.opacity = '.4';
+    sEl.textContent = pad(s);
+    mEl.textContent = pad(m);
+    hEl.textContent = pad(h);
+    requestAnimationFrame(function () { sEl.style.opacity = '1'; });
   }
-  tick();setInterval(tick,1000);
-})();
 
-/* ─── Dashboard live ─── */
-(function(){
-  function refresh(){
-    const sups=(JSON.parse(localStorage.getItem('cgm')||'{"signups":{}}').signups)||{};
-    let reg=0,full=0;
-    for(let i=1;i<=30;i++){const n=(sups[String(i)]||[]).length;reg+=n;if(n>=2)full++;}
-    document.getElementById('sbReg').textContent=reg;
-    document.getElementById('sbFree').textContent=60-reg;
-    document.getElementById('sbFull').textContent=full;
+  tick();
+  setInterval(tick, 1000);
+}());
+
+/* ═══════════════════════════════════════════════
+   DASHBOARD — données localStorage
+   ═══════════════════════════════════════════════ */
+(function () {
+  function getData() {
+    try { return JSON.parse(localStorage.getItem('cgm') || '{"signups":{}}'); }
+    catch (e) { return { signups: {} }; }
   }
-  refresh();window.addEventListener('storage',refresh);
-})();
+
+  function updateDash() {
+    var data = getData();
+    var signups = data.signups || {};
+    var totalPeople = 0;
+    var fullRoles = 0;
+    Object.keys(signups).forEach(function (k) {
+      var arr = signups[k];
+      if (Array.isArray(arr)) {
+        totalPeople += arr.length;
+        if (arr.length >= 2) fullRoles++;
+      }
+    });
+    var freeSpots = Math.max(0, 60 - totalPeople);
+    document.getElementById('dbSignups').textContent = totalPeople;
+    document.getElementById('dbFree').textContent    = freeSpots;
+    document.getElementById('dbFull').textContent    = fullRoles;
+  }
+
+  updateDash();
+  window.addEventListener('storage', updateDash);
+}());
 </script>
+
+<!-- ═══ TRANSITIONS (partagé) ═══ -->
+<script src="transitions.js"></script>
+
 </body>
 </html>
