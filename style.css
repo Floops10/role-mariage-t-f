@@ -2,10 +2,10 @@
  * style.css — T & F Mariage
  * Feuille de style partagée : variables, typo, nav, overlay transitions, utilities.
  *
- * Polices locales (fichiers dans /fonts/) :
- *   fonts/TANAngleton-Regular.ttf    → TAN Angleton (grands titres)
- *   fonts/Versailles-Regular.ttf     → Versailles / jen-wagner (sous-titres)
- *   fonts/ParfumerieScript-Regular.otf → Parfumerie Script (noms, script)
+ * Polices locales (fichiers à la racine du repo, même niveau que style.css) :
+ *   TANAngleton-Regular.ttf    → TAN Angleton (grands titres)
+ *   Versailles-Regular.ttf     → Versailles / jen-wagner (sous-titres)
+ *   ParfumerieScript-Regular.otf → Parfumerie Script (noms, script)
  * Google Fonts (CDN) : DM Sans
  */
 
@@ -16,7 +16,7 @@
   font-family: 'TAN Angleton';
   src: local('TAN Angleton'),
        local('TAN - Angleton'),
-       url('fonts/TANAngleton-Regular.ttf') format('truetype');
+       url('TANAngleton-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -26,7 +26,7 @@
   font-family: 'TAN Angleton';
   src: local('TAN Angleton'),
        local('TAN - Angleton'),
-       url('fonts/TANAngleton-Regular.ttf') format('truetype');
+       url('TANAngleton-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -36,7 +36,7 @@
   src: local('Versailles'),
        local('ITC Versailles'),
        local('Versailles LT Std'),
-       url('fonts/Versailles-Regular.ttf') format('truetype');
+       url('Versailles-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -44,7 +44,7 @@
 @font-face {
   font-family: 'Versailles';
   src: local('Versailles'),
-       url('fonts/Versailles-Regular.ttf') format('truetype');
+       url('Versailles-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -53,7 +53,7 @@
   font-family: 'Parfumerie Script';
   src: local('Parfumerie Script'),
        local('ParfumerieScript'),
-       url('fonts/ParfumerieScript-Regular.otf') format('opentype');
+       url('ParfumerieScript-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
