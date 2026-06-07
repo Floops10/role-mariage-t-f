@@ -982,23 +982,28 @@ const ROLES = [
 /* Firebase Realtime Database */
 const FB_URL = 'https://roles-du-mariage-default-rtdb.europe-west1.firebasedatabase.app/signups.json';
 let _signups = {};
-
-async function fbLoad() {
-  try {
-    const r = await fetch(FB_URL);
-    const data = await r.json();
-    _signups = (data && typeof data === 'object') ? data : {};
-  } catch(e) { /* garde le cache local en cas d'erreur réseau */ }
-}
+let _unsaved = false; // true si on a des changements locaux pas encore confirmés sur Firebase
 
 async function fbSave() {
+  _unsaved = true;
   try {
-    await fetch(FB_URL, {
+    const resp = await fetch(FB_URL, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(_signups)
     });
-  } catch(e) { /* silent fail */ }
+    if (resp.ok) _unsaved = false;
+  } catch(e) { /* réessayera au prochain intervalle */ }
+}
+
+async function fbLoad() {
+  if (_unsaved) { fbSave(); return; } // priorité aux données locales non sauvegardées
+  try {
+    const r = await fetch(FB_URL);
+    if (!r.ok) return;
+    const data = await r.json();
+    _signups = (data && typeof data === 'object') ? data : {};
+  } catch(e) { /* garde le cache local */ }
 }
 
 function getData()   { return { signups: _signups }; }
