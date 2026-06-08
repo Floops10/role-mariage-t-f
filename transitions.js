@@ -1,20 +1,47 @@
 /**
  * transitions.js — Système de transition de page T & F
  * Portes navy qui se ferment/ouvrent entre chaque navigation.
- * Le titre de la page de destination s'affiche sur les portes fermées.
+ * Le titre de la page de destination + une citation s'affichent sur les portes fermées.
  */
 (function () {
   'use strict';
 
-  const KEY = 'cgm_t'; // sessionStorage: nom du fichier de destination
+  const KEY = 'cgm_t';
 
   const PAGES = {
     'index.html':    { eyebrow: 'Accueil',             title: 'T & F' },
-    'roles.html':    { eyebrow: 'Les 30 missions',      title: "Rôles d'Honneur" },
+    'roles.html':    { eyebrow: '29 missions actives',  title: "Rôles d'Honneur" },
     'quiz.html':     { eyebrow: 'Votre profil',          title: 'Questionnaire' },
     'resultat.html': { eyebrow: 'Vos correspondances',   title: 'Mes Résultats' },
     '':              { eyebrow: 'Accueil',               title: 'T & F' },
   };
+
+  const QUOTES = [
+    { fr: '« L\'amour est patient, il est plein de bonté. »', ref: '1 Cor 13, 4' },
+    { fr: '« Ce que Dieu a uni, que l\'homme ne le sépare pas. »', ref: 'Marc 10, 9' },
+    { fr: '« Deux valent mieux qu\'un. »', ref: 'Eccl 4, 9' },
+    { fr: '« Là où tu iras, j\'irai. »', ref: 'Ruth 1, 16' },
+    { fr: '« L\'amour se réjouit de la vérité. »', ref: '1 Cor 13, 6' },
+    { fr: '« Revêtez-vous d\'amour. »', ref: 'Col 3, 14' },
+    { fr: '« Ils seront une seule chair. »', ref: 'Genèse 2, 24' },
+    { fr: '« Je t\'aimerai d\'un amour éternel. »', ref: 'Jér 31, 3' },
+    { fr: 'La vie est belle quand on la partage.' },
+    { fr: 'L\'amour vrai se vit dans les petits riens.' },
+    { fr: 'Votre présence est le plus beau des cadeaux.' },
+    { fr: 'Une famille qui s\'agrandit, un cœur qui s\'ouvre.' },
+    { fr: 'Le bonheur partagé est un bonheur doublé.' },
+    { fr: 'Chaque rôle tisse le souvenir d\'une vie.' },
+    { fr: '« L\'espérance ne déçoit pas. »', ref: 'Rom 5, 5' },
+    { fr: 'Être là, vraiment — c\'est la plus belle attention.' },
+    { fr: '« Que tout soit fait avec amour. »', ref: '1 Cor 16, 14' },
+    { fr: 'Ce jour n\'aurait pas la même saveur sans vous.' },
+    { fr: 'On ne mesure pas l\'amour en années.' },
+    { fr: '« Dieu est amour. »', ref: '1 Jean 4, 16' },
+  ];
+
+  function randomQuote() {
+    return QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  }
 
   function filename(href) {
     const p = href.replace(/[?#].*/, '').replace(/.*\//, '');
@@ -29,23 +56,30 @@
     const doorR  = ov.querySelector('.t-door-r');
     const eyeEl  = document.getElementById('t-eyebrow');
     const ttlEl  = document.getElementById('t-title');
+    const qtEl   = document.getElementById('t-quote');
 
-    /* ── Helpers ── */
-    function setMeta(fname) {
+    function setMeta(fname, quote) {
       const m = PAGES[fname] || PAGES['index.html'];
       if (eyeEl) eyeEl.textContent = m.eyebrow;
       if (ttlEl) ttlEl.textContent = m.title;
+      if (qtEl) {
+        const q = quote || randomQuote();
+        qtEl.textContent = q.fr;
+        const refEl = document.getElementById('t-quote-ref');
+        if (refEl) refEl.textContent = q.ref || '';
+      }
     }
 
     function openDoors(delay) {
       setTimeout(function () {
         ov.dataset.state = 'opening';
-        /* Après la fin d'animation, cacher l'overlay */
         function onEnd(e) {
           if (e.propertyName !== 'transform') return;
           doorR.removeEventListener('transitionend', onEnd);
           delete ov.dataset.state;
           ov.style.pointerEvents = 'none';
+          /* Réinitialise le fond forcé par le script inline */
+          document.documentElement.style.background = '';
         }
         doorR.addEventListener('transitionend', onEnd);
       }, delay || 0);
@@ -54,33 +88,31 @@
     function closeDoors(onClosed) {
       ov.style.pointerEvents = 'all';
       ov.dataset.state = 'closing';
-      setTimeout(onClosed, 780);
+      setTimeout(onClosed, 1020);
     }
 
-    /* ── Arrivée sur la page via transition ── */
+    /* Arrivée via transition */
     const from = sessionStorage.getItem(KEY);
     if (from) {
       sessionStorage.removeItem(KEY);
-      setMeta(from);
-      /* L'attribut data-trans-in (posé par l'inline script en tête de page)
-         a déjà forcé les portes en position fermée sans transition.
-         On retire l'attribut puis on ouvre. */
+      const storedQ = sessionStorage.getItem(KEY + '_q');
+      sessionStorage.removeItem(KEY + '_q');
+      setMeta(from, storedQ ? JSON.parse(storedQ) : null);
       ov.dataset.state = 'closed';
       document.documentElement.removeAttribute('data-trans-in');
-      openDoors(420); /* petite pause pour laisser le titre se lire */
+      /* style.css est chargé (DOMContentLoaded) — on peut retirer le style inline de secours */
+      const tc = document.getElementById('__tc');
+      if (tc) tc.parentNode.removeChild(tc);
+      openDoors(820);
     } else {
-      /* Pas de transition entrante — s'assurer que l'overlay est invisible */
       ov.style.pointerEvents = 'none';
     }
 
-    /* ── Interception des liens internes ── */
+    /* Interception des liens internes */
     document.addEventListener('click', function (e) {
-      /* Ne pas intercepter si modifier key */
       if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-
       const a = e.target.closest('a[href]');
       if (!a) return;
-
       const href = a.getAttribute('href');
       if (!href) return;
       if (/^(#|https?:|mailto:|tel:|javascript)/i.test(href)) return;
@@ -89,13 +121,14 @@
       e.stopPropagation();
 
       const fname = filename(href);
-      setMeta(fname);
-
+      const q = randomQuote();
+      setMeta(fname, q);
       sessionStorage.setItem(KEY, fname);
+      sessionStorage.setItem(KEY + '_q', JSON.stringify(q));
 
       closeDoors(function () {
         window.location.href = href;
       });
-    }, true /* capture = intercepte avant les autres handlers */);
+    }, true);
   });
 }());

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Les Rôles d'Honneur — T & F Mariage</title>
 <!-- Prevent flash-of-content during page transition -->
-<script>if(sessionStorage.getItem('cgm_t'))document.documentElement.setAttribute('data-trans-in','');</script>
+<script>(function(){if(!sessionStorage.getItem('cgm_t'))return;var d=document.documentElement;d.setAttribute('data-trans-in','');d.style.background='#0e1e35';var s=document.createElement('style');s.id='__tc';s.textContent='#t-overlay{position:fixed;inset:0;z-index:9000;pointer-events:all;display:flex;align-items:center;justify-content:center}.t-door{position:absolute;top:0;height:100%;width:51%;background:#1F2F44}.t-door-l{left:0;transform:translateX(0)}.t-door-r{right:0;transform:translateX(0)}.t-center{opacity:1}';document.head.appendChild(s);})();</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -581,6 +581,8 @@
   <div class="t-center">
     <span class="t-eyebrow" id="t-eyebrow"></span>
     <span class="t-title" id="t-title"></span>
+    <span class="t-quote" id="t-quote"></span>
+    <span class="t-quote-ref" id="t-quote-ref"></span>
   </div>
 </div>
 
@@ -714,49 +716,49 @@ const ROLES = [
    impact:"Élimine la peur panique d'égarer ses papiers juste avant l'autel."},
 
 
-  {id:31, ph:1, phName:'Les Préparatifs', num:'07',
+  {id:31, ph:1, phName:'Les Préparatifs', num:'06',
    nom:'Chargée du Bible Study',    en:'The Spiritual Organizer',
    pour:'mariee', periode:['preparatifs'], spots:2,
    importance:'Organise le moment de recueillement et de prière du matin.',
    mission:'Préparer et animer le temps de Bible study avant les cérémonies.',
    impact:'Un départ spirituel et serein, ancré dans la foi du couple.'},
 
-  {id:32, ph:1, phName:'Les Préparatifs', num:'08',
+  {id:32, ph:1, phName:'Les Préparatifs', num:'07',
    nom:'Gardienne du Téléphone',    en:'The Phone Guardian',
    pour:'mariee', periode:['preparatifs','ceremonies','vin_honneur','diner','soiree'], spots:2,
    importance:'Gardienne discrète de la connexion numérique de la mariée.',
    mission:'Conserver le téléphone de la mariée, gérer les messages urgents et filtrer les notifications.',
    impact:'La mariée est pleinement présente, sans distraction numérique tout au long de la journée.'},
 
-  {id:33, ph:1, phName:'Les Préparatifs', num:'09',
+  {id:33, ph:1, phName:'Les Préparatifs', num:'08',
    nom:'Dame de Compagnie',         en:'The Discreet Companion',
    pour:'mariee', periode:['preparatifs','ceremonies','vin_honneur','diner','soiree'], spots:1,
    importance:'Présence discrète et indispensable pour le confort de la mariée.',
    mission:'Accompagner la mariée aux toilettes, aider avec la robe et assurer son confort tout au long de la journée.',
    impact:'La mariée se déplace avec aisance et dignité en toute circonstance.'},
 
-  {id:34, ph:1, phName:'Les Préparatifs', num:'10',
+  {id:34, ph:1, phName:'Les Préparatifs', num:'09',
    nom:'Gérante du Timing',         en:'The Schedule Keeper',
    pour:'mariee', periode:['preparatifs','ceremonies','vin_honneur','diner','soiree'], spots:1,
    importance:"Chef d'orchestre du timing côté mariée pour toute la journée.",
    mission:"Suivre le programme de la journée, alerter la mariée sur les transitions et coordonner avec les prestataires.",
    impact:'Chaque moment se déroule à l\'heure, sans stress de retard.'},
 
-  {id:35, ph:1, phName:'Les Préparatifs', num:'11',
+  {id:35, ph:1, phName:'Les Préparatifs', num:'10',
    nom:'Ajusteur',                  en:"The Groom's Stylist",
    pour:'marie', periode:['preparatifs'], spots:1,
    importance:'Garant du look impeccable du marié pour son grand jour.',
    mission:'Ajuster la tenue du marié — nœud papillon, pochette, costume — et veiller à son apparence tout au long de la journée.',
    impact:'Le marié est impeccable de la tête aux pieds dès les premières photos.'},
 
-  {id:36, ph:1, phName:'Les Préparatifs', num:'12',
+  {id:36, ph:1, phName:'Les Préparatifs', num:'11',
    nom:'Gardien du Timing',         en:"The Groom's Timekeeper",
    pour:'marie', periode:['preparatifs','ceremonies','vin_honneur','diner','soiree'], spots:1,
    importance:'Référent logistique et temporel côté marié pour toute la journée.',
    mission:'Suivre le programme, alerter le marié sur les transitions et coordonner avec les équipes.',
    impact:'Le marié arrive toujours au bon endroit, au bon moment, sans stress.'},
 
-  {id:37, ph:1, phName:'Les Préparatifs', num:'13',
+  {id:37, ph:1, phName:'Les Préparatifs', num:'12',
    nom:'Le Back-Up',                en:"The Groom's Wingman",
    pour:'marie', periode:['preparatifs','ceremonies','vin_honneur','diner','soiree'], spots:2,
    importance:"Bras droit polyvalent du marié, prêt à gérer n'importe quelle situation.",
@@ -765,49 +767,49 @@ const ROLES = [
 
   // ─── PHASE 2 : La Cérémonie ─────────────────────────────────────────────────
 
-  {id:8,  ph:2, phName:'La Cérémonie', num:'15',
+  {id:8,  ph:2, phName:'La Cérémonie', num:'13',
    nom:'Porteur des Alliances',     en:'The Ring Bearer',
    pour:'mixte', periode:['ceremonies'], spots:1,
    importance:'Responsabilité suprême sur les objets les plus symboliques du mariage.',
    mission:'Conserver alliances et documents officiels sous haute sécurité, et les présenter lors des vœux.',
    impact:"Garantie absolue contre la perte ou l'oubli des bagues et papiers officiels."},
 
-  {id:9,  ph:2, phName:'La Cérémonie', num:'16',
+  {id:9,  ph:2, phName:'La Cérémonie', num:'14',
    nom:'Coordinateur de Sortie',    en:'The Exit Maestro',
    pour:'mixte', periode:['ceremonies'], spots:2,
    importance:'Orchestre les deux sorties de cérémonie pour un effet spectaculaire.',
    mission:"Briefer les invités, distribuer les éléments à lancer et coordonner la haie d'honneur aux sorties de 15h et 16h30.",
    impact:'Des sorties de cérémonie grandioses, parfaitement synchronisées et mémorables.'},
 
-  {id:10, ph:2, phName:'La Cérémonie', num:'17',
+  {id:10, ph:2, phName:'La Cérémonie', num:'15',
    nom:"Chargé(e) d'Accueil",      en:'The Welcome Connoisseur',
    pour:'mixte', periode:['ceremonies'], spots:4,
    importance:'Premier visage hospitalier et bienveillant du couple pour les convives.',
    mission:"Accueillir chaleureusement les invités à partir de 12h45, distribuer les programmes et orienter chacun.",
    impact:"Élimine toute confusion et installe un sentiment d'organisation haut de gamme dès l'arrivée."},
 
-  {id:11, ph:2, phName:'La Cérémonie', num:'18', pending:true,
+  {id:11, ph:2, phName:'La Cérémonie', num:'30', pending:true,
    nom:'Relais pour les Absents',   en:'The Legacy Keeper',
    pour:'mixte', periode:['ceremonies'], spots:2,
    importance:'Mission à haute valeur humaine honorant sa sensibilité.',
    mission:'Superviser la retransmission vidéo privée ou organiser un hommage discret pour les défunts.',
    impact:"Permet d'inclure l'ensemble du cercle affectif avec douceur."},
 
-  {id:12, ph:2, phName:'La Cérémonie', num:'19',
+  {id:12, ph:2, phName:'La Cérémonie', num:'16',
    nom:'Dame aux Mouchoirs',        en:'The Tear Catcher',
    pour:'mixte', periode:['ceremonies'], spots:2,
    importance:'Met en lumière son empathie naturelle pour le cercle proche.',
    mission:'Distribuer des mouchoirs élégants et attentions de réconfort aux premiers rangs.',
    impact:'Permet aux proches de vivre pleinement leurs larmes de joie.'},
 
-  {id:38, ph:2, phName:'La Cérémonie', num:'20',
+  {id:38, ph:2, phName:'La Cérémonie', num:'17',
    nom:'Chef de Route',             en:'The Convoy Leader',
    pour:'mixte', periode:['ceremonies'], spots:2,
    importance:'Garant de la ponctualité et de la cohésion du convoi vers les lieux.',
    mission:"Organiser et guider les convois de voitures entre 13h45 et 16h30, s'assurer que personne ne se perd.",
    impact:'Tous les invités arrivent en temps et en heure, sans confusion ni retard.'},
 
-  {id:39, ph:2, phName:'La Cérémonie', num:'21',
+  {id:39, ph:2, phName:'La Cérémonie', num:'18',
    nom:'Placeur',                   en:'The Seating Guide',
    pour:'mixte', periode:['ceremonies'], spots:2,
    importance:'Garant de la fluidité et du placement élégant des invités en cérémonie.',
@@ -816,7 +818,7 @@ const ROLES = [
 
   // ─── PHASE 3 : Le Vin d'Honneur ─────────────────────────────────────────────
 
-  {id:14, ph:3, phName:"Le Vin d'Honneur", num:'23',
+  {id:14, ph:3, phName:"Le Vin d'Honneur", num:'19',
    nom:'Photographe des Coulisses', en:'The VIP Paparazzi',
    pour:'mixte', periode:['vin_honneur'], spots:2,
    importance:"Valorise sa complicité pour documenter l'envers du décor.",
@@ -824,7 +826,7 @@ const ROLES = [
    impact:"Un album photo d'une vérité brute et touchante disponible dès le lendemain."},
 
 
-  {id:16, ph:3, phName:"Le Vin d'Honneur", num:'25',
+  {id:16, ph:3, phName:"Le Vin d'Honneur", num:'20',
    nom:"Gardiens de l'Urne & du Livre d'Or", en:'The Memory Keepers',
    pour:'mixte', periode:['vin_honneur'], spots:2,
    importance:'Gardiens des trésors matériels et écrits qui traverseront le temps.',
@@ -832,21 +834,21 @@ const ROLES = [
    impact:"Un recueil complet de témoignages d'amour et une urne soigneusement gardée."},
 
 
-  {id:40, ph:3, phName:"Le Vin d'Honneur", num:'29',
+  {id:40, ph:3, phName:"Le Vin d'Honneur", num:'21',
    nom:"Inspecteur d'Ambiance",     en:'The Vibe Inspector',
    pour:'mixte', periode:['vin_honneur'], spots:2,
    importance:'Dernier regard qualité avant le début de la réception.',
    mission:"Vérifier à 16h30 la mise en place de la salle, l'ambiance générale et signaler toute anomalie.",
    impact:'La salle est impeccable et prête à accueillir les invités dans les meilleures conditions.'},
 
-  {id:41, ph:3, phName:"Le Vin d'Honneur", num:'30',
+  {id:41, ph:3, phName:"Le Vin d'Honneur", num:'22',
    nom:'Rabatteur Photo de Groupe', en:'The Group Shot Wrangler',
    pour:'mixte', periode:['vin_honneur'], spots:2,
    importance:'Garant que chaque famille et groupe soit photographié.',
    mission:'Rassembler les différents groupes pour les photos de famille et de groupe entre 17h et 19h30.',
    impact:'Toutes les photos de groupe importantes sont réalisées sans oubli ni stress.'},
 
-  {id:42, ph:3, phName:"Le Vin d'Honneur", num:'31',
+  {id:42, ph:3, phName:"Le Vin d'Honneur", num:'23',
    nom:'Rabatteur pour le Dîner',   en:'The Dinner Caller',
    pour:'mixte', periode:['diner'], spots:2,
    importance:'Le maillon essentiel pour une transition fluide vers le dîner.',
@@ -854,35 +856,35 @@ const ROLES = [
    impact:'Le dîner débute dans les temps avec tous les convives présents.'},
 
   // ─── PHASE 4 : La Soirée ────────────────────────────────────────────────────
-  {id:20, ph:4, phName:'La Soirée', num:'32',
+  {id:20, ph:4, phName:'La Soirée', num:'24',
    nom:'Retoucheuse & Urgences',    en:'The Emergency Officer',
    pour:'mariee', periode:['preparatifs','ceremonies','vin_honneur','diner','soiree'], spots:2,
    importance:"Super-héroïne de l'apparence et de l'urgence matérielle pour toute la journée.",
    mission:"Gérer les retouches de la robe, détenir le kit d'urgence (couture, pharmacie, détachant) et intervenir discrètement.",
    impact:'Aucun incident vestimentaire ou matériel ne perturbe la journée des mariés.'},
 
-  {id:21, ph:4, phName:'La Soirée', num:'33',
+  {id:21, ph:4, phName:'La Soirée', num:'25',
    nom:'Coordinateur Backstage',    en:'The Surprise Strategist',
    pour:'mixte', periode:['diner','soiree'], spots:3,
    importance:'Garant du rythme de la soirée, orchestre les coulisses depuis 20h.',
    mission:'Coordonner les interventions, discours et surprises avec le traiteur et le DJ entre 20h et 00h30.',
    impact:'Un dîner fluide et vivant, sans longueurs, avec un service parfait.'},
 
-  {id:22, ph:4, phName:'La Soirée', num:'34', pending:true,
+  {id:22, ph:4, phName:'La Soirée', num:'31', pending:true,
    nom:'Maîtresse des Sparklers',   en:'The Sparkler Captain',
    pour:'mixte', periode:['soiree'], spots:2,
    importance:'Direction du signal visuel de transition vers la fête.',
    mission:"Distribuer les cierges magiques, rappeler la sécurité et coordonner l'allumage synchrone.",
    impact:"Atmosphère féerique instantanée et photographies d'ouverture de bal spectaculaires."},
 
-  {id:23, ph:4, phName:'La Soirée', num:'35',
+  {id:23, ph:4, phName:'La Soirée', num:'26',
    nom:'Chauffeur de Salle',        en:'The Dancefloor Igniter',
    pour:'mixte', periode:['soiree'], spots:4,
    importance:"Moteur festif qui maintient la piste animée jusqu'à la fin.",
    mission:'Chauffer la salle, motiver les invités à danser et maintenir une énergie festive maximale de 23h à la fin.',
    impact:'Une piste de danse constamment habitée et une fête mémorable qui ne s\'arrête pas.'},
 
-  {id:24, ph:4, phName:'La Soirée', num:'36',
+  {id:24, ph:4, phName:'La Soirée', num:'27',
    nom:'Gardienne de Fin de Nuit',  en:'The Guardian of the Temple',
    pour:'mixte', periode:['soiree'], spots:2,
    importance:'Rôle de confiance protégeant la sérénité matérielle du couple.',
@@ -890,7 +892,7 @@ const ROLES = [
    impact:"Permet aux mariés de se retirer l'esprit totalement libéré."},
 
 
-  {id:27, ph:4, phName:'La Soirée', num:'39',
+  {id:27, ph:4, phName:'La Soirée', num:'28',
    nom:'Collectrice de Playlists',  en:'The Dance-List Collector',
    pour:'mixte', periode:['soiree'], spots:2,
    importance:"Donne un pouvoir d'influence musicale aux tables.",
@@ -898,14 +900,14 @@ const ROLES = [
    impact:"Une programmation nocturne en phase avec les désirs réels de l'assemblée."},
 
 
-  {id:29, ph:4, phName:'La Soirée', num:'41', pending:true,
+  {id:29, ph:4, phName:'La Soirée', num:'32', pending:true,
    nom:"Collectrice d'Anecdotes",   en:'The Quote Collector',
    pour:'mixte', periode:['diner','soiree'], spots:2,
    importance:"Archive l'esprit spontané et immatériel du mariage.",
    mission:'Consigner secrètement dans un carnet les répliques cultes et anecdotes touchantes des invités.',
    impact:"Un recueil historique d'amour et d'humour brut que le couple découvrira au réveil."},
 
-  {id:30, ph:4, phName:'La Soirée', num:'42',
+  {id:30, ph:4, phName:'La Soirée', num:'29',
    nom:'Responsable des Cadeaux',   en:'The Favor Queen',
    pour:'mixte', periode:['soiree'], spots:2,
    importance:'Dernier point de contact, remettant le témoignage final de gratitude.',

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mes Rôles — T & F Mariage</title>
 <!-- Prevent flash-of-content during page transition -->
-<script>if(sessionStorage.getItem('cgm_t'))document.documentElement.setAttribute('data-trans-in','');</script>
+<script>(function(){if(!sessionStorage.getItem('cgm_t'))return;var d=document.documentElement;d.setAttribute('data-trans-in','');d.style.background='#0e1e35';var s=document.createElement('style');s.id='__tc';s.textContent='#t-overlay{position:fixed;inset:0;z-index:9000;pointer-events:all;display:flex;align-items:center;justify-content:center}.t-door{position:absolute;top:0;height:100%;width:51%;background:#1F2F44}.t-door-l{left:0;transform:translateX(0)}.t-door-r{right:0;transform:translateX(0)}.t-center{opacity:1}';document.head.appendChild(s);})();</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -396,6 +396,8 @@
   <div class="t-center">
     <span class="t-eyebrow" id="t-eyebrow"></span>
     <span class="t-title" id="t-title"></span>
+    <span class="t-quote" id="t-quote"></span>
+    <span class="t-quote-ref" id="t-quote-ref"></span>
   </div>
 </div>
 
@@ -438,30 +440,30 @@ const ROLES = {
   2: {num:'02',nom:'Habilleuse',                        en:'The Chief of Elegance',      phase:'Le Matin',     spots:3, mission:"Aider à l'habillage, ajuster le voile et la traîne, coordonner les accessoires du cortège."},
   3: {num:'03',nom:'Animatrice des Préparatifs',        en:'The Morning Hype Woman',     phase:'Le Matin',     spots:1, mission:"Gérer la playlist du matin, l'espace de préparation et s'occuper des snacks et rafraîchissements."},
   4: {num:'04',nom:'Photographe des Préparatifs',       en:'The Behind-the-Scenes Lens', phase:'Le Matin',     spots:1, mission:'Photographier les préparatifs et les moments de cérémonie en marge du photographe officiel.'},
-  31:{num:'07',nom:'Chargée du Bible Study',            en:'The Spiritual Organizer',    phase:'Le Matin',     spots:2, mission:'Préparer et animer le temps de Bible study avant les cérémonies.'},
-  32:{num:'08',nom:'Gardienne du Téléphone',            en:'The Phone Guardian',         phase:'Le Matin',     spots:2, mission:'Conserver le téléphone de la mariée, gérer les messages urgents et filtrer les notifications.'},
-  33:{num:'09',nom:'Dame de Compagnie',                 en:'The Discreet Companion',     phase:'Le Matin',     spots:1, mission:'Accompagner la mariée aux toilettes, aider avec la robe et assurer son confort tout au long de la journée.'},
-  34:{num:'10',nom:'Gérante du Timing',                 en:'The Schedule Keeper',        phase:'Le Matin',     spots:1, mission:"Suivre le programme de la journée, alerter la mariée sur les transitions et coordonner avec les prestataires."},
-  35:{num:'11',nom:'Ajusteur',                          en:"The Groom's Stylist",        phase:'Le Matin',     spots:1, mission:"Ajuster la tenue du marié — nœud papillon, pochette, costume — et veiller à son apparence tout au long de la journée."},
-  36:{num:'12',nom:'Gardien du Timing',                 en:"The Groom's Timekeeper",     phase:'Le Matin',     spots:1, mission:'Suivre le programme, alerter le marié sur les transitions et coordonner avec les équipes.'},
-  37:{num:'13',nom:'Le Back-Up',                        en:"The Groom's Wingman",        phase:'Le Matin',     spots:2, mission:'Assister le marié dans toutes ses demandes, gérer les imprévus et être le lien entre les différents groupes.'},
-  12:{num:'19',nom:'Dame aux Mouchoirs',             en:'The Tear Catcher',           phase:"L'Après-midi", spots:2, mission:'Distribuer des mouchoirs élégants et attentions de réconfort aux premiers rangs.'},
-  8: {num:'15',nom:'Porteur des Alliances',             en:'The Ring Bearer',            phase:"L'Après-midi", spots:1, mission:'Conserver alliances et documents officiels sous haute sécurité, et les présenter lors des vœux.'},
-  9: {num:'16',nom:'Coordinateur de Sortie',            en:'The Exit Maestro',           phase:"L'Après-midi", spots:2, mission:"Briefer les invités, distribuer les éléments à lancer et coordonner la haie d'honneur aux sorties de 15h et 16h30."},
-  10:{num:'17',nom:"Chargé(e) d'Accueil",              en:'The Welcome Connoisseur',    phase:"L'Après-midi", spots:4, mission:"Accueillir chaleureusement les invités à partir de 12h45, distribuer les programmes et orienter chacun."},
-  38:{num:'20',nom:'Chef de Route',                     en:'The Convoy Leader',          phase:"L'Après-midi", spots:2, mission:"Organiser et guider les convois de voitures entre 13h45 et 16h30, s'assurer que personne ne se perd."},
-  39:{num:'21',nom:'Placeur',                           en:'The Seating Guide',          phase:"L'Après-midi", spots:2, mission:'Accueillir et guider les invités vers leurs places lors des cérémonies civile et religieuse.'},
-  14:{num:'23',nom:'Photographe des Coulisses',       en:'The VIP Paparazzi',          phase:'Le Cocktail',  spots:2, mission:"Saisir des instants volés, éclats de rire et accolades en marge du photographe officiel."},
-  16:{num:'25',nom:"Gardiens de l'Urne & Livre d'Or",  en:'The Memory Keepers',         phase:'Le Cocktail',  spots:2, mission:"Dynamiser l'espace du livre d'or, motiver les invités à contribuer et sécuriser l'urne à cadeaux."},
-  40:{num:'29',nom:"Inspecteur d'Ambiance",             en:'The Vibe Inspector',         phase:'Le Cocktail',  spots:2, mission:"Vérifier à 16h30 la mise en place de la salle, l'ambiance générale et signaler toute anomalie."},
-  41:{num:'30',nom:'Rabatteur Photo de Groupe',         en:'The Group Shot Wrangler',    phase:'Le Cocktail',  spots:2, mission:'Rassembler les différents groupes pour les photos de famille et de groupe entre 17h et 19h30.'},
-  42:{num:'31',nom:'Rabatteur pour le Dîner',           en:'The Dinner Caller',          phase:'Le Cocktail',  spots:2, mission:'Rassembler et guider les invités vers la salle de dîner entre 19h30 et 20h.'},
-  24:{num:'36',nom:'Gardienne de Fin de Nuit',        en:'The Guardian of the Temple', phase:'La Soirée',    spots:2, mission:"Sécuriser l'urne et la boîte aux cadeaux, gérer les départs et fermer le bal."},
-  27:{num:'39',nom:'Collectrice de Playlists',        en:'The Dance-List Collector',   phase:'La Soirée',    spots:2, mission:'Récolter les souhaits musicaux des convives et soumettre le tri qualitatif au DJ.'},
-  30:{num:'42',nom:'Responsable des Cadeaux',         en:'The Favor Queen',            phase:'La Soirée',    spots:2, mission:"S'assurer que chaque invité récupère son cadeau de remerciement au départ."},
-  20:{num:'32',nom:'Retoucheuse & Urgences',            en:'The Emergency Officer',      phase:'La Soirée',    spots:2, mission:"Gérer les retouches de la robe, détenir le kit d'urgence (couture, pharmacie, détachant) et intervenir discrètement."},
-  21:{num:'33',nom:'Coordinateur Backstage',            en:'The Surprise Strategist',    phase:'La Soirée',    spots:3, mission:'Coordonner les interventions, discours et surprises avec le traiteur et le DJ entre 20h et 00h30.'},
-  23:{num:'35',nom:'Chauffeur de Salle',                en:'The Dancefloor Igniter',     phase:'La Soirée',    spots:4, mission:"Chauffer la salle, motiver les invités à danser et maintenir une énergie festive maximale de 23h à la fin."},
+  31:{num:'06',nom:'Chargée du Bible Study',            en:'The Spiritual Organizer',    phase:'Le Matin',     spots:2, mission:'Préparer et animer le temps de Bible study avant les cérémonies.'},
+  32:{num:'07',nom:'Gardienne du Téléphone',            en:'The Phone Guardian',         phase:'Le Matin',     spots:2, mission:'Conserver le téléphone de la mariée, gérer les messages urgents et filtrer les notifications.'},
+  33:{num:'08',nom:'Dame de Compagnie',                 en:'The Discreet Companion',     phase:'Le Matin',     spots:1, mission:'Accompagner la mariée aux toilettes, aider avec la robe et assurer son confort tout au long de la journée.'},
+  34:{num:'09',nom:'Gérante du Timing',                 en:'The Schedule Keeper',        phase:'Le Matin',     spots:1, mission:"Suivre le programme de la journée, alerter la mariée sur les transitions et coordonner avec les prestataires."},
+  35:{num:'10',nom:'Ajusteur',                          en:"The Groom's Stylist",        phase:'Le Matin',     spots:1, mission:"Ajuster la tenue du marié — nœud papillon, pochette, costume — et veiller à son apparence tout au long de la journée."},
+  36:{num:'11',nom:'Gardien du Timing',                 en:"The Groom's Timekeeper",     phase:'Le Matin',     spots:1, mission:'Suivre le programme, alerter le marié sur les transitions et coordonner avec les équipes.'},
+  37:{num:'12',nom:'Le Back-Up',                        en:"The Groom's Wingman",        phase:'Le Matin',     spots:2, mission:'Assister le marié dans toutes ses demandes, gérer les imprévus et être le lien entre les différents groupes.'},
+  12:{num:'16',nom:'Dame aux Mouchoirs',             en:'The Tear Catcher',           phase:"L'Après-midi", spots:2, mission:'Distribuer des mouchoirs élégants et attentions de réconfort aux premiers rangs.'},
+  8: {num:'13',nom:'Porteur des Alliances',             en:'The Ring Bearer',            phase:"L'Après-midi", spots:1, mission:'Conserver alliances et documents officiels sous haute sécurité, et les présenter lors des vœux.'},
+  9: {num:'14',nom:'Coordinateur de Sortie',            en:'The Exit Maestro',           phase:"L'Après-midi", spots:2, mission:"Briefer les invités, distribuer les éléments à lancer et coordonner la haie d'honneur aux sorties de 15h et 16h30."},
+  10:{num:'15',nom:"Chargé(e) d'Accueil",              en:'The Welcome Connoisseur',    phase:"L'Après-midi", spots:4, mission:"Accueillir chaleureusement les invités à partir de 12h45, distribuer les programmes et orienter chacun."},
+  38:{num:'17',nom:'Chef de Route',                     en:'The Convoy Leader',          phase:"L'Après-midi", spots:2, mission:"Organiser et guider les convois de voitures entre 13h45 et 16h30, s'assurer que personne ne se perd."},
+  39:{num:'18',nom:'Placeur',                           en:'The Seating Guide',          phase:"L'Après-midi", spots:2, mission:'Accueillir et guider les invités vers leurs places lors des cérémonies civile et religieuse.'},
+  14:{num:'19',nom:'Photographe des Coulisses',       en:'The VIP Paparazzi',          phase:'Le Cocktail',  spots:2, mission:"Saisir des instants volés, éclats de rire et accolades en marge du photographe officiel."},
+  16:{num:'20',nom:"Gardiens de l'Urne & Livre d'Or",  en:'The Memory Keepers',         phase:'Le Cocktail',  spots:2, mission:"Dynamiser l'espace du livre d'or, motiver les invités à contribuer et sécuriser l'urne à cadeaux."},
+  40:{num:'21',nom:"Inspecteur d'Ambiance",             en:'The Vibe Inspector',         phase:'Le Cocktail',  spots:2, mission:"Vérifier à 16h30 la mise en place de la salle, l'ambiance générale et signaler toute anomalie."},
+  41:{num:'22',nom:'Rabatteur Photo de Groupe',         en:'The Group Shot Wrangler',    phase:'Le Cocktail',  spots:2, mission:'Rassembler les différents groupes pour les photos de famille et de groupe entre 17h et 19h30.'},
+  42:{num:'23',nom:'Rabatteur pour le Dîner',           en:'The Dinner Caller',          phase:'Le Cocktail',  spots:2, mission:'Rassembler et guider les invités vers la salle de dîner entre 19h30 et 20h.'},
+  24:{num:'27',nom:'Gardienne de Fin de Nuit',        en:'The Guardian of the Temple', phase:'La Soirée',    spots:2, mission:"Sécuriser l'urne et la boîte aux cadeaux, gérer les départs et fermer le bal."},
+  27:{num:'28',nom:'Collectrice de Playlists',        en:'The Dance-List Collector',   phase:'La Soirée',    spots:2, mission:'Récolter les souhaits musicaux des convives et soumettre le tri qualitatif au DJ.'},
+  30:{num:'29',nom:'Responsable des Cadeaux',         en:'The Favor Queen',            phase:'La Soirée',    spots:2, mission:"S'assurer que chaque invité récupère son cadeau de remerciement au départ."},
+  20:{num:'24',nom:'Retoucheuse & Urgences',            en:'The Emergency Officer',      phase:'La Soirée',    spots:2, mission:"Gérer les retouches de la robe, détenir le kit d'urgence (couture, pharmacie, détachant) et intervenir discrètement."},
+  21:{num:'25',nom:'Coordinateur Backstage',            en:'The Surprise Strategist',    phase:'La Soirée',    spots:3, mission:'Coordonner les interventions, discours et surprises avec le traiteur et le DJ entre 20h et 00h30.'},
+  23:{num:'26',nom:'Chauffeur de Salle',                en:'The Dancefloor Igniter',     phase:'La Soirée',    spots:4, mission:"Chauffer la salle, motiver les invités à danser et maintenir une énergie festive maximale de 23h à la fin."},
 };
 
 /* ═══════════════════════════════════════════════
