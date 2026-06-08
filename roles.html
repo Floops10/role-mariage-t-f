@@ -600,7 +600,7 @@
 <!-- ═══ PAGE HEADER ═══ -->
 <header class="page-head" aria-labelledby="page-title">
   <div class="ph-inner">
-    <span class="ph-script">23 missions actives</span>
+    <span class="ph-script">29 missions actives</span>
     <h1 class="ph-title" id="page-title">Rôles d'Honneur</h1>
     <p class="ph-desc">Filtrez par moment de la journée ou par camp (Mariée / Marié / Mixte). Cliquez sur un rôle pour en voir le détail et vous inscrire.</p>
   </div>
@@ -706,19 +706,13 @@ const ROLES = [
    mission:'Photographier les préparatifs et les moments de cérémonie en marge du photographe officiel.',
    impact:'Un album coulisses poétique et authentique, disponible dès le lendemain.'},
 
-  {id:5,  ph:1, phName:'Les Préparatifs', num:'05', pending:true,
+  {id:5,  ph:1, phName:'Les Préparatifs', num:'05',
    nom:'Gardienne des Vœux',        en:'The Vow Custodian',
    pour:'mariee', periode:['preparatifs','ceremonies'], spots:2,
    importance:"Fait d'elle la complice des mots les plus profonds en amont.",
    mission:"Détenir les copies officielles et doubles des vœux, et les tendre au moment précis.",
    impact:"Élimine la peur panique d'égarer ses papiers juste avant l'autel."},
 
-  {id:6,  ph:1, phName:'Les Préparatifs', num:'06', pending:true,
-   nom:'Responsable des Fragrances', en:'The Scent Curator',
-   pour:'mariee', periode:['preparatifs'], spots:2,
-   importance:"Confie la création de l'identité olfactive à une amie sensible.",
-   mission:'Parfumer les espaces clés et veiller à ce que la mariée dispose de son flacon pour les retouches.',
-   impact:'Crée un ancrage sensoriel unique associé à la magie de la journée.'},
 
   {id:31, ph:1, phName:'Les Préparatifs', num:'07',
    nom:'Chargée du Bible Study',    en:'The Spiritual Organizer',
@@ -770,12 +764,6 @@ const ROLES = [
    impact:"Le marié peut se concentrer sur sa journée, l'esprit serein."},
 
   // ─── PHASE 2 : La Cérémonie ─────────────────────────────────────────────────
-  {id:7,  ph:2, phName:'La Cérémonie', num:'14', pending:true,
-   nom:'Lanceuse de Pétales',       en:'The Premium Flower Girl',
-   pour:'mixte', periode:['ceremonies'], spots:2,
-   importance:'Sublime une tradition avec une touche adulte chic et assurée.',
-   mission:"Ouvrir la marche de la procession d'entrée en parsemant l'allée de pétales.",
-   impact:'Installe immédiatement une atmosphère solennelle et magique.'},
 
   {id:8,  ph:2, phName:'La Cérémonie', num:'15',
    nom:'Porteur des Alliances',     en:'The Ring Bearer',
@@ -805,7 +793,7 @@ const ROLES = [
    mission:'Superviser la retransmission vidéo privée ou organiser un hommage discret pour les défunts.',
    impact:"Permet d'inclure l'ensemble du cercle affectif avec douceur."},
 
-  {id:12, ph:2, phName:'La Cérémonie', num:'19', pending:true,
+  {id:12, ph:2, phName:'La Cérémonie', num:'19',
    nom:'Dame aux Mouchoirs',        en:'The Tear Catcher',
    pour:'mixte', periode:['ceremonies'], spots:2,
    importance:'Met en lumière son empathie naturelle pour le cercle proche.',
@@ -827,26 +815,14 @@ const ROLES = [
    impact:"Une cérémonie qui commence dans l'ordre et la sérénité, sans confusion."},
 
   // ─── PHASE 3 : Le Vin d'Honneur ─────────────────────────────────────────────
-  {id:13, ph:3, phName:"Le Vin d'Honneur", num:'22', pending:true,
-   nom:'Intendante du Couple',      en:'The Secret Concierge',
-   pour:'mixte', periode:['vin_honneur'], spots:2,
-   importance:'Protection physique et bienveillante directe des mariés.',
-   mission:"Intercepter le couple pour leur apporter eau, nourriture du buffet et préserver leur énergie.",
-   impact:"Prévient l'épuisement des mariés au milieu des sollicitations continues."},
 
-  {id:14, ph:3, phName:"Le Vin d'Honneur", num:'23', pending:true,
+  {id:14, ph:3, phName:"Le Vin d'Honneur", num:'23',
    nom:'Photographe des Coulisses', en:'The VIP Paparazzi',
    pour:'mixte', periode:['vin_honneur'], spots:2,
    importance:"Valorise sa complicité pour documenter l'envers du décor.",
    mission:"Saisir des instants volés, éclats de rire et accolades en marge du photographe officiel.",
    impact:"Un album photo d'une vérité brute et touchante disponible dès le lendemain."},
 
-  {id:15, ph:3, phName:"Le Vin d'Honneur", num:'24', pending:true,
-   nom:'Animatrice des Invités',    en:'The Social Catalyst',
-   pour:'mixte', periode:['vin_honneur'], spots:2,
-   importance:'Met à contribution son aisance relationnelle et son charisme.',
-   mission:"Naviguer activement entre les différents cercles d'invités pour initier des conversations.",
-   impact:"Unifie l'assemblée et fait disparaître toute sensation d'isolement."},
 
   {id:16, ph:3, phName:"Le Vin d'Honneur", num:'25',
    nom:"Gardiens de l'Urne & du Livre d'Or", en:'The Memory Keepers',
@@ -855,26 +831,6 @@ const ROLES = [
    mission:"Dynamiser l'espace du livre d'or, motiver les invités à contribuer et sécuriser l'urne à cadeaux.",
    impact:"Un recueil complet de témoignages d'amour et une urne soigneusement gardée."},
 
-  {id:17, ph:3, phName:"Le Vin d'Honneur", num:'26', pending:true,
-   nom:'Animatrice du Bar',         en:'The Cocktail Ambassador',
-   pour:'mixte', periode:['vin_honneur'], spots:2,
-   importance:"Associe son image à la convivialité et l'épicurisme de la fête.",
-   mission:'Inaugurer le bar à thèmes, présenter les cocktails signatures et veiller à la tenue du bar.',
-   impact:'Transforme le buffet en animation interactive et fluidifie le service.'},
-
-  {id:18, ph:3, phName:"Le Vin d'Honneur", num:'27', pending:true,
-   nom:'Coordinatrice Décoration',  en:'The Decor Transformer',
-   pour:'mixte', periode:['vin_honneur'], spots:2,
-   importance:"S'appuie sur sa rigueur esthétique pour optimiser la décoration.",
-   mission:'Coordonner le transfert des compositions florales ou bougies de la cérémonie vers le dîner.',
-   impact:'Maximise les investissements floraux et crée un effet de surprise visuel.'},
-
-  {id:19, ph:3, phName:"Le Vin d'Honneur", num:'28', pending:true,
-   nom:'Responsable Photobooth',    en:'The Photobooth Director',
-   pour:'mixte', periode:['vin_honneur'], spots:2,
-   importance:'Responsable directe du lâcher-prise ludique des invités.',
-   mission:'Superviser la borne photo, proposer des thématiques de poses et aider les moins technophiles.',
-   impact:'Des clichés décalés et mémorables de chaque convive.'},
 
   {id:40, ph:3, phName:"Le Vin d'Honneur", num:'29',
    nom:"Inspecteur d'Ambiance",     en:'The Vibe Inspector',
@@ -926,40 +882,21 @@ const ROLES = [
    mission:'Chauffer la salle, motiver les invités à danser et maintenir une énergie festive maximale de 23h à la fin.',
    impact:'Une piste de danse constamment habitée et une fête mémorable qui ne s\'arrête pas.'},
 
-  {id:24, ph:4, phName:'La Soirée', num:'36', pending:true,
+  {id:24, ph:4, phName:'La Soirée', num:'36',
    nom:'Gardienne de Fin de Nuit',  en:'The Guardian of the Temple',
    pour:'mixte', periode:['soiree'], spots:2,
    importance:'Rôle de confiance protégeant la sérénité matérielle du couple.',
    mission:"Sécuriser l'urne et la boîte aux cadeaux, gérer les départs et fermer le bal.",
    impact:"Permet aux mariés de se retirer l'esprit totalement libéré."},
 
-  {id:25, ph:4, phName:'La Soirée', num:'37', pending:true,
-   nom:'Responsable Confort',       en:'The Cozy Officer',
-   pour:'mixte', periode:['soiree'], spots:2,
-   importance:"Incarne l'attention délicate portée à la fatigue physique.",
-   mission:'Déployer les paniers de chaussures plates de danse et distribuer des plaids si besoin.',
-   impact:'Prolonge le confort et la présence des convives à la fête.'},
 
-  {id:26, ph:4, phName:'La Soirée', num:'38', pending:true,
-   nom:'Coordinatrice des Toasts',  en:'The Toast Liaison',
-   pour:'mixte', periode:['diner'], spots:2,
-   importance:"Assure l'unanimité de chaque geste de célébration.",
-   mission:'Vérifier discrètement que les verres soient remplis avant le lancement d\'un toast officiel.',
-   impact:'Des toasts unanimes et chaleureux où chaque invité participe pleinement.'},
-
-  {id:27, ph:4, phName:'La Soirée', num:'39', pending:true,
+  {id:27, ph:4, phName:'La Soirée', num:'39',
    nom:'Collectrice de Playlists',  en:'The Dance-List Collector',
    pour:'mixte', periode:['soiree'], spots:2,
    importance:"Donne un pouvoir d'influence musicale aux tables.",
    mission:'Récolter les souhaits musicaux des convives et soumettre le tri qualitatif au DJ.',
    impact:"Une programmation nocturne en phase avec les désirs réels de l'assemblée."},
 
-  {id:28, ph:4, phName:'La Soirée', num:'40', pending:true,
-   nom:'Coordinatrice du Buffet',   en:'The Late-Night Captain',
-   pour:'mixte', periode:['soiree'], spots:2,
-   importance:'Pilote le moment de réconfort gourmand nocturne le plus attendu.',
-   mission:"Coordonner avec le service l'apparition théâtrale du buffet de nuit à 2h.",
-   impact:"Un regain d'énergie massif aux invités, prolongeant la fête."},
 
   {id:29, ph:4, phName:'La Soirée', num:'41', pending:true,
    nom:"Collectrice d'Anecdotes",   en:'The Quote Collector',
@@ -968,7 +905,7 @@ const ROLES = [
    mission:'Consigner secrètement dans un carnet les répliques cultes et anecdotes touchantes des invités.',
    impact:"Un recueil historique d'amour et d'humour brut que le couple découvrira au réveil."},
 
-  {id:30, ph:4, phName:'La Soirée', num:'42', pending:true,
+  {id:30, ph:4, phName:'La Soirée', num:'42',
    nom:'Responsable des Cadeaux',   en:'The Favor Queen',
    pour:'mixte', periode:['soiree'], spots:2,
    importance:'Dernier point de contact, remettant le témoignage final de gratitude.',

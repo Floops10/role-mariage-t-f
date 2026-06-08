@@ -433,60 +433,79 @@ const TRAIT_META = {
    RÔLES (résumé pour affichage résultats)
    ═══════════════════════════════════════════════ */
 const ROLES = {
-  1: {num:'01',nom:'Gardienne de la Mariée',       en:'The Bridal Bodyguard',         phase:'Le Matin',      mission:"Filtrer les appels, gérer la logistique de dernière minute des prestataires et éloigner le stress."},
-  2: {num:'02',nom:'Styliste',                     en:'The Chief of Elegance',        phase:'Le Matin',      mission:"Ajuster le voile et la traîne, coordonner les accessoires du cortège pour les photos."},
-  3: {num:'03',nom:'Animatrice des Préparatifs',   en:'The Morning Hype Woman',       phase:'Le Matin',      mission:"Gérer la playlist du matin, l'espace de préparation et servir les rafraîchissements."},
-  4: {num:'04',nom:'Vidéaste des Coulisses',       en:'The Cinematic Content Creator',phase:'Le Matin',      mission:"Filmer de courtes séquences esthétiques en coulisses : rires, détails de la robe, parfum."},
-  5: {num:'05',nom:'Gardienne des Vœux',           en:'The Vow Custodian',            phase:'Le Matin',      mission:"Détenir les copies officielles et doubles des vœux, et les tendre au moment précis."},
-  6: {num:'06',nom:'Responsable des Fragrances',  en:'The Scent Curator',            phase:'Le Matin',      mission:"Parfumer les espaces clés et veiller à ce que la mariée dispose de son flacon pour les retouches."},
-  7: {num:'07',nom:'Lanceuse de Pétales',          en:'The Premium Flower Girl',      phase:"L'Après-midi",  mission:"Ouvrir la marche de la procession d'entrée en parsemant l'allée de pétales."},
-  8: {num:'08',nom:'Gardienne des Alliances',     en:'The Ring Keeper',              phase:"L'Après-midi",  mission:"Conserver les alliances sous haute sécurité et les présenter lors des vœux."},
-  9: {num:'09',nom:'Coordinatrice des Confettis', en:'The Confetti Conductor',       phase:"L'Après-midi",  mission:"Briefer les invités, distribuer les éléments à lancer et organiser la haie d'honneur."},
-  10:{num:'10',nom:"Hôtesse d'Accueil",           en:'The Welcome Connoisseur',      phase:"L'Après-midi",  mission:"Accueillir chaleureusement les invités, distribuer les programmes et orienter."},
-  11:{num:'11',nom:'Relais pour les Absents',     en:'The Legacy Keeper',            phase:"L'Après-midi",  mission:"Superviser la retransmission vidéo privée ou organiser un hommage discret pour les défunts."},
-  12:{num:'12',nom:'Dame aux Mouchoirs',          en:'The Tear Catcher',             phase:"L'Après-midi",  mission:"Distribuer des mouchoirs élégants et attentions de réconfort aux premiers rangs."},
-  13:{num:'13',nom:'Intendante du Couple',        en:'The Secret Concierge',         phase:'Le Cocktail',   mission:"Intercepter le couple pour leur apporter de l'eau, des pièces du buffet et préserver leur énergie."},
-  14:{num:'14',nom:'Photographe des Coulisses',   en:'The VIP Paparazzi',            phase:'Le Cocktail',   mission:"Saisir des instants volés, éclats de rire et accolades en marge du photographe officiel."},
-  15:{num:'15',nom:'Animatrice des Invités',      en:'The Social Catalyst',          phase:'Le Cocktail',   mission:"Naviguer activement entre les différents cercles d'invités pour initier des conversations."},
-  16:{num:'16',nom:"Responsable du Livre d'Or",  en:'The Guestbook Curator',        phase:'Le Cocktail',   mission:"Dynamiser l'espace du livre d'or ou de la borne audio en motivant les invités à contribuer."},
-  17:{num:'17',nom:'Animatrice du Bar',           en:'The Cocktail Ambassador',      phase:'Le Cocktail',   mission:"Inaugurer le bar à thèmes, présenter les cocktails signatures et veiller à la tenue du bar."},
-  18:{num:'18',nom:'Coordinatrice Décoration',    en:'The Decor Transformer',        phase:'Le Cocktail',   mission:"Coordonner le transfert des compositions florales ou bougies de la cérémonie vers le dîner."},
-  19:{num:'19',nom:'Responsable Photobooth',      en:'The Photobooth Director',      phase:'Le Cocktail',   mission:"Superviser la borne photo, proposer des thématiques de poses et aider les moins technophiles."},
-  20:{num:'20',nom:'Responsable des Urgences',    en:'The Emergency Officer',        phase:'La Soirée',     mission:"Détenir le kit d'urgence ultime (couture, pharmacie, détachant) et intervenir discrètement."},
-  21:{num:'21',nom:'Coordinatrice de Soirée',     en:'The Surprise Strategist',      phase:'La Soirée',     mission:"Centraliser et planifier les interventions ou discours en lien avec le traiteur et le DJ."},
-  22:{num:'22',nom:'Maîtresse des Sparklers',     en:'The Sparkler Captain',         phase:'La Soirée',     mission:"Distribuer les cierges magiques, rappeler la sécurité et coordonner l'allumage synchrone."},
-  23:{num:'23',nom:'Capitaine de Danse',          en:'The Dancefloor Captain',       phase:'La Soirée',     mission:"Ouvrir la piste aux côtés des mariés et motiver chaleureusement les invités timides."},
-  24:{num:'24',nom:'Gardienne de Fin de Nuit',    en:'The Guardian of the Temple',   phase:'La Soirée',     mission:"Sécuriser l'urne et la boîte aux cadeaux, gérer les départs et fermer le bal."},
-  25:{num:'25',nom:'Responsable Confort',         en:'The Cozy Officer',             phase:'La Soirée',     mission:"Déployer les paniers de chaussures plates de danse et distribuer des plaids si besoin."},
-  26:{num:'26',nom:'Coordinatrice des Toasts',    en:'The Toast Liaison',            phase:'La Soirée',     mission:"Vérifier discrètement que les verres soient remplis avant le lancement d'un toast officiel."},
-  27:{num:'27',nom:'Collectrice de Playlists',    en:'The Dance-List Collector',     phase:'La Soirée',     mission:"Récolter les souhaits musicaux des convives et soumettre le tri qualitatif au DJ."},
-  28:{num:'28',nom:'Coordinatrice du Buffet',     en:'The Late-Night Captain',       phase:'La Soirée',     mission:"Coordonner avec le service l'apparition théâtrale du buffet de nuit (mini-burgers, douceurs) à 2h."},
-  29:{num:'29',nom:"Collectrice d'Anecdotes",     en:'The Quote Collector',          phase:'La Soirée',     mission:"Consigner secrètement dans un carnet les répliques cultes et anecdotes touchantes des invités."},
-  30:{num:'30',nom:'Responsable des Cadeaux',     en:'The Favor Queen',              phase:'La Soirée',     mission:"S'assurer rigoureusement que chaque invité récupère son cadeau de remerciement au départ."},
+  5: {num:'05',nom:'Gardienne des Vœux',           en:'The Vow Custodian',          phase:'Le Matin',     spots:2, mission:"Détenir les copies officielles et doubles des vœux, et les tendre au moment précis."},
+  1: {num:'01',nom:'Rassureuse Émotionnelle',          en:'The Emotional Anchor',       phase:'Le Matin',     spots:1, mission:"Être à ses côtés à chaque instant, filtrer le stress, éloigner les tensions et offrir un soutien constant jusqu'au dernier slow."},
+  2: {num:'02',nom:'Habilleuse',                        en:'The Chief of Elegance',      phase:'Le Matin',     spots:3, mission:"Aider à l'habillage, ajuster le voile et la traîne, coordonner les accessoires du cortège."},
+  3: {num:'03',nom:'Animatrice des Préparatifs',        en:'The Morning Hype Woman',     phase:'Le Matin',     spots:1, mission:"Gérer la playlist du matin, l'espace de préparation et s'occuper des snacks et rafraîchissements."},
+  4: {num:'04',nom:'Photographe des Préparatifs',       en:'The Behind-the-Scenes Lens', phase:'Le Matin',     spots:1, mission:'Photographier les préparatifs et les moments de cérémonie en marge du photographe officiel.'},
+  31:{num:'07',nom:'Chargée du Bible Study',            en:'The Spiritual Organizer',    phase:'Le Matin',     spots:2, mission:'Préparer et animer le temps de Bible study avant les cérémonies.'},
+  32:{num:'08',nom:'Gardienne du Téléphone',            en:'The Phone Guardian',         phase:'Le Matin',     spots:2, mission:'Conserver le téléphone de la mariée, gérer les messages urgents et filtrer les notifications.'},
+  33:{num:'09',nom:'Dame de Compagnie',                 en:'The Discreet Companion',     phase:'Le Matin',     spots:1, mission:'Accompagner la mariée aux toilettes, aider avec la robe et assurer son confort tout au long de la journée.'},
+  34:{num:'10',nom:'Gérante du Timing',                 en:'The Schedule Keeper',        phase:'Le Matin',     spots:1, mission:"Suivre le programme de la journée, alerter la mariée sur les transitions et coordonner avec les prestataires."},
+  35:{num:'11',nom:'Ajusteur',                          en:"The Groom's Stylist",        phase:'Le Matin',     spots:1, mission:"Ajuster la tenue du marié — nœud papillon, pochette, costume — et veiller à son apparence tout au long de la journée."},
+  36:{num:'12',nom:'Gardien du Timing',                 en:"The Groom's Timekeeper",     phase:'Le Matin',     spots:1, mission:'Suivre le programme, alerter le marié sur les transitions et coordonner avec les équipes.'},
+  37:{num:'13',nom:'Le Back-Up',                        en:"The Groom's Wingman",        phase:'Le Matin',     spots:2, mission:'Assister le marié dans toutes ses demandes, gérer les imprévus et être le lien entre les différents groupes.'},
+  12:{num:'19',nom:'Dame aux Mouchoirs',             en:'The Tear Catcher',           phase:"L'Après-midi", spots:2, mission:'Distribuer des mouchoirs élégants et attentions de réconfort aux premiers rangs.'},
+  8: {num:'15',nom:'Porteur des Alliances',             en:'The Ring Bearer',            phase:"L'Après-midi", spots:1, mission:'Conserver alliances et documents officiels sous haute sécurité, et les présenter lors des vœux.'},
+  9: {num:'16',nom:'Coordinateur de Sortie',            en:'The Exit Maestro',           phase:"L'Après-midi", spots:2, mission:"Briefer les invités, distribuer les éléments à lancer et coordonner la haie d'honneur aux sorties de 15h et 16h30."},
+  10:{num:'17',nom:"Chargé(e) d'Accueil",              en:'The Welcome Connoisseur',    phase:"L'Après-midi", spots:4, mission:"Accueillir chaleureusement les invités à partir de 12h45, distribuer les programmes et orienter chacun."},
+  38:{num:'20',nom:'Chef de Route',                     en:'The Convoy Leader',          phase:"L'Après-midi", spots:2, mission:"Organiser et guider les convois de voitures entre 13h45 et 16h30, s'assurer que personne ne se perd."},
+  39:{num:'21',nom:'Placeur',                           en:'The Seating Guide',          phase:"L'Après-midi", spots:2, mission:'Accueillir et guider les invités vers leurs places lors des cérémonies civile et religieuse.'},
+  14:{num:'23',nom:'Photographe des Coulisses',       en:'The VIP Paparazzi',          phase:'Le Cocktail',  spots:2, mission:"Saisir des instants volés, éclats de rire et accolades en marge du photographe officiel."},
+  16:{num:'25',nom:"Gardiens de l'Urne & Livre d'Or",  en:'The Memory Keepers',         phase:'Le Cocktail',  spots:2, mission:"Dynamiser l'espace du livre d'or, motiver les invités à contribuer et sécuriser l'urne à cadeaux."},
+  40:{num:'29',nom:"Inspecteur d'Ambiance",             en:'The Vibe Inspector',         phase:'Le Cocktail',  spots:2, mission:"Vérifier à 16h30 la mise en place de la salle, l'ambiance générale et signaler toute anomalie."},
+  41:{num:'30',nom:'Rabatteur Photo de Groupe',         en:'The Group Shot Wrangler',    phase:'Le Cocktail',  spots:2, mission:'Rassembler les différents groupes pour les photos de famille et de groupe entre 17h et 19h30.'},
+  42:{num:'31',nom:'Rabatteur pour le Dîner',           en:'The Dinner Caller',          phase:'Le Cocktail',  spots:2, mission:'Rassembler et guider les invités vers la salle de dîner entre 19h30 et 20h.'},
+  24:{num:'36',nom:'Gardienne de Fin de Nuit',        en:'The Guardian of the Temple', phase:'La Soirée',    spots:2, mission:"Sécuriser l'urne et la boîte aux cadeaux, gérer les départs et fermer le bal."},
+  27:{num:'39',nom:'Collectrice de Playlists',        en:'The Dance-List Collector',   phase:'La Soirée',    spots:2, mission:'Récolter les souhaits musicaux des convives et soumettre le tri qualitatif au DJ.'},
+  30:{num:'42',nom:'Responsable des Cadeaux',         en:'The Favor Queen',            phase:'La Soirée',    spots:2, mission:"S'assurer que chaque invité récupère son cadeau de remerciement au départ."},
+  20:{num:'32',nom:'Retoucheuse & Urgences',            en:'The Emergency Officer',      phase:'La Soirée',    spots:2, mission:"Gérer les retouches de la robe, détenir le kit d'urgence (couture, pharmacie, détachant) et intervenir discrètement."},
+  21:{num:'33',nom:'Coordinateur Backstage',            en:'The Surprise Strategist',    phase:'La Soirée',    spots:3, mission:'Coordonner les interventions, discours et surprises avec le traiteur et le DJ entre 20h et 00h30.'},
+  23:{num:'35',nom:'Chauffeur de Salle',                en:'The Dancefloor Igniter',     phase:'La Soirée',    spots:4, mission:"Chauffer la salle, motiver les invités à danser et maintenir une énergie festive maximale de 23h à la fin."},
 };
 
 /* ═══════════════════════════════════════════════
-   LOCAL STORAGE
+   FIREBASE
    ═══════════════════════════════════════════════ */
-function getData()  { try { return JSON.parse(localStorage.getItem('cgm') || '{"signups":{}}'); } catch(e) { return {signups:{}}; } }
-function saveData(d){ localStorage.setItem('cgm', JSON.stringify(d)); }
-function getRoleSignups(id){ return (getData().signups || {})[String(id)] || []; }
-function isRoleFull(id)    { return getRoleSignups(id).length >= 2; }
+const FB_URL = 'https://roles-du-mariage-default-rtdb.europe-west1.firebasedatabase.app/signups.json';
+let _signups = {};
+let _unsaved = false;
+
+async function fbSave() {
+  _unsaved = true;
+  try {
+    const resp = await fetch(FB_URL, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(_signups) });
+    if (resp.ok) _unsaved = false;
+  } catch(e) {}
+}
+async function fbLoad() {
+  if (_unsaved) { fbSave(); return; }
+  try {
+    const r = await fetch(FB_URL);
+    if (!r.ok) return;
+    const data = await r.json();
+    _signups = (data && typeof data === 'object') ? data : {};
+  } catch(e) {}
+}
+
+function getData()   { return { signups: _signups }; }
+function saveData(d) { _signups = d.signups || {}; fbSave(); }
+
+function getRoleSignups(id) { return (_signups || {})[String(id)] || []; }
+function isRoleFull(id)     { const s = ROLES[id] ? (ROLES[id].spots || 2) : 2; return getRoleSignups(id).length >= s; }
 
 function doSignup(id, name) {
-  const d = getData();
-  if (!d.signups) d.signups = {};
-  if (getRoleSignups(id).length >= 2 || getRoleSignups(id).map(n=>n.toLowerCase()).includes(name.toLowerCase().trim())) return false;
-  if (!d.signups[id]) d.signups[id] = [];
-  d.signups[id].push(name.trim());
-  saveData(d);
+  const maxSp = ROLES[id] ? (ROLES[id].spots || 2) : 2;
+  if (getRoleSignups(id).length >= maxSp || getRoleSignups(id).map(n=>n.toLowerCase()).includes(name.toLowerCase().trim())) return false;
+  if (!_signups[id]) _signups[id] = [];
+  _signups[id].push(name.trim());
+  fbSave();
   return true;
 }
 function doWithdraw(id, name) {
-  const d = getData();
-  if (d.signups && d.signups[id])
-    d.signups[id] = d.signups[id].filter(n => n.toLowerCase() !== name.toLowerCase().trim());
-  saveData(d);
+  if (_signups[id])
+    _signups[id] = _signups[id].filter(n => n.toLowerCase() !== name.toLowerCase().trim());
+  fbSave();
 }
 
 /* ═══════════════════════════════════════════════
@@ -553,9 +572,9 @@ function render(data) {
     <div class="footer-section">
       <span class="fs-script">Et maintenant ?</span>
       <h3 class="fs-title">Explorer tous les rôles</h3>
-      <p class="fs-desc">Consultez la liste complète des 30 rôles et inscrivez-vous directement.</p>
+      <p class="fs-desc">Consultez la liste complète des rôles et inscrivez-vous directement.</p>
       <div class="fs-ctas">
-        <a href="roles.html" class="btn btn-primary">Voir les 30 rôles</a>
+        <a href="roles.html" class="btn btn-primary">Voir tous les rôles</a>
         <a href="quiz.html"  class="btn btn-outline">Recommencer</a>
       </div>
     </div>
@@ -572,14 +591,16 @@ function renderRoleCards() {
     const r = ROLES[id];
     if (!r) return '';
 
+    const maxSp    = r.spots || 2;
     const sups     = getRoleSignups(id);
-    const full     = sups.length >= 2;
+    const full     = sups.length >= maxSp;
+    const free     = maxSp - sups.length;
     const accepted = decisions[id] === 'accepted';
     const refused  = decisions[id] === 'refused';
     const userIn   = sups.map(n => n.toLowerCase()).includes(userName.toLowerCase());
 
     const badgeH = !full
-      ? '<span class="rc-badge open">' + (sups.length === 0 ? '2 places' : '1 restante') + '</span>'
+      ? '<span class="rc-badge open">' + (free === 1 && sups.length > 0 ? '1 restante' : free + ' place' + (free > 1 ? 's' : '')) + '</span>'
       : '<span class="rc-badge full-b">Complet</span>';
     const namesH = sups.length
       ? '<p class="rc-names">' + sups.join(' · ') + '</p>'
@@ -634,7 +655,11 @@ if (!raw) {
   try {
     const d = JSON.parse(raw);
     if (!d.top5?.length) throw new Error('invalid');
-    render(d);
+    // Charger Firebase d'abord, puis rendre
+    fbLoad().then(function() {
+      render(d);
+      setInterval(function() { fbLoad().then(renderRoleCards); }, 30000);
+    });
   } catch (e) {
     document.getElementById('app').innerHTML = `
       <div class="no-data">
